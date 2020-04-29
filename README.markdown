@@ -1,6 +1,4 @@
-### Powerlink Manager Self Service app
-
-![alt BaF Portal](powerlink-logo_400x162.png)
+## Strategik - Jobs Scheduler demo app
 
 ### Development Environment
 
