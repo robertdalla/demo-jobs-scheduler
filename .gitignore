@@ -1,0 +1,57 @@
+#------------------------------------
+# System Files
+.DS_Store
+Thumbs.db
+
+
+#------------------------------------
+# Visual Studio Files and directories
+
+*.suo        # 'user' settings like 'which file is open in Visual Studio'
+*.ncb        # Used for debugging
+*.user
+*.ccscc      # Used for versioning
+*.cache
+
+.vs/**/*
+packages/**/*
+bin/**/*
+obj/**/*
+pkgobj/**/*
+pkg/**/*
+
+
+#------------------------------------
+# IDEs and editors
+
+.idea/**/*
+.project/**/*
+.classpath/**/*
+.c9/**/*
+*.launch
+.settings/**/*
+*.sublime-workspace/**/*
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+#------------------------------------
+# app
+
+/node_modules/**/*
+/dist/**/*
+/tmp/**/*
+/out-tsc/**/*
+
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+
