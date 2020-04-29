@@ -74,11 +74,8 @@ ng serve --prod --vendor-chunk=true
 ng build --prod --build-optimizer --vendor-chunk=true
 ```
 
-> Step7 option1: deploy the app in a document library
+> Step7: deploy the app in your production hosting server
 
-Upload the entire dist folder in a document library.
-The starting point is index.aspx
+Upload the entire dist folder in your production webserver folder.
+The starting point is index.html
 
-> Step8 option2: deploy the app as a Sharepoint package
-
-Deploy with Visual Studio
