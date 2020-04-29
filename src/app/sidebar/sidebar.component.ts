@@ -19,7 +19,13 @@ export interface ChildrenItems {
 }
 
 //Menu Items
-export const ROUTES: RouteInfo[] = [{
+export const ROUTES: RouteInfo[] = [
+    {
+        path: '/pages/jobs-scheduler',
+        title: 'Jobs Scheduler demo',
+        type: 'link',
+        icontype: 'nc-icon nc-calendar-60'
+    },{
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',

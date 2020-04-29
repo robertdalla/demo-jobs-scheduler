@@ -36,6 +36,9 @@ export const AppRoutes: Routes = [{
             loadChildren: './userpage/user.module#UserModule'
         },{
             path: '',
+            loadChildren: './jobs-scheduler-demo/jobs-scheduler-demo.module#JobsSchedulerDemoModule'
+        },{
+            path: '',
             loadChildren: './timeline/timeline.module#TimelineModule'
         },{
             path: '',
