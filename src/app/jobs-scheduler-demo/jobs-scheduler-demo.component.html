@@ -1,13 +1,105 @@
 <div class="main-content">
-  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="card card-calendar">
-          <div class="card-content">
-            <div id="jobs-Scheduler"></div>
-          </div>
+
+        <div class="col-md-2">
+
         </div>
-      </div>
+
+        <div class="col-md-8">
+            <div class="d-flex flex-row-reverse">
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_1">
+                        <a *ngFor="let item of this.APP['Data'].Health" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Stage
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_2">
+                      <a *ngFor="let item of this.APP['Data'].Stage" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_3">
+                      <a *ngFor="let item of this.APP['Data'].Product" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Branch
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_4">
+                      <a *ngFor="let item of this.APP['Data'].Branch" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Division
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_5">
+                      <a *ngFor="let item of this.APP['Data'].Division" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_6">
+                      <a *ngFor="let item of this.APP['Data'].Customer" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fixer
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_7">
+                      <a *ngFor="let item of this.APP['Data'].Fixer" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Scheduler
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_8">
+                      <a *ngFor="let item of this.APP['Data'].Scheduler" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
+                            id="dropdown_filter_9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_9">
+                      <a *ngFor="let item of this.APP['Data'].Employees" class="dropdown-item" href="#">{{item.Name}}</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card card-calendar">
+                <div class="card-content">
+                    <div id="jobs-Scheduler"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
     </div>
-  </div>
 </div>

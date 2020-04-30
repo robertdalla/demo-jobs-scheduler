@@ -71,7 +71,9 @@
     "sweetalert2": "8.12.1",
     "twitter-bootstrap-wizard": "1.2.0",
     "web-animations-js": "2.3.1",
-    "zone.js": "0.10.2"
+    "zone.js": "0.10.2",
+    "ng2-simple-global": "^1.2.5",
+    "ngx-spinner": "^7.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.900.4",
