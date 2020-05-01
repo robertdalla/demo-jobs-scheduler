@@ -1,10 +1,15 @@
 // angular core
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit, ViewEncapsulation, Inject, Input } from '@angular/core';
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global';
 import Swal from 'sweetalert2'
 import PerfectScrollbar from 'perfect-scrollbar';
+import { Calendar } from '@fullcalendar/core';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 
 // config
 import { global_IS_LOCALDEV } from '../app-config';
@@ -16,10 +21,14 @@ declare var $: any;
 
     moduleId: module.id,
     selector: 'app-jobsscheduler',
-    templateUrl: 'jobs-scheduler-demo.component.html'
+    // template: '',
+    templateUrl: 'jobs-scheduler-demo.component.html',
+    // styles: [''],
+    // styleUrls: [''],
+    encapsulation: ViewEncapsulation.None
 })
 
-export class JobsSchedulerDemoComponent implements OnInit {
+export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
     constructor(
 
@@ -29,223 +38,95 @@ export class JobsSchedulerDemoComponent implements OnInit {
 
         // Demo data
         const demoDATA: any = {
+            Draggable: {
+                SubContractor: [
+                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                ],
+                Scheduler: [
+                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                ],
+                Employee: [
+                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                ],
+                Jobs: [
+                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                ],
+            },
             Employees: [
-                {
-                    Id: 1,
-                    Name: 'Ellesha Alvarado',
-                },
-                {
-                    Id: 2,
-                    Name: 'Jorja Kirby',
-                },
-                {
-                    Id: 3,
-                    Name: 'Thomas Barker',
-                },
-                {
-                    Id: 4,
-                    Name: 'Rafe Hines',
-                },
-                {
-                    Id: 5,
-                    Name: 'Wren Haworth',
-                },
-                {
-                    Id: 6,
-                    Name: 'Rahim Kent',
-                },
+                { Name: 'Ellesha Alvarado'},
+                { Name: 'Jorja Kirby'},
+                { Name: 'Thomas Barker'},
+                { Name: 'Rafe Hines'},
+                { Name: 'Wren Haworth'},
+                { Name: 'Rahim Kent'},
             ],
             Scheduler: [
-                {
-                    Id: 1,
-                    Name: 'Scheduler 1',
-                },
-                {
-                    Id: 2,
-                    Name: 'Scheduler 2',
-                },
-                {
-                    Id: 3,
-                    Name: 'Scheduler 3',
-                },
+                { Name: 'Scheduler 1'},
+                { Name: 'Scheduler 2'},
+                { Name: 'Scheduler 3'},
             ],
             Fixer: [
-                {
-                    Id: 1,
-                    Name: 'Fixer 1',
-                },
-                {
-                    Id: 2,
-                    Name: 'Fixer 2',
-                },
-                {
-                    Id: 3,
-                    Name: 'Fixer 3',
-                },
+                { Name: 'Fixer 1'},
+                { Name: 'Fixer 2'},
+                { Name: 'Fixer 3'},
             ],
             Customer: [
-                {
-                    Id: 1,
-                    Name: 'Accord Homes',
-                },
-                {
-                    Id: 2,
-                    Name: 'A B Freese',
-                },
-                {
-                    Id: 3,
-                    Name: 'Cameron Daff',
-                },
-                {
-                    Id: 4,
-                    Name: 'Rawcorp Pty Ltd',
-                },
-                {
-                    Id: 5,
-                    Name: 'Urban Building Services',
-                },
-                {
-                    Id: 6,
-                    Name: 'East Coast Designer Builders Pty Ltd',
-                },
-                {
-                    Id: 7,
-                    Name: 'Eddie Blaiklock Builder',
-                },
-                {
-                    Id: 8,
-                    Name: 'Nerek Construction',
-                },
-                {
-                    Id: 9,
-                    Name: 'Lauder Jeff',
-                },
-                {
-                    Id: 10,
-                    Name: 'Saurus Contracting',
-                },
-                {
-                    Id: 11,
-                    Name: 'Dalponte Building Services',
-                },
-                {
-                    Id: 12,
-                    Name: 'Dave Baldwin',
-                },
-                {
-                    Id: 13,
-                    Name: 'O\'Loan Build',
-                },
-                {
-                    Id: 14,
-                    Name: 'Ray Mahoney Builder',
-                },
-                {
-                    Id: 15,
-                    Name: 'Bale Constructions',
-                },
-                {
-                    Id: 16,
-                    Name: 'Vivid Home Builders',
-                },
-                {
-                    Id: 17,
-                    Name: 'Leisure Living Homes, Mackay',
-                },
-                {
-                    Id: 18,
-                    Name: 'Galaxi Homes',
-                },
-                {
-                    Id: 19,
-                    Name: 'Lamb Gary Building Contractor',
-                },
-                {
-                    Id: 20,
-                    Name: 'Fergus Builders',
-                },
+                { Name: 'Accord Homes'},
+                { Name: 'A B Freese'},
+                { Name: 'Cameron Daff'},
+                { Name: 'Rawcorp Pty Ltd'},
+                { Name: 'Urban Building Services'},
+                { Name: 'East Coast Designer Builders Pty Ltd'},
+                { Name: 'Eddie Blaiklock Builder'},
+                { Name: 'Nerek Construction'},
+                { Name: 'Lauder Jeff'},
+                { Name: 'Saurus Contracting'},
+                { Name: 'Dalponte Building Services'},
+                { Name: 'Dave Baldwin'},
+                { Name: 'O\'Loan Build'},
+                { Name: 'Ray Mahoney Builder'},
+                { Name: 'Bale Constructions'},
+                { Name: 'Vivid Home Builders'},
+                { Name: 'Leisure Living Homes, Mackay'},
+                { Name: 'Galaxi Homes'},
+                { Name: 'Lamb Gary Building Contractor'},
+                { Name: 'Fergus Builders'},
             ],
             Division: [
-                {
-                    Id: 1,
-                    Name: 'Construction',
-                },
-                {
-                    Id: 2,
-                    Name: 'Plumbing',
-                },
-                {
-                    Id: 3,
-                    Name: 'Electrical',
-                },
+                { Name: 'Construction'},
+                { Name: 'Plumbing'},
+                { Name: 'Electrical'},
             ],
             Branch: [
-                {
-                    Id: 1,
-                    Name: 'QLD',
-                },
-                {
-                    Id: 2,
-                    Name: 'NSW',
-                },
-                {
-                    Id: 3,
-                    Name: 'VIC',
-                },
-                {
-                    Id: 3,
-                    Name: 'WA',
-                },
-                {
-                    Id: 3,
-                    Name: 'NT',
-                },
+                { Name: 'QLD'},
+                { Name: 'NSW'},
+                { Name: 'VIC'},
+                { Name: 'WA'},
+                { Name: 'NT'},
             ],
             Product: [
-                {
-                    Id: 1,
-                    Name: 'Product 1',
-                },
-                {
-                    Id: 2,
-                    Name: 'Product 2',
-                },
-                {
-                    Id: 3,
-                    Name: 'Product 3',
-                },
-                {
-                    Id: 4,
-                    Name: 'Product 4',
-                },
+                { Name: 'Product 1'},
+                { Name: 'Product 2'},
+                { Name: 'Product 3'},
+                { Name: 'Product 4'},
             ],
             Stage: [
-                {
-                    Id: 1,
-                    Name: 'Stage 1',
-                },
-                {
-                    Id: 2,
-                    Name: 'Stage 2',
-                },
-                {
-                    Id: 3,
-                    Name: 'Stage 3',
-                },
+                { Name: 'Stage 1'},
+                { Name: 'Stage 2'},
+                { Name: 'Stage 3'},
             ],
             Health: [
-                {
-                    Id: 1,
-                    Name: 'Good',
-                },
-                {
-                    Id: 2,
-                    Name: 'Average',
-                },
-                {
-                    Id: 3,
-                    Name: 'Bad',
-                },
+                { Name: 'Good'},
+                { Name: 'Average'},
+                { Name: 'Bad'},
             ]
 
         };
@@ -262,33 +143,79 @@ export class JobsSchedulerDemoComponent implements OnInit {
     }
 
 
+    object_to_JSON(item) {
+        return JSON.stringify(item);
+    }
 
-    ngOnInit() {
 
-        const $calendar = $('#jobs-Scheduler');
+    ngAfterViewInit() {
+
+        const that = this;
+
+        // const $calendar = $('#jobs_Scheduler');
 
         const today = new Date();
         const y = today.getFullYear();
         const m = today.getMonth();
         const d = today.getDate();
 
-        $calendar.fullCalendar({
-            viewRender: function(view: any, element: any) {
-                // We make sure that we activate the perfect scrollbar when the view isn't on Month
-                if (view.name != 'month') {
-                    var elem = $(element).find('.fc-scroller')[0];
-                    let ps = new PerfectScrollbar(elem);
-                }
-            },
-            header: {
-                left: 'title',
-                center: 'month, agendaWeek, agendaDay',
-                right: 'prev, next, today'
-            },
+        const draggableEl = document.getElementById('collapse1');
+        const draggableE2 = document.getElementById('collapse2');
+        const draggableE3 = document.getElementById('collapse3');
+        const draggableE4 = document.getElementById('collapse4');
+        new Draggable(draggableEl, {
+            itemSelector: '.fc-draggable',
+            // eventData: function(eventEl) {
+            //     // console.log('Draggable element data-event = ', eventEl);
+            //     const data = JSON.parse(eventEl.getAttribute('data-event'));
+            //     // console.log('data = ', data);
+            //     return {
+            //         create: data.create,
+            //         title: data.title,
+            //         duration: data.duration,
+            //     };
+            // }
+        });
+        new Draggable(draggableE2, {
+            itemSelector: '.fc-draggable',
+        });
+        new Draggable(draggableE3, {
+            itemSelector: '.fc-draggable',
+        });
+        new Draggable(draggableE4, {
+            itemSelector: '.fc-draggable',
+        });
+
+        const calendarEl = document.getElementById('jobsScheduler');
+        const calendar = new Calendar(calendarEl, {
+
+            plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
             defaultDate: today,
             selectable: true,
-            selectHelper: true,
-            views: {
+            navLinks: true, // can click day/week names to navigate views
+            // selectHelper: true,
+
+            droppable: true,
+            drop: function(info) {
+            },
+
+/*            viewRender: function(view: any, element: any) {
+                // We make sure that we activate the perfect scrollbar when the view isn't on Month
+                if (view.name !== 'month') {
+                    const elem = $(element).find('.fc-scroller')[0];
+                    let ps = new PerfectScrollbar(elem);
+                }
+            },*/
+
+            header: {
+                left: 'title',
+                center: 'dayGridMonth, timeGridWeek, timeGridDay',
+                right: 'prev, next, today'
+            },
+
+/*                views: {
                 month: { // name of view
                     titleFormat: 'MMMM YYYY'
                     // other view-specific options here
@@ -299,9 +226,9 @@ export class JobsSchedulerDemoComponent implements OnInit {
                 day: {
                     titleFormat: 'D MMM, YYYY'
                 }
-            },
+            },*/
 
-            select: function(start: any, end: any) {
+/*            select: function(start: any, end: any) {
 
                 // on select we show the Sweet Alert modal with an input
                 Swal.fire({
@@ -324,16 +251,15 @@ export class JobsSchedulerDemoComponent implements OnInit {
                             start: start,
                             end: end
                         };
-                        $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+                        // $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+                        calendar('renderEvent', eventData, true); // stick? = true
                     }
 
-                    $calendar.fullCalendar('unselect');
+                    // $calendar.fullCalendar('unselect');
+                    calendar('unselect');
 
                 });
-            },
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-
+            },*/
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
             events: [
@@ -398,6 +324,17 @@ export class JobsSchedulerDemoComponent implements OnInit {
                 }
             ]
         });
+
+        calendar.render();
+
+    }
+
+    ngOnInit() {
+
+    }
+
+    ngOnDestroy() {
+
     }
 }
 

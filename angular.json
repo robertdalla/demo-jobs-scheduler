@@ -24,7 +24,11 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "src/assets/scss/paper-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "node_modules/@fullcalendar/core/main.css",
+              "node_modules/@fullcalendar/daygrid/main.css",
+              "node_modules/@fullcalendar/timegrid/main.css",
+              "node_modules/@fullcalendar/list/main.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -36,7 +40,6 @@
               "node_modules/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/easy-pie-chart/dist/jquery.easypiechart.js",
-              "node_modules/fullcalendar/dist/fullcalendar.js",
               "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/jvectormap/jquery-jvectormap.min.js",
               "node_modules/jvectormap/lib/jquery-mousewheel.js",
@@ -112,7 +115,6 @@
               "node_modules/twitter-bootstrap-wizard/jquery.bootstrap.wizard.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/easy-pie-chart/dist/jquery.easypiechart.js",
-              "node_modules/fullcalendar/dist/fullcalendar.js",
               "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/jvectormap/jquery-jvectormap.min.js",
               "node_modules/jvectormap/lib/jquery-mousewheel.js",
@@ -137,7 +139,11 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "src/assets/scss/paper-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "node_modules/@fullcalendar/core/main.css",
+              "node_modules/@fullcalendar/daygrid/main.css",
+              "node_modules/@fullcalendar/timegrid/main.css",
+              "node_modules/@fullcalendar/list/main.css"
             ],
             "assets": [
               "src/assets",

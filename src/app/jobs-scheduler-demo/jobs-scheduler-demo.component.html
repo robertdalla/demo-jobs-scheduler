@@ -8,53 +8,57 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingOne" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed"> SubContractor
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1" class="collapsed"> SubContractor
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
-                                <div class="fc-event fc-draggable">Event 1</div>
-                                <div class="fc-event fc-draggable">Event 2</div>
-                                <div class="fc-event fc-draggable">Event 3</div>
+                            <div id="collapse1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
+                                <div class="fc-event fc-draggable"
+                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor; index as index"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingTwo" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed"> Scheduler
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed"> Scheduler
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
-                                <div class="fc-event fc-draggable">Event 1</div>
-                                <div class="fc-event fc-draggable">Event 2</div>
-                                <div class="fc-event fc-draggable">Event 3</div>
+                            <div id="collapse2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
+                                <div class="fc-event fc-draggable"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler; index as index"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingThree" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed"> Employee
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3" class="collapsed"> Employee
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                                <div class="fc-event fc-draggable">Event 1</div>
-                                <div class="fc-event fc-draggable">Event 2</div>
-                                <div class="fc-event fc-draggable">Event 3</div>
+                            <div id="collapse3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
+                                <div class="fc-event fc-draggable"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Employee; index as index"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingFour" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree" class="collapsed"> Jobs (Unscheduled)
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse3" class="collapsed"> Jobs (Unscheduled)
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapseFour" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <div class="fc-event fc-draggable">Event 1</div>
-                                <div class="fc-event fc-draggable">Event 2</div>
-                                <div class="fc-event fc-draggable">Event 3</div>
+                            <div id="collapse4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
+                                <div class="fc-event fc-draggable"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs; index as index"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                </div>
                             </div>
                         </div>
 
@@ -151,7 +155,7 @@
 
             <div class="card card-calendar">
                 <div class="card-content">
-                    <div id="jobs-Scheduler"></div>
+                    <div id="jobsScheduler"></div>
                 </div>
             </div>
         </div>
