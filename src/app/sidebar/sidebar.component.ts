@@ -84,18 +84,11 @@ export const ROUTES: RouteInfo[] = [
         title: 'Widgets',
         type: 'link',
         icontype: 'nc-icon nc-box'
-
     },{
         path: '/charts',
         title: 'Charts',
         type: 'link',
         icontype: 'nc-icon nc-chart-bar-32'
-
-    },{
-        path: '/calendar',
-        title: 'Calendar',
-        type: 'link',
-        icontype: 'nc-icon nc-calendar-60'
     },{
         path: '/pages',
         title: 'Pages',
