@@ -36,99 +36,154 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     ) {
 
-        // Demo data
+        // Demo data  Draggable.SubContractor.Id  Draggable.Scheduler.Id  Draggable.Employee.Id  Draggable.Jobs.Id
         const demoDATA: any = {
-            Draggable: {
-                SubContractor: [
-                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
-                ],
-                Scheduler: [
-                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
-                ],
-                Employee: [
-                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
-                ],
-                Jobs: [
-                    { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                    { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                    { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
-                ],
-            },
-            Employees: [
-                { Name: 'Ellesha Alvarado'},
-                { Name: 'Jorja Kirby'},
-                { Name: 'Thomas Barker'},
-                { Name: 'Rafe Hines'},
-                { Name: 'Wren Haworth'},
-                { Name: 'Rahim Kent'},
-            ],
-            Scheduler: [
-                { Name: 'Scheduler 1'},
-                { Name: 'Scheduler 2'},
-                { Name: 'Scheduler 3'},
-            ],
-            Fixer: [
-                { Name: 'Fixer 1'},
-                { Name: 'Fixer 2'},
-                { Name: 'Fixer 3'},
-            ],
-            Customer: [
-                { Name: 'Accord Homes'},
-                { Name: 'A B Freese'},
-                { Name: 'Cameron Daff'},
-                { Name: 'Rawcorp Pty Ltd'},
-                { Name: 'Urban Building Services'},
-                { Name: 'East Coast Designer Builders Pty Ltd'},
-                { Name: 'Eddie Blaiklock Builder'},
-                { Name: 'Nerek Construction'},
-                { Name: 'Lauder Jeff'},
-                { Name: 'Saurus Contracting'},
-                { Name: 'Dalponte Building Services'},
-                { Name: 'Dave Baldwin'},
-                { Name: 'O\'Loan Build'},
-                { Name: 'Ray Mahoney Builder'},
-                { Name: 'Bale Constructions'},
-                { Name: 'Vivid Home Builders'},
-                { Name: 'Leisure Living Homes, Mackay'},
-                { Name: 'Galaxi Homes'},
-                { Name: 'Lamb Gary Building Contractor'},
-                { Name: 'Fergus Builders'},
-            ],
-            Division: [
-                { Name: 'Construction'},
-                { Name: 'Plumbing'},
-                { Name: 'Electrical'},
-            ],
-            Branch: [
-                { Name: 'QLD'},
-                { Name: 'NSW'},
-                { Name: 'VIC'},
-                { Name: 'WA'},
-                { Name: 'NT'},
-            ],
-            Product: [
-                { Name: 'Product 1'},
-                { Name: 'Product 2'},
-                { Name: 'Product 3'},
-                { Name: 'Product 4'},
-            ],
-            Stage: [
-                { Name: 'Stage 1'},
-                { Name: 'Stage 2'},
-                { Name: 'Stage 3'},
-            ],
-            Health: [
-                { Name: 'Good'},
-                { Name: 'Average'},
-                { Name: 'Bad'},
-            ]
 
+            Draggable: {
+                SubContractor: {
+                    Id: '1',
+                    label: 'SubContractor',
+                    events: [
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                    ]
+                },
+                Scheduler: {
+                    Id: '2',
+                    label: 'Scheduler',
+                    events: [
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                    ]
+                },
+                Employee: {
+                    Id: '3',
+                    label: 'Employee',
+                    events: [
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                    ]
+                },
+                Jobs: {
+                    Id: '4',
+                    label: 'Jobs (Unscheduled)',
+                    events: [
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                    ]
+                },
+            },
+
+            Dropdown_filters: {
+                Employees: {
+                    Id: '1',
+                    label: 'Employees',
+                    data: [
+                        { label: 'Ellesha Alvarado' },
+                        { label: 'Jorja Kirby' },
+                        { label: 'Thomas Barker' },
+                        { label: 'Rafe Hines' },
+                        { label: 'Wren Haworth' },
+                        { label: 'Rahim Kent' },
+                    ],
+                },
+                Scheduler: {
+                    Id: '2',
+                    label: 'Scheduler',
+                    data: [
+                        { label: 'Scheduler 1' },
+                        { label: 'Scheduler 2' },
+                        { label: 'Scheduler 3' },
+                    ],
+                },
+                Fixer: {
+                    Id: '3',
+                    label: 'Fixer',
+                    data: [
+                        { label: 'Fixer 1' },
+                        { label: 'Fixer 2' },
+                        { label: 'Fixer 3' },
+                    ],
+                },
+                Customer: {
+                    Id: '4',
+                    label: 'Customer',
+                    data: [
+                        { label: 'Accord Homes' },
+                        { label: 'A B Freese' },
+                        { label: 'Cameron Daff' },
+                        { label: 'Rawcorp Pty Ltd' },
+                        { label: 'Urban Building Services' },
+                        { label: 'East Coast Designer Builders Pty Ltd' },
+                        { label: 'Eddie Blaiklock Builder' },
+                        { label: 'Nerek Construction' },
+                        { label: 'Lauder Jeff' },
+                        { label: 'Saurus Contracting' },
+                        { label: 'Dalponte Building Services' },
+                        { label: 'Dave Baldwin' },
+                        { label: 'O\'Loan Build' },
+                        { label: 'Ray Mahoney Builder' },
+                        { label: 'Bale Constructions' },
+                        { label: 'Vivid Home Builders' },
+                        { label: 'Leisure Living Homes, Mackay' },
+                        { label: 'Galaxi Homes' },
+                        { label: 'Lamb Gary Building Contractor' },
+                        { label: 'Fergus Builders' },
+                    ],
+                },
+                Division: {
+                    Id: '5',
+                    label: 'Division',
+                    data: [
+                        { label: 'Construction' },
+                        { label: 'Plumbing' },
+                        { label: 'Electrical' },
+                    ],
+                },
+                Branch: {
+                    Id: '6',
+                    label: 'Branch',
+                    data: [
+                        { label: 'QLD' },
+                        { label: 'NSW' },
+                        { label: 'VIC' },
+                        { label: 'WA' },
+                        { label: 'NT' },
+                    ],
+                },
+                Product: {
+                    Id: '7',
+                    label: 'Product',
+                    data: [
+                        { label: 'Product 1' },
+                        { label: 'Product 2' },
+                        { label: 'Product 3' },
+                        { label: 'Product 4' },
+                    ],
+                },
+                Stage: {
+                    Id: '8',
+                    label: 'Stage',
+                    data: [
+                        { label: 'Stage 1' },
+                        { label: 'Stage 2' },
+                        { label: 'Stage 3' },
+                    ],
+                },
+                Health: {
+                    Id: '9',
+                    label: 'Health',
+                    data: [
+                        { label: 'Good' },
+                        { label: 'Average' },
+                        { label: 'Bad' },
+                    ],
+                },
+            }
         };
 
         if (global_IS_LOCALDEV) {
@@ -159,11 +214,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         const m = today.getMonth();
         const d = today.getDate();
 
-        const draggableEl = document.getElementById('collapse1');
-        const draggableE2 = document.getElementById('collapse2');
-        const draggableE3 = document.getElementById('collapse3');
-        const draggableE4 = document.getElementById('collapse4');
-        new Draggable(draggableEl, {
+        // Instantiate the Draggable DOM elements
+        const draggable_El = document.getElementById('collapse_1');
+        new Draggable(draggable_El, {
             itemSelector: '.fc-draggable',
             // eventData: function(eventEl) {
             //     // console.log('Draggable element data-event = ', eventEl);
@@ -176,19 +229,22 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             //     };
             // }
         });
-        new Draggable(draggableE2, {
+        const draggable_E2 = document.getElementById('collapse_2');
+        new Draggable(draggable_E2, {
             itemSelector: '.fc-draggable',
         });
-        new Draggable(draggableE3, {
+        const draggable_E3 = document.getElementById('collapse_3');
+        new Draggable(draggable_E3, {
             itemSelector: '.fc-draggable',
         });
-        new Draggable(draggableE4, {
+        const draggable_E4 = document.getElementById('collapse_4');
+        new Draggable(draggable_E4, {
             itemSelector: '.fc-draggable',
         });
 
+        // Instantiate the FullCalenndar DOM element
         const calendarEl = document.getElementById('jobsScheduler');
         const calendar = new Calendar(calendarEl, {
-
             plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
             editable: true,
             eventLimit: true, // allow "more" link when too many events
@@ -312,19 +368,16 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     title: 'Click for Creative Tim',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
-                    url: 'https://www.creative-tim.com/',
                     className: 'event-orange'
                 },
                 {
                     title: 'Click for Google',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
-                    url: 'https://www.creative-tim.com/',
                     className: 'event-orange'
                 }
             ]
         });
-
         calendar.render();
 
     }

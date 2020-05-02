@@ -8,13 +8,13 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingOne" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1" class="collapsed"> SubContractor
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_1" aria-expanded="false" aria-controls="collapse_1" class="collapsed"> {{this.APP['Data'].Draggable.SubContractor.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
+                            <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
                                 <div class="fc-event fc-draggable"
-                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor; index as index"
+                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
                             </div>
@@ -22,13 +22,13 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingTwo" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed"> Scheduler
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_2" aria-expanded="false" aria-controls="collapse_2" class="collapsed"> {{this.APP['Data'].Draggable.Scheduler.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
+                            <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
                                 <div class="fc-event fc-draggable"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler; index as index"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
                             </div>
@@ -36,13 +36,13 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingThree" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3" class="collapsed"> Employee
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_3" aria-expanded="false" aria-controls="collapse_3" class="collapsed"> {{this.APP['Data'].Draggable.Employee.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
+                            <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
                                 <div class="fc-event fc-draggable"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Employee; index as index"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
                             </div>
@@ -50,13 +50,13 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingFour" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse3" class="collapsed"> Jobs (Unscheduled)
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_4" aria-expanded="false" aria-controls="collapse_4" class="collapsed"> {{this.APP['Data'].Draggable.Jobs.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
+                            <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
                                 <div class="fc-event fc-draggable"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs; index as index"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
                             </div>
@@ -72,82 +72,82 @@
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Health
+                            id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Health.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_1">
-                        <a *ngFor="let item of this.APP['Data'].Health" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_1">
+                        <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Health.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Stage
+                            id="dropdown_2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Stage.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_2">
-                      <a *ngFor="let item of this.APP['Data'].Stage" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_2">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Stage.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product
+                            id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Product.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_3">
-                      <a *ngFor="let item of this.APP['Data'].Product" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_3">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Product.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Branch
+                            id="dropdown_4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Branch.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_4">
-                      <a *ngFor="let item of this.APP['Data'].Branch" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_4">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Branch.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Division
+                            id="dropdown_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Division.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_5">
-                      <a *ngFor="let item of this.APP['Data'].Division" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_5">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Division.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer
+                            id="dropdown_6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Customer.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_6">
-                      <a *ngFor="let item of this.APP['Data'].Customer" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_6">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Customer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Fixer
+                            id="dropdown_7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Fixer.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_7">
-                      <a *ngFor="let item of this.APP['Data'].Fixer" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_7">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Fixer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Scheduler
+                            id="dropdown_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Scheduler.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_8">
-                      <a *ngFor="let item of this.APP['Data'].Scheduler" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_8">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Scheduler.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
                 <div class="dropdown bg-dark">
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
-                            id="dropdown_filter_9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employee
+                            id="dropdown_9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Employees.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_filter_9">
-                      <a *ngFor="let item of this.APP['Data'].Employees" class="dropdown-item" href="#">{{item.Name}}</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_9">
+                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Employees.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
 
