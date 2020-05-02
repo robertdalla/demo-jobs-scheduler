@@ -13,7 +13,8 @@
                                 </a>
                             </div>
                             <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
-                                <div class="fc-event fc-draggable"
+                                <div class="fc-event fc-draggable mb-1"
+                                     [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
@@ -27,7 +28,8 @@
                                 </a>
                             </div>
                             <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
-                                <div class="fc-event fc-draggable"
+                                <div class="fc-event fc-draggable mb-1"
+                                     [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
@@ -41,7 +43,8 @@
                                 </a>
                             </div>
                             <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                                <div class="fc-event fc-draggable"
+                                <div class="fc-event fc-draggable mb-1"
+                                     [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
@@ -55,7 +58,8 @@
                                 </a>
                             </div>
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <div class="fc-event fc-draggable"
+                                <div class="fc-event fc-draggable mb-1"
+                                     [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index"
                                      [attr.data-event]="object_to_JSON(item)">{{item.label}}
                                 </div>
@@ -74,7 +78,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Health.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_1">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_1" style="background-color: #E3E3E3;">
                         <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Health.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -83,7 +87,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Stage.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_2">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_2" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Stage.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -92,7 +96,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Product.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_3">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_3" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Product.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -101,7 +105,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Branch.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_4">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_4" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Branch.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -110,7 +114,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Division.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_5">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_5" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Division.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -119,7 +123,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Customer.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_6">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_6" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Customer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -128,7 +132,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Fixer.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_7">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_7" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Fixer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -137,7 +141,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Scheduler.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_8">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_8" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Scheduler.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>
@@ -146,7 +150,7 @@
                     <button class="dropdown-toggle btn btn-primary btn-link btn-sm px-2" type="button"
                             id="dropdown_9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Employees.label}}
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_9">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_9" style="background-color: #E3E3E3;">
                       <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Employees.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
                     </div>
                 </div>

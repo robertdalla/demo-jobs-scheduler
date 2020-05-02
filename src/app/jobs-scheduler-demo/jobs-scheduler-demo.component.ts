@@ -44,36 +44,36 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '1',
                     label: 'SubContractor',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '24:00', className: 'event-red' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-green' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '02:00', className: 'event-orange' },
                     ]
                 },
                 Scheduler: {
                     Id: '2',
                     label: 'Scheduler',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-default' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-default' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-default' },
                     ]
                 },
                 Employee: {
                     Id: '3',
                     label: 'Employee',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-azure' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-azure' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-azure' },
                     ]
                 },
                 Jobs: {
                     Id: '4',
                     label: 'Jobs (Unscheduled)',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-default' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-default' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-default' },
                     ]
                 },
             },
@@ -218,6 +218,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         const draggable_El = document.getElementById('collapse_1');
         new Draggable(draggable_El, {
             itemSelector: '.fc-draggable',
+
+            // Use the method below when we want to create events from Javascript instead of from the HTML'data-event' attribute from the template
             // eventData: function(eventEl) {
             //     // console.log('Draggable element data-event = ', eventEl);
             //     const data = JSON.parse(eventEl.getAttribute('data-event'));
@@ -226,6 +228,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             //         create: data.create,
             //         title: data.title,
             //         duration: data.duration,
+            //         className: data.className
             //     };
             // }
         });
@@ -329,14 +332,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     title: 'Repeating Event',
                     start: new Date(y, m, d - 4, 6, 0),
                     allDay: false,
-                    className: 'event-rose'
+                    className: 'event-default'
                 },
                 {
                     id: 999,
                     title: 'Repeating Event',
                     start: new Date(y, m, d + 3, 6, 0),
                     allDay: false,
-                    className: 'event-rose'
+                    className: 'event-default'
                 },
                 {
                     title: 'Meeting',
