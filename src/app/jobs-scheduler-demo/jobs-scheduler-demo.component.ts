@@ -1,9 +1,10 @@
 // angular core
-import { Component, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit, ViewEncapsulation, Inject, Input } from '@angular/core';
+import { Component, Type, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit, ViewEncapsulation, Inject, Input } from '@angular/core';
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global';
 import Swal from 'sweetalert2'
+import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
@@ -15,7 +16,39 @@ import listPlugin from '@fullcalendar/list';
 import { global_IS_LOCALDEV } from '../app-config';
 import { global_TODAY_DATE } from '../app-config';
 
-declare var $: any;
+declare var $: any; // Support for Jquery
+
+
+@Component({
+    selector: 'app-ngbd-modal-confirm',
+    template: `
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Profile deletion</h4>
+        </div>
+        <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">"John Doe"</span> profile?</strong></p>
+            <p>All information associated to this user profile will be permanently deleted.
+                <span class="text-danger">This operation can not be undone.</span>
+            </p>
+            <div>{{this.APP['Data'].Draggable.SubContractor.label}}</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+        </div>
+  `,
+})
+export class AddEventModalComponent {
+    constructor(
+        public modal: NgbActiveModal,
+        public APP: SimpleGlobal,
+    ) {}
+}
+
+const MODALS: {[name: string]: Type<any>} = {
+    AddEventModal: AddEventModalComponent,
+};
+
 
 @Component({
 
@@ -33,6 +66,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     constructor(
 
         public APP: SimpleGlobal,
+        private modalService: NgbModal,
 
     ) {
 
@@ -260,13 +294,16 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             drop: function(info) {
             },
 
-/*            viewRender: function(view: any, element: any) {
+            viewSkeletonRender: function(info) {
+                // console.log(info);
                 // We make sure that we activate the perfect scrollbar when the view isn't on Month
-                if (view.name !== 'month') {
-                    const elem = $(element).find('.fc-scroller')[0];
+                if (info.view.type !== 'dayGridMonth') {
+                    console.log('perfect scrollbar activated');
+                    const elem = $(info.el).find('.fc-scroller')[0];
                     let ps = new PerfectScrollbar(elem);
                 }
-            },*/
+
+            },
 
             header: {
                 left: 'title',
@@ -274,26 +311,32 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 right: 'prev, next, today'
             },
 
-/*                views: {
-                month: { // name of view
-                    titleFormat: 'MMMM YYYY'
+            views: {
+                dayGridMonth: { // name of view
+                    // titleFormat: { year: '2020', month: '05', day: '03' } // year wrong format, crashes the calendar !
                     // other view-specific options here
                 },
+                dayGrid: {
+                    // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
+                },
+                timeGrid: {
+                    // options apply to timeGridWeek and timeGridDay views
+                },
                 week: {
-                    titleFormat: ' MMMM D YYYY'
+                    // options apply to dayGridWeek and timeGridWeek views
                 },
                 day: {
-                    titleFormat: 'D MMM, YYYY'
+                    // options apply to dayGridDay and timeGridDay views
                 }
-            },*/
+            },
 
-/*            select: function(start: any, end: any) {
+            select: function(selectionInfo ) {
 
                 // on select we show the Sweet Alert modal with an input
                 Swal.fire({
                     title: 'Create an Event',
-                    html: '<div class="form-group">' +
-                        '<input class="form-control" placeholder="Event Title" id="input-field">' +
+                    html: '<div class="form-group">{{this.APP[\'Data\'].Draggable.SubContractor.label}}' +
+                        '<input class="form-control" placeholder="Event Title" id="create_event_input">' +
                         '</div>',
                     showCancelButton: true,
                     confirmButtonClass: 'btn btn-success',
@@ -301,24 +344,35 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     buttonsStyling: false
                 }).then(function(result: any) {
 
-                    let eventData;
-                    const event_title = $('#input-field').val();
-
+                    const event_title = $('#create_event_input').val();
                     if (event_title) {
-                        eventData = {
+                        calendar.addEvent({
                             title: event_title,
-                            start: start,
-                            end: end
-                        };
-                        // $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
-                        calendar('renderEvent', eventData, true); // stick? = true
+                            start: selectionInfo.start,
+                            end: selectionInfo.end
+                        });
                     }
-
-                    // $calendar.fullCalendar('unselect');
-                    calendar('unselect');
-
                 });
-            },*/
+
+                that.modalService.open(MODALS.AddEventModal, {
+                    ariaLabelledBy: 'modal-basic-title',
+                    centered: true
+                }).result.then((result) => {
+                    // Modal was closed
+                    console.log('Closed by ' + result);
+
+                }, (reason) => {
+                    // Modal was dismissed
+                    if (reason === ModalDismissReasons.ESC) {
+                        console.log('Dismissed by pressing ESC');
+                    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+                        console.log('Dismissed by clicking on a backdrop');
+                    } else {
+                        console.log('Dismissed with: ' + reason);
+                    }
+                });
+
+            },
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
             events: [
@@ -393,4 +447,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     }
 }
+
+
 

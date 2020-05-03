@@ -19,6 +19,7 @@ import { WINDOW_PROVIDERS } from './services/windows.service';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AddEventModalComponent } from './jobs-scheduler-demo/jobs-scheduler-demo.component';
 
 // config
 import { global_IS_LOCALDEV, global_TODAY_DATE } from './app-config';
@@ -51,6 +52,7 @@ import { AppRoutes } from './app.routing';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        AddEventModalComponent
     ],
 
     providers: [
