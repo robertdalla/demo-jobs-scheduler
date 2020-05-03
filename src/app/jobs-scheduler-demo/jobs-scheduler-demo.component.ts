@@ -36,7 +36,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     ) {
 
-        // Demo data  Draggable.SubContractor.Id  Draggable.Scheduler.Id  Draggable.Employee.Id  Draggable.Jobs.Id
+        // Demo data
         const demoDATA: any = {
 
             Draggable: {
@@ -45,17 +45,17 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'SubContractor',
                     events: [
                         { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '24:00', className: 'event-red' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-green' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '02:00', className: 'event-orange' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-red' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '02:00', className: 'event-red' },
                     ]
                 },
                 Scheduler: {
                     Id: '2',
                     label: 'Scheduler',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-default' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-default' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-default' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-green' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-green' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-green' },
                     ]
                 },
                 Employee: {
@@ -71,9 +71,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '4',
                     label: 'Jobs (Unscheduled)',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-default' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-default' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-default' },
+                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-orange' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-orange' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-orange' },
                     ]
                 },
             },
@@ -325,21 +325,21 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 {
                     title: 'All Day Event',
                     start: new Date(y, m, 1),
-                    className: 'event-default'
+                    className: 'event-azure'
                 },
                 {
                     id: 999,
                     title: 'Repeating Event',
                     start: new Date(y, m, d - 4, 6, 0),
                     allDay: false,
-                    className: 'event-default'
+                    className: 'event-azure'
                 },
                 {
                     id: 999,
                     title: 'Repeating Event',
                     start: new Date(y, m, d + 3, 6, 0),
                     allDay: false,
-                    className: 'event-default'
+                    className: 'event-azure'
                 },
                 {
                     title: 'Meeting',

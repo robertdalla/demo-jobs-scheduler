@@ -8,7 +8,7 @@
 
                         <div class="card card-plain">
                             <div role="tab" id="headingOne" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_1" aria-expanded="false" aria-controls="collapse_1" class="collapsed"> {{this.APP['Data'].Draggable.SubContractor.label}}
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_1" aria-expanded="false" aria-controls="collapse_1" class="collapsed">{{this.APP['Data'].Draggable.SubContractor.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
@@ -16,14 +16,14 @@
                                 <div class="fc-event fc-draggable mb-1"
                                      [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
                                 </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingTwo" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_2" aria-expanded="false" aria-controls="collapse_2" class="collapsed"> {{this.APP['Data'].Draggable.Scheduler.label}}
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_2" aria-expanded="false" aria-controls="collapse_2" class="collapsed">{{this.APP['Data'].Draggable.Scheduler.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
@@ -31,14 +31,14 @@
                                 <div class="fc-event fc-draggable mb-1"
                                      [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
                                 </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingThree" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_3" aria-expanded="false" aria-controls="collapse_3" class="collapsed"> {{this.APP['Data'].Draggable.Employee.label}}
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_3" aria-expanded="false" aria-controls="collapse_3" class="collapsed">{{this.APP['Data'].Draggable.Employee.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
@@ -46,14 +46,14 @@
                                 <div class="fc-event fc-draggable mb-1"
                                      [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
                                 </div>
                             </div>
                         </div>
 
                         <div class="card card-plain">
                             <div role="tab" id="headingFour" class="card-header">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_4" aria-expanded="false" aria-controls="collapse_4" class="collapsed"> {{this.APP['Data'].Draggable.Jobs.label}}
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse_4" aria-expanded="false" aria-controls="collapse_4" class="collapsed">{{this.APP['Data'].Draggable.Jobs.label}}
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="fc-event fc-draggable mb-1"
                                      [ngClass]="item.className"
                                      *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}}
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
                                 </div>
                             </div>
                         </div>
