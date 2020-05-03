@@ -45,8 +45,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'SubContractor',
                     events: [
                         { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '24:00', className: 'event-red' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-red' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '02:00', className: 'event-red' },
+                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '24:00', className: 'event-red' },
+                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '24:00', className: 'event-red' },
                     ]
                 },
                 Scheduler: {
