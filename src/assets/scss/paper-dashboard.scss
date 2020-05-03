@@ -63,14 +63,11 @@
 @import 'paper-dashboard/sidebar-and-main-panel';
 @import 'paper-dashboard/timeline';
 
-
-
 // cards
 @import 'paper-dashboard/cards';
 @import "paper-dashboard/cards/card-chart";
 @import "paper-dashboard/cards/card-map";
 @import "paper-dashboard/cards/card-user";
-
 @import "paper-dashboard/cards/card-background";
 @import "paper-dashboard/cards/card-collapse";
 @import "paper-dashboard/cards/card-contributions";
@@ -85,8 +82,6 @@
 @import "paper-dashboard/cards/card-testimonials";
 @import "paper-dashboard/cards/card-tasks";
 
-
-
 // example pages and sections
 @import 'paper-dashboard/example-pages';
 @import 'paper-dashboard/sections';
@@ -94,3 +89,7 @@
 
 @import 'paper-dashboard/responsive';
 @import 'paper-dashboard/media-queries';
+
+// jobs-scheduler
+@import './override-ng-bootstrap';
+
