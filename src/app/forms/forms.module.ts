@@ -25,12 +25,15 @@ import { WizardComponent } from './wizard/wizard.component';
         NgbModule,
         FormsModule
     ],
+    exports: [
+        EqualValidator
+    ],
     declarations: [
-          ExtendedFormsComponent,
-          RegularFormsComponent,
-          ValidationFormsComponent,
-          WizardComponent,
-          EqualValidator
+        ExtendedFormsComponent,
+        RegularFormsComponent,
+        ValidationFormsComponent,
+        WizardComponent,
+        EqualValidator
     ]
 })
 

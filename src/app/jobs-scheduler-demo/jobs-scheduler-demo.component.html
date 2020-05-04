@@ -74,86 +74,38 @@
         <div class="col-md-8">
             <div class="d-flex flex-row-reverse">
 
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Health.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_1" style="background-color: #E3E3E3;">
-                        <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Health.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
+<!--                <div class="btn-group">
+                    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                        <button class="btn btn-outline-danger" ngbDropdownToggle  id="dropdownBasic1">Select me</button>
+                        <div class="dropdown-menu" ngbDropdownMenu  aria-labelledby="dropdownBasic1">
+                            <button ngbDropdownItem>One</button>
+                            <button ngbDropdownItem>Two</button>
+                            <button ngbDropdownItem>Four!</button>
+                        </div>
                     </div>
-                </div>
+                    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                        <button class="btn btn-outline-success" ngbDropdownToggle>Or me</button>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <button ngbDropdownItem>One</button>
+                            <button ngbDropdownItem>Two</button>
+                            <button ngbDropdownItem>Four!</button>
+                        </div>
+                    </div>
+                </div>-->
 
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Stage.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_2" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Stage.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border ">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Product.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_3" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Product.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Branch.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_4" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Branch.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Division.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_5" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Division.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Customer.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_6" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Customer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Fixer.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_7" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Fixer.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Scheduler.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_8" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Scheduler.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
-
-                <div class="dropdown border">
-                    <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                            id="dropdown_9" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Employees.label}}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_9" style="background-color: #E3E3E3;">
-                      <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Employees.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
-                    </div>
-                </div>
+                <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters | keyvalue; index as index">
+                    <select class="selectpicker border"
+                            data-size="7"
+                            data-style="btn btn-link btn-sm"
+                            [(ngModel)]="dropdown.value.value"
+                            title="{{dropdown.value.label}}">
+                        <ng-container *ngFor="let option of dropdown.value.data">
+                            <option [disabled]="option.disabled"
+                                    [value]="option.label">{{option.label}}
+                            </option>
+                        </ng-container>
+                    </select>
+                </ng-container>
 
             </div>
 

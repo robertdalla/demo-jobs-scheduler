@@ -3,14 +3,15 @@ import { Component, Type, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewIni
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global';
-import Swal from 'sweetalert2'
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import PerfectScrollbar from 'perfect-scrollbar';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { AddEventModalComponent } from './add-event.component';
+
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 
 // config
 import { global_IS_LOCALDEV } from '../app-config';
@@ -18,32 +19,6 @@ import { global_TODAY_DATE } from '../app-config';
 
 declare var $: any; // Support for Jquery
 
-
-@Component({
-    selector: 'app-ngbd-modal-confirm',
-    template: `
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Profile deletion</h4>
-        </div>
-        <div class="modal-body">
-            <p><strong>Are you sure you want to delete <span class="text-primary">"John Doe"</span> profile?</strong></p>
-            <p>All information associated to this user profile will be permanently deleted.
-                <span class="text-danger">This operation can not be undone.</span>
-            </p>
-            <div>{{this.APP['Data'].Draggable.SubContractor.label}}</div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-            <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
-        </div>
-  `,
-})
-export class AddEventModalComponent {
-    constructor(
-        public modal: NgbActiveModal,
-        public APP: SimpleGlobal,
-    ) {}
-}
 
 const MODALS: {[name: string]: Type<any>} = {
     AddEventModal: AddEventModalComponent,
@@ -55,7 +30,7 @@ const MODALS: {[name: string]: Type<any>} = {
     moduleId: module.id,
     selector: 'app-jobsscheduler',
     // template: '',
-    templateUrl: 'jobs-scheduler-demo.component.html',
+    templateUrl: './jobs-scheduler-demo.component.html',
     // styles: [''],
     // styleUrls: [''],
     encapsulation: ViewEncapsulation.None
@@ -116,105 +91,114 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 Employees: {
                     Id: '1',
                     label: 'Employees',
+                    value: null,
                     data: [
-                        { label: 'Ellesha Alvarado' },
-                        { label: 'Jorja Kirby' },
-                        { label: 'Thomas Barker' },
-                        { label: 'Rafe Hines' },
-                        { label: 'Wren Haworth' },
-                        { label: 'Rahim Kent' },
+                        { disabled: true, label: 'Ellesha Alvarado' },
+                        { disabled: false, label: 'Jorja Kirby' },
+                        { disabled: false, label: 'Thomas Barker' },
+                        { disabled: false, label: 'Rafe Hines' },
+                        { disabled: false, label: 'Wren Haworth' },
+                        { disabled: false, label: 'Rahim Kent' },
                     ],
                 },
                 Scheduler: {
                     Id: '2',
                     label: 'Scheduler',
+                    value: null,
                     data: [
-                        { label: 'Scheduler 1' },
-                        { label: 'Scheduler 2' },
-                        { label: 'Scheduler 3' },
+                        { disabled: false, label: 'Scheduler 1' },
+                        { disabled: false, label: 'Scheduler 2' },
+                        { disabled: false, label: 'Scheduler 3' },
                     ],
                 },
                 Fixer: {
                     Id: '3',
                     label: 'Fixer',
+                    value: null,
                     data: [
-                        { label: 'Fixer 1' },
-                        { label: 'Fixer 2' },
-                        { label: 'Fixer 3' },
+                        { disabled: false, label: 'Fixer 1' },
+                        { disabled: false, label: 'Fixer 2' },
+                        { disabled: false, label: 'Fixer 3' },
                     ],
                 },
                 Customer: {
                     Id: '4',
                     label: 'Customer',
+                    value: null,
                     data: [
-                        { label: 'Accord Homes' },
-                        { label: 'A B Freese' },
-                        { label: 'Cameron Daff' },
-                        { label: 'Rawcorp Pty Ltd' },
-                        { label: 'Urban Building Services' },
-                        { label: 'East Coast Designer Builders Pty Ltd' },
-                        { label: 'Eddie Blaiklock Builder' },
-                        { label: 'Nerek Construction' },
-                        { label: 'Lauder Jeff' },
-                        { label: 'Saurus Contracting' },
-                        { label: 'Dalponte Building Services' },
-                        { label: 'Dave Baldwin' },
-                        { label: 'O\'Loan Build' },
-                        { label: 'Ray Mahoney Builder' },
-                        { label: 'Bale Constructions' },
-                        { label: 'Vivid Home Builders' },
-                        { label: 'Leisure Living Homes, Mackay' },
-                        { label: 'Galaxi Homes' },
-                        { label: 'Lamb Gary Building Contractor' },
-                        { label: 'Fergus Builders' },
+                        { disabled: false, label: 'Accord Homes' },
+                        { disabled: false, label: 'A B Freese' },
+                        { disabled: false, label: 'Cameron Daff' },
+                        { disabled: false, label: 'Rawcorp Pty Ltd' },
+                        { disabled: false, label: 'Urban Building Services' },
+                        { disabled: false, label: 'East Coast Designer Builders Pty Ltd' },
+                        { disabled: false, label: 'Eddie Blaiklock Builder' },
+                        { disabled: false, label: 'Nerek Construction' },
+                        { disabled: false, label: 'Lauder Jeff' },
+                        { disabled: false, label: 'Saurus Contracting' },
+                        { disabled: false, label: 'Dalponte Building Services' },
+                        { disabled: false, label: 'Dave Baldwin' },
+                        { disabled: false, label: 'O\'Loan Build' },
+                        { disabled: false, label: 'Ray Mahoney Builder' },
+                        { disabled: false, label: 'Bale Constructions' },
+                        { disabled: false, label: 'Vivid Home Builders' },
+                        { disabled: false, label: 'Leisure Living Homes, Mackay' },
+                        { disabled: false, label: 'Galaxi Homes' },
+                        { disabled: false, label: 'Lamb Gary Building Contractor' },
+                        { disabled: false, label: 'Fergus Builders' },
                     ],
                 },
                 Division: {
                     Id: '5',
                     label: 'Division',
+                    value: null,
                     data: [
-                        { label: 'Construction' },
-                        { label: 'Plumbing' },
-                        { label: 'Electrical' },
+                        { disabled: false, label: 'Construction' },
+                        { disabled: false, label: 'Plumbing' },
+                        { disabled: false, label: 'Electrical' },
                     ],
                 },
                 Branch: {
                     Id: '6',
                     label: 'Branch',
+                    value: null,
                     data: [
-                        { label: 'QLD' },
-                        { label: 'NSW' },
-                        { label: 'VIC' },
-                        { label: 'WA' },
-                        { label: 'NT' },
+                        { disabled: false, label: 'QLD' },
+                        { disabled: false, label: 'NSW' },
+                        { disabled: false, label: 'VIC' },
+                        { disabled: false, label: 'WA' },
+                        { disabled: false, label: 'NT' },
                     ],
                 },
                 Product: {
                     Id: '7',
                     label: 'Product',
+                    value: null,
                     data: [
-                        { label: 'Product 1' },
-                        { label: 'Product 2' },
-                        { label: 'Product 3' },
-                        { label: 'Product 4' },
+                        { disabled: false, label: 'Product 1' },
+                        { disabled: false, label: 'Product 2' },
+                        { disabled: false, label: 'Product 3' },
+                        { disabled: false, label: 'Product 4' },
                     ],
                 },
                 Stage: {
                     Id: '8',
                     label: 'Stage',
+                    value: null,
                     data: [
-                        { label: 'Stage 1' },
-                        { label: 'Stage 2' },
-                        { label: 'Stage 3' },
+                        { disabled: false, label: 'Stage 1' },
+                        { disabled: false, label: 'Stage 2' },
+                        { disabled: false, label: 'Stage 3' },
                     ],
                 },
                 Health: {
                     Id: '9',
                     label: 'Health',
+                    value: null,
                     data: [
-                        { label: 'Good' },
-                        { label: 'Average' },
-                        { label: 'Bad' },
+                        { disabled: false, label: 'Good' },
+                        { disabled: false, label: 'Average' },
+                        { disabled: false, label: 'Bad' },
                     ],
                 },
             }
@@ -249,7 +233,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         const d = today.getDate();
 
         // Instantiate the Draggable DOM elements
-        const draggable_El = document.getElementById('collapse_1');
+        const draggable_El = <HTMLElement>document.getElementById('collapse_1');
         new Draggable(draggable_El, {
             itemSelector: '.fc-draggable',
 
@@ -266,21 +250,21 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             //     };
             // }
         });
-        const draggable_E2 = document.getElementById('collapse_2');
+        const draggable_E2 = <HTMLElement>document.getElementById('collapse_2');
         new Draggable(draggable_E2, {
             itemSelector: '.fc-draggable',
         });
-        const draggable_E3 = document.getElementById('collapse_3');
+        const draggable_E3 = <HTMLElement>document.getElementById('collapse_3');
         new Draggable(draggable_E3, {
             itemSelector: '.fc-draggable',
         });
-        const draggable_E4 = document.getElementById('collapse_4');
+        const draggable_E4 = <HTMLElement>document.getElementById('collapse_4');
         new Draggable(draggable_E4, {
             itemSelector: '.fc-draggable',
         });
 
         // Instantiate the FullCalenndar DOM element
-        const calendarEl = document.getElementById('jobsScheduler');
+        const calendarEl = <HTMLElement>document.getElementById('jobsScheduler');
         const calendar = new Calendar(calendarEl, {
             plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
             editable: true,
@@ -288,21 +272,17 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             defaultDate: today,
             selectable: true,
             navLinks: true, // can click day/week names to navigate views
-            // selectHelper: true,
 
             droppable: true,
             drop: function(info) {
+                // console.log(info);
             },
 
             viewSkeletonRender: function(info) {
                 // console.log(info);
-                // We make sure that we activate the perfect scrollbar when the view isn't on Month
-                if (info.view.type !== 'dayGridMonth') {
-                    console.log('perfect scrollbar activated');
-                    const elem = $(info.el).find('.fc-scroller')[0];
-                    let ps = new PerfectScrollbar(elem);
-                }
 
+                // if (info.view.type !== 'dayGridMonth') {
+                // }
             },
 
             header: {
@@ -331,29 +311,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function(selectionInfo ) {
-
-                // on select we show the Sweet Alert modal with an input
-                Swal.fire({
-                    title: 'Create an Event',
-                    html: '<div class="form-group">{{this.APP[\'Data\'].Draggable.SubContractor.label}}' +
-                        '<input class="form-control" placeholder="Event Title" id="create_event_input">' +
-                        '</div>',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                    buttonsStyling: false
-                }).then(function(result: any) {
-
-                    const event_title = $('#create_event_input').val();
-                    if (event_title) {
-                        calendar.addEvent({
-                            title: event_title,
-                            start: selectionInfo.start,
-                            end: selectionInfo.end
-                        });
-                    }
-                });
-
                 that.modalService.open(MODALS.AddEventModal, {
                     ariaLabelledBy: 'modal-basic-title',
                     centered: true
