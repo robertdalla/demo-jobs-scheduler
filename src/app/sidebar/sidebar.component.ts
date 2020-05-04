@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit, OnDestroy, AfterViewChecked, AfterContentInit} from '@angular/core';
 
-//Metadata
+// Metadata
 export interface RouteInfo {
     path: string;
     title: string;
@@ -18,7 +18,7 @@ export interface ChildrenItems {
     type?: string;
 }
 
-//Menu Items
+// Menu Items
 export const ROUTES: RouteInfo[] = [
     {
         path: '/pages/jobs-scheduler',
@@ -79,23 +79,21 @@ export const ROUTES: RouteInfo[] = [
             {path: 'fullscreen', title: 'Full Screen Map', ab:'FSM'},
             {path: 'vector', title: 'Vector Map', ab:'VM'}
         ]
-    },{
+    }, {
         path: '/widgets',
         title: 'Widgets',
         type: 'link',
         icontype: 'nc-icon nc-box'
-
+    }, {
+        path: '/pages//timeline',
+        title: 'Timeline',
+        type: 'link',
+        icontype: 'nc-icon nc-calendar-60'
     },{
         path: '/charts',
         title: 'Charts',
         type: 'link',
         icontype: 'nc-icon nc-chart-bar-32'
-
-    },{
-        path: '/calendar',
-        title: 'Calendar',
-        type: 'link',
-        icontype: 'nc-icon nc-calendar-60'
     },{
         path: '/pages',
         title: 'Pages',
@@ -103,7 +101,6 @@ export const ROUTES: RouteInfo[] = [
         type: 'sub',
         icontype: 'nc-icon nc-book-bookmark',
         children: [
-            {path: 'timeline', title: 'Timeline Page', ab:'T'},
             {path: 'user', title: 'User Page', ab:'UP'},
             {path: 'login', title: 'Login Page', ab:'LP'},
             {path: 'register', title: 'Register Page', ab:'RP'},
@@ -118,18 +115,21 @@ export const ROUTES: RouteInfo[] = [
     templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit, OnDestroy, AfterViewInit {
+
     public menuItems: any[];
+
     isNotMobileMenu(){
-        if( window.outerWidth > 991){
-            return false;
-        }
-        return true;
+        return window.outerWidth <= 991;
     }
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
     }
-    ngAfterViewInit(){
+
+    ngAfterViewInit() {
+    }
+
+    ngOnDestroy() {
     }
 }

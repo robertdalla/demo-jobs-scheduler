@@ -13,7 +13,7 @@
         color: $dropdown-color;
 
         &:hover,
-        &:focus{
+        &:focus, &.selected{
             background-color: $background-color;
         }
     }

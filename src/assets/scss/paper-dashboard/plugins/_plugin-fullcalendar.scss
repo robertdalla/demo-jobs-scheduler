@@ -524,7 +524,7 @@ temporary rendered events).
 	font-size: .85em;
 	line-height: 1.3;
 	border-radius: 2px;
-	background-color: $light-blue; /* default BACKGROUND color */
+	background-color: $muted-color; /* default BACKGROUND color */
 	font-weight: normal; /* undo jqui's ui-widget-header bold */
 
     &.event-azure{

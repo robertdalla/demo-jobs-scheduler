@@ -1,15 +1,16 @@
 // angular core
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global'; // A simple global variable service for Angular2/4
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Services
@@ -19,43 +20,54 @@ import { WINDOW_PROVIDERS } from './services/windows.service';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AddEventModalComponent } from './jobs-scheduler-demo/add-event.component';
 
-// config
-import { global_IS_LOCALDEV, global_TODAY_DATE } from './app-config';
+// Modules
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
+
+// config
+import { global_IS_LOCALDEV, global_TODAY_DATE } from './app-config';
 import { AppRoutes } from './app.routing';
 
 
 @NgModule({
 
     imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        RouterModule.forRoot(AppRoutes,{
-          useHash: true
-        }),
-        NgbModule,
-        HttpModule,
+        BrowserModule,
         HttpClientModule,
+        BrowserAnimationsModule,
+        FormsModule, ReactiveFormsModule,
+        NgbModule,
+        // NgbDropdownModule,
+        NgxSpinnerModule,
         SidebarModule,
         NavbarModule,
         FooterModule,
         FixedPluginModule,
-        NgxSpinnerModule,
+        RouterModule.forRoot(AppRoutes,{
+            useHash: true,
+            anchorScrolling: 'enabled',
+            scrollPositionRestoration: 'enabled'
+        }),
     ],
 
     declarations: [
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        AddEventModalComponent,
     ],
 
     providers: [
         WINDOW_PROVIDERS,
         SimpleGlobal,
+    ],
+
+    exports: [
+        // AddEventModalComponent
     ],
 
     bootstrap: [ AppComponent ]

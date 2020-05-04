@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 export const AppRoutes: Routes = [{
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: '/pages/jobs-scheduler',
         pathMatch: 'full',
       },{
         path: '',
@@ -28,9 +28,6 @@ export const AppRoutes: Routes = [{
         },{
             path: 'charts',
             loadChildren: './charts/charts.module#ChartsModule'
-        },{
-            path: 'calendar',
-            loadChildren: './calendar/calendar.module#CalendarModule'
         },{
             path: '',
             loadChildren: './userpage/user.module#UserModule'
