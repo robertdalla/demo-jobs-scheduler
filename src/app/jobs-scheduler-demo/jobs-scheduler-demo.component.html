@@ -94,7 +94,7 @@
                 </div>-->
 
                 <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters | keyvalue; index as index">
-                    <select class="selectpicker border"
+                    <select class="selectpicker"
                             data-size="7"
                             data-style="btn btn-link btn-sm"
                             [(ngModel)]="dropdown.value.value"
