@@ -10,6 +10,8 @@ import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+
+// components
 import { AddEventModalComponent } from './add-event.component';
 
 // config
@@ -280,8 +282,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             viewSkeletonRender: function(info) {
                 // console.log(info);
 
-                // if (info.view.type !== 'dayGridMonth') {
-                // }
+                if (info.view.type !== 'dayGridMonth') {
+
+                }
             },
 
             header: {

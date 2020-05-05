@@ -21,12 +21,12 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "node_modules/@fullcalendar/core/main.css",
               "node_modules/@fullcalendar/daygrid/main.css",
               "node_modules/@fullcalendar/timegrid/main.css",
               "node_modules/@fullcalendar/list/main.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/paper-dashboard.scss",
               "src/assets/css/demo.css"
             ],
@@ -35,7 +35,6 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap-select/dist/js/bootstrap-select.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
               "node_modules/moment/moment.js",
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/chartist/dist/chartist.js",
@@ -110,7 +109,6 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/bootstrap-select/dist/js/bootstrap-select.js",
-              "node_modules/sweetalert2/dist/sweetalert2.js",
               "node_modules/moment/moment.js",
               "node_modules/chart.js/dist/Chart.min.js",
               "node_modules/chartist/dist/chartist.js",
@@ -136,12 +134,12 @@
               "src/assets/js/jquery.validate.min.js"
             ],
             "styles": [
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "node_modules/@fullcalendar/core/main.css",
               "node_modules/@fullcalendar/daygrid/main.css",
               "node_modules/@fullcalendar/timegrid/main.css",
               "node_modules/@fullcalendar/list/main.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/paper-dashboard.scss",
               "src/assets/css/demo.css"
             ],
