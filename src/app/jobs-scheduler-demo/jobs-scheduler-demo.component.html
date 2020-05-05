@@ -73,26 +73,6 @@
 
         <div class="col-md-8">
             <div class="d-flex flex-row-reverse">
-
-<!--                <div class="btn-group">
-                    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-outline-danger" ngbDropdownToggle  id="dropdownBasic1">Select me</button>
-                        <div class="dropdown-menu" ngbDropdownMenu  aria-labelledby="dropdownBasic1">
-                            <button ngbDropdownItem>One</button>
-                            <button ngbDropdownItem>Two</button>
-                            <button ngbDropdownItem>Four!</button>
-                        </div>
-                    </div>
-                    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-                        <button class="btn btn-outline-success" ngbDropdownToggle>Or me</button>
-                        <div class="dropdown-menu" ngbDropdownMenu>
-                            <button ngbDropdownItem>One</button>
-                            <button ngbDropdownItem>Two</button>
-                            <button ngbDropdownItem>Four!</button>
-                        </div>
-                    </div>
-                </div>-->
-
                 <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters | keyvalue; index as index">
                     <select class="selectpicker"
                             data-size="7"
