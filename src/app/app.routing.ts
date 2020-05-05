@@ -12,6 +12,9 @@ export const AppRoutes: Routes = [{
         component: AdminLayoutComponent,
         children: [{
             path: '',
+            loadChildren: './jobs-scheduler-demo/jobs-scheduler-demo.module#JobsSchedulerDemoModule'
+        },{
+            path: '',
             loadChildren: './dashboard/dashboard.module#DashboardModule'
         },{
             path: 'components',
@@ -31,9 +34,6 @@ export const AppRoutes: Routes = [{
         },{
             path: '',
             loadChildren: './userpage/user.module#UserModule'
-        },{
-            path: '',
-            loadChildren: './jobs-scheduler-demo/jobs-scheduler-demo.module#JobsSchedulerDemoModule'
         },{
             path: '',
             loadChildren: './timeline/timeline.module#TimelineModule'

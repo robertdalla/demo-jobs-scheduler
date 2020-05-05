@@ -10,6 +10,7 @@ import { APP_BASE_HREF } from '@angular/common';
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global'; // A simple global variable service for Angular2/4
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // Services
@@ -49,7 +50,8 @@ import { AppRoutes } from './app.routing';
             anchorScrolling: 'enabled',
             scrollPositionRestoration: 'enabled'
         }),
-        SweetAlert2Module.forRoot()
+        NgbModule,
+        SweetAlert2Module.forRoot(),
     ],
 
     declarations: [

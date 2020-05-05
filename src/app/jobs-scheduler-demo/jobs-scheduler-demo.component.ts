@@ -4,7 +4,6 @@ import { Component, Type, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewIni
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -88,8 +87,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 },
             },
 
-            Dropdown_filters: {
-                Employees: {
+            Dropdown_filters: [
+                {
                     Id: '1',
                     label: 'Employees',
                     value: null,
@@ -102,7 +101,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Rahim Kent' },
                     ],
                 },
-                Scheduler: {
+                {
                     Id: '2',
                     label: 'Scheduler',
                     value: null,
@@ -112,7 +111,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Scheduler 3' },
                     ],
                 },
-                Fixer: {
+                {
                     Id: '3',
                     label: 'Fixer',
                     value: null,
@@ -122,7 +121,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Fixer 3' },
                     ],
                 },
-                Customer: {
+                {
                     Id: '4',
                     label: 'Customer',
                     value: null,
@@ -149,7 +148,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Fergus Builders' },
                     ],
                 },
-                Division: {
+                {
                     Id: '5',
                     label: 'Division',
                     value: null,
@@ -159,7 +158,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Electrical' },
                     ],
                 },
-                Branch: {
+                {
                     Id: '6',
                     label: 'Branch',
                     value: null,
@@ -171,7 +170,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'NT' },
                     ],
                 },
-                Product: {
+                {
                     Id: '7',
                     label: 'Product',
                     value: null,
@@ -182,7 +181,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Product 4' },
                     ],
                 },
-                Stage: {
+                {
                     Id: '8',
                     label: 'Stage',
                     value: null,
@@ -192,7 +191,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Stage 3' },
                     ],
                 },
-                Health: {
+                {
                     Id: '9',
                     label: 'Health',
                     value: null,
@@ -202,7 +201,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Bad' },
                     ],
                 },
-            }
+            ]
         };
 
         if (global_IS_LOCALDEV) {
