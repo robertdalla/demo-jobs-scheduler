@@ -9,9 +9,9 @@ import { APP_BASE_HREF } from '@angular/common';
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global'; // A simple global variable service for Angular2/4
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // Services
 import { WINDOW_PROVIDERS } from './services/windows.service';
@@ -40,8 +40,6 @@ import { AppRoutes } from './app.routing';
         HttpClientModule,
         BrowserAnimationsModule,
         FormsModule, ReactiveFormsModule,
-        NgbModule,
-        // NgbDropdownModule,
         NgxSpinnerModule,
         SidebarModule,
         NavbarModule,
@@ -52,6 +50,8 @@ import { AppRoutes } from './app.routing';
             anchorScrolling: 'enabled',
             scrollPositionRestoration: 'enabled'
         }),
+        NgbModule,
+        SweetAlert2Module.forRoot(),
     ],
 
     declarations: [
@@ -67,7 +67,7 @@ import { AppRoutes } from './app.routing';
     ],
 
     exports: [
-        // AddEventModalComponent
+        AddEventModalComponent
     ],
 
     bootstrap: [ AppComponent ]

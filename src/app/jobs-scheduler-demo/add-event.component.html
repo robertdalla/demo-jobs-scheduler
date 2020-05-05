@@ -5,10 +5,10 @@
     <div class="col-md-12 text-center">
         <div class="dropdown">
             <button class="dropdown-toggle btn btn-inverse btn-link btn-sm px-2" type="button"
-                    id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters.Health.label}}
+                    id="dropdown_1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{this.APP['Data'].Dropdown_filters[0].label}}
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_1" style="background-color: #F3F3F3;">
-                <a *ngFor="let item of this.APP['Data'].Dropdown_filters.Health.data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
+                <a *ngFor="let item of this.APP['Data'].Dropdown_filters[0].data; index as index" class="dropdown-item" href="#">{{item.label}}</a>
             </div>
         </div>
     </div>

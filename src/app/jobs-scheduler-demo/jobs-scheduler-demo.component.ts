@@ -9,9 +9,9 @@ import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { AddEventModalComponent } from './add-event.component';
 
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+// components
+import { AddEventModalComponent } from './add-event.component';
 
 // config
 import { global_IS_LOCALDEV } from '../app-config';
@@ -87,8 +87,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 },
             },
 
-            Dropdown_filters: {
-                Employees: {
+            Dropdown_filters: [
+                {
                     Id: '1',
                     label: 'Employees',
                     value: null,
@@ -101,7 +101,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Rahim Kent' },
                     ],
                 },
-                Scheduler: {
+                {
                     Id: '2',
                     label: 'Scheduler',
                     value: null,
@@ -111,7 +111,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Scheduler 3' },
                     ],
                 },
-                Fixer: {
+                {
                     Id: '3',
                     label: 'Fixer',
                     value: null,
@@ -121,7 +121,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Fixer 3' },
                     ],
                 },
-                Customer: {
+                {
                     Id: '4',
                     label: 'Customer',
                     value: null,
@@ -148,7 +148,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Fergus Builders' },
                     ],
                 },
-                Division: {
+                {
                     Id: '5',
                     label: 'Division',
                     value: null,
@@ -158,7 +158,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Electrical' },
                     ],
                 },
-                Branch: {
+                {
                     Id: '6',
                     label: 'Branch',
                     value: null,
@@ -170,7 +170,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'NT' },
                     ],
                 },
-                Product: {
+                {
                     Id: '7',
                     label: 'Product',
                     value: null,
@@ -181,7 +181,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Product 4' },
                     ],
                 },
-                Stage: {
+                {
                     Id: '8',
                     label: 'Stage',
                     value: null,
@@ -191,7 +191,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Stage 3' },
                     ],
                 },
-                Health: {
+                {
                     Id: '9',
                     label: 'Health',
                     value: null,
@@ -201,7 +201,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Bad' },
                     ],
                 },
-            }
+            ]
         };
 
         if (global_IS_LOCALDEV) {
@@ -281,8 +281,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             viewSkeletonRender: function(info) {
                 // console.log(info);
 
-                // if (info.view.type !== 'dayGridMonth') {
-                // }
+                if (info.view.type !== 'dayGridMonth') {
+
+                }
             },
 
             header: {
