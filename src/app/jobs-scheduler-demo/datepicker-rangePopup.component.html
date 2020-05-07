@@ -1,0 +1,66 @@
+<form class="form-inline">
+    <div class="form-group hidden">
+        <div class="input-group">
+            <input name="datepicker"
+                   class="form-control"
+                   ngbDatepicker
+                   #datepicker="ngbDatepicker"
+                   [autoClose]="'outside'"
+                   (dateSelect)="onDateSelection($event)"
+                   [displayMonths]="2"
+                   [dayTemplate]="t"
+                   outsideDays="hidden"
+                   [startDate]="fromDate!">
+            <ng-template #t let-date let-focused="focused">
+        <span class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+            </ng-template>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            <input #dpFromDate
+                   class="form-control form-control-sm" placeholder="yyyy-mm-dd"
+                   name="dpFromDate"
+                   [value]="formatter.format(fromDate)"
+                   (input)="fromDate = validateFromDateInput(fromDate, dpFromDate.value)">
+            <div class="input-group-append">
+                <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
+                    <i class="nc-icon lg nc-calendar-60"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group ml-2">
+        <div class="input-group">
+            <input #dpToDate
+                   class="form-control form-control-sm" placeholder="yyyy-mm-dd"
+                   name="dpToDate"
+                   [value]="formatter.format(toDate)"
+                   (input)="toDate = validateToDateInput(toDate, dpToDate.value)">
+            <div class="input-group-append">
+                <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
+                    <i class="nc-icon lg nc-calendar-60"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--<form class="form-inline">
+    <div>
+        <pre>From date model: {{ fromDate | json }}</pre>
+    </div>
+    <div class="mx-3"></div>
+    <div>
+        <pre>To date model: {{ toDate | json }}</pre>
+    </div>
+</form>-->
