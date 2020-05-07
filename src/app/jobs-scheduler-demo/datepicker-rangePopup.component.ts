@@ -52,6 +52,8 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-b
 
 export class DatepickerRangePopupComponent {
 
+    @Input() labelEnabled: boolean;
+
     @Input() fromDate: NgbDate | null;
     @Output() fromDateChange = new EventEmitter();
 

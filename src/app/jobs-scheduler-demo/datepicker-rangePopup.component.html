@@ -1,5 +1,5 @@
-<form class="form-inline">
-    <div class="form-group hidden">
+<div class="form-inline">
+    <div class="form-group hidden" [ngStyle]="labelEnabled && {'margin-top': '1.5em'}">
         <div class="input-group">
             <input name="datepicker"
                    class="form-control"
@@ -24,36 +24,44 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="input-group">
-            <input #dpFromDate
-                   class="form-control form-control-sm" placeholder="yyyy-mm-dd"
-                   name="dpFromDate"
-                   [value]="formatter.format(fromDate)"
-                   (input)="fromDate = validateFromDateInput(fromDate, dpFromDate.value)">
-            <div class="input-group-append">
-                <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
-                    <i class="nc-icon lg nc-calendar-60"></i>
-                </button>
+    <div class="form-inline">
+        <div>
+            <div *ngIf="labelEnabled" class="text-center"><small>Start</small></div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input #dpFromDate
+                           class="form-control form-control-sm" placeholder="yyyy-mm-dd"
+                           name="dpFromDate"
+                           [value]="formatter.format(fromDate)"
+                           (input)="fromDate = validateFromDateInput(fromDate, dpFromDate.value)">
+                    <div class="input-group-append">
+                        <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
+                            <i class="nc-icon lg nc-calendar-60"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-group ml-2">
-        <div class="input-group">
-            <input #dpToDate
-                   class="form-control form-control-sm" placeholder="yyyy-mm-dd"
-                   name="dpToDate"
-                   [value]="formatter.format(toDate)"
-                   (input)="toDate = validateToDateInput(toDate, dpToDate.value)">
-            <div class="input-group-append">
-                <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
-                    <i class="nc-icon lg nc-calendar-60"></i>
-                </button>
+        <div>
+            <div *ngIf="labelEnabled" class="text-center"><small>End</small></div>
+            <div class="form-group ml-2">
+                <div class="input-group">
+                    <input #dpToDate
+                           class="form-control form-control-sm" placeholder="yyyy-mm-dd"
+                           name="dpToDate"
+                           [value]="formatter.format(toDate)"
+                           (input)="toDate = validateToDateInput(toDate, dpToDate.value)">
+                    <div class="input-group-append">
+                        <button class="btn-simple btn-sm" (click)="datepicker.toggle()" type="button">
+                            <i class="nc-icon lg nc-calendar-60"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</form>
+</div>
 
 <!-- For testing only: Display JSON content -->
 <!--<form class="form-inline">
