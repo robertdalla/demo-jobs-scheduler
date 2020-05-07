@@ -13,11 +13,12 @@
                                 </a>
                             </div>
                             <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
-                                <div class="fc-event fc-draggable mb-1"
-                                     [ngClass]="item.className"
-                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
-                                </div>
+                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index">
+                                    <div class="fc-event noUi-target mb-1"
+                                         [ngClass]="[(item.enabled ? 'fc-draggable' : 'blurred'), item.className]"
+                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -28,11 +29,12 @@
                                 </a>
                             </div>
                             <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
-                                <div class="fc-event fc-draggable mb-1"
-                                     [ngClass]="item.className"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
-                                </div>
+                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index">
+                                    <div class="fc-event noUi-target mb-1"
+                                         [ngClass]="[(item.enabled ? 'fc-draggable' : 'blurred'), item.className]"
+                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -43,11 +45,12 @@
                                 </a>
                             </div>
                             <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                                <div class="fc-event fc-draggable mb-1"
-                                     [ngClass]="item.className"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
-                                </div>
+                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index">
+                                    <div class="fc-event noUi-target mb-1"
+                                         [ngClass]="[(item.enabled ? 'fc-draggable' : 'blurred'), item.className]"
+                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -58,11 +61,12 @@
                                 </a>
                             </div>
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <div class="fc-event fc-draggable mb-1"
-                                     [ngClass]="item.className"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
-                                </div>
+                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index">
+                                    <div class="fc-event noUi-target mb-1"
+                                         [ngClass]="[(item.enabled ? 'fc-draggable' : 'blurred'), item.className]"
+                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -72,8 +76,9 @@
         </div>
 
         <div class="col-md-8">
-            <!-- Version with ng-bootstrap -->
             <div class="d-flex flex-row-reverse justify-content-around">
+
+                <!-- Dropdown filters -->
                 <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                          ngbDropdown [placement]="'bottom'">
@@ -89,23 +94,6 @@
                 </ng-container>
             </div>
 
-            <!-- Version with bootstrap-select.js + popper.js -->
-<!--            <div class="d-flex flex-row-reverse">-->
-<!--                <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">-->
-<!--                    <select class="selectpicker"-->
-<!--                            data-size="7"-->
-<!--                            data-style="btn btn-link btn-sm"-->
-<!--                            [(ngModel)]="dropdown.value"-->
-<!--                            title="{{dropdown.label}}">-->
-<!--                        <ng-container *ngFor="let option of dropdown.data">-->
-<!--                            <option [disabled]="option.disabled"-->
-<!--                                    [value]="option.label">{{option.label}}-->
-<!--                            </option>-->
-<!--                        </ng-container>-->
-<!--                    </select>-->
-<!--                </ng-container>-->
-<!--            </div>-->
-
             <div class="card card-calendar">
                 <div class="card-content">
                     <div id="jobsScheduler"></div>
@@ -119,3 +107,116 @@
 
     </div>
 </div>
+
+
+<ng-template #add_event_modal let-modal>
+
+    <div class="modal-header">
+        <h4 class="modal-title"><b>New event</b></h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+
+            <!-- Title -->
+            <div class="form-group">
+                <div class="font-weight-bold">Event title</div>
+                <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="new_event_modal_data.title">
+            </div>
+
+            <!-- Type of event -->
+            <form class="form-inline mb-2">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                     ngbDropdown [placement]="'bottom'">
+                    <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Event type </a>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <ng-container *ngFor="let option of new_event_modal_data.choices_types">
+                            <button ngbDropdownItem
+                                    (click)="new_event_modal_data.selected_choices_types = option">{{option.label}}</button>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <div class="mx-3">{{new_event_modal_data.selected_choices_types.label}}</div>
+            </form>
+
+            <!-- Date range picker -->
+            <form class="form-inline">
+                <div class="font-weight-bold mr-3" style="height: 50px; padding-top: 10px;">Date range</div>
+                <datepicker-range-popup
+                        [(fromDate)]="new_event_modal_data.fromDate"
+                        [(toDate)]="new_event_modal_data.toDate">
+                </datepicker-range-popup>
+            </form>
+
+            <hr>
+
+            <!-- Time range picker -->
+            <div class="d-flex flex-row justify-content-between">
+                <div>
+                    <div class="font-weight-bold">Time range</div>
+                    <div style="margin-top: 37px;">
+                        <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                           (click)="new_event_set_all_day()">8am > 6pm
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="text-center"><small>Start time</small></div>
+                    <ngb-timepicker
+                            [(ngModel)]="new_event_modal_data.start_time"
+                            (ngModelChange)="new_event_time_changed()"
+                            [meridian]="true"
+                            [minuteStep]="30"
+                            [size]="'small'">
+                    </ngb-timepicker>
+                </div>
+
+                <div>
+                    <div class="text-center"><small>End time</small></div>
+                    <ngb-timepicker
+                            [(ngModel)]="new_event_modal_data.end_time"
+                            (ngModelChange)="new_event_time_changed()"
+                            [meridian]="true"
+                            [minuteStep]="30"
+                            [size]="'small'">
+                    </ngb-timepicker>
+                </div>
+            </div>
+
+            <!-- For testing only: Display JSON content -->
+            <pre>new_event: {{new_event_modal_data | json}}</pre>
+
+            <!--                <div>
+                    <div class="form-check-radio">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio"
+                                   [(ngModel)]="new_event_modal_data.all_day"
+                                   [checked]="!new_event_modal_data.all_day"
+                                   [value]="false"
+                                   (ngModelChange)="new_event_set_all_day()"> Time range
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+                    <div class="form-check-radio">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio"
+                                   [(ngModel)]="new_event_modal_data.all_day"
+                                   [checked]="new_event_modal_data.all_day"
+                                   [value]="true"
+                                   (ngModelChange)="new_event_set_all_day()"> All day
+                            <span class="form-check-sign"></span>
+                        </label>
+                    </div>
+                </div>-->
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-info" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-success" (click)="modal.close('Ok click')">Create</button>
+        </div>
+    </div>
+
+</ng-template>

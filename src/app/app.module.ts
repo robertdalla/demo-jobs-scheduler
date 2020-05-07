@@ -7,20 +7,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 
+// Services
+import { WINDOW_PROVIDERS } from './services/windows.service';
+import { HELPERSService } from './jobs-scheduler-demo/HELPERS.service';
+
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global'; // A simple global variable service for Angular2/4
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
-// Services
-import { WINDOW_PROVIDERS } from './services/windows.service';
-
 // components
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-import { AddEventModalComponent } from './jobs-scheduler-demo/add-event.component';
 
 // Modules
 import { SidebarModule } from './sidebar/sidebar.module';
@@ -58,16 +58,16 @@ import { AppRoutes } from './app.routing';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
-        AddEventModalComponent,
     ],
 
     providers: [
         WINDOW_PROVIDERS,
         SimpleGlobal,
+        HELPERSService,
     ],
 
     exports: [
-        AddEventModalComponent
+
     ],
 
     bootstrap: [ AppComponent ]
@@ -82,7 +82,6 @@ export class AppModule {
         // Initialize globals
         this.APP['criticaldataLoaded'] = false; // when true a template assumes that all necessary data is available
         this.APP['isBusy'] = true; // freezes the DOM
-        this.APP['digest'] = ''; // will get the Sharepoint digest
         this.APP['todayDate'] = new Date(global_TODAY_DATE.year, global_TODAY_DATE.month - 1, global_TODAY_DATE.day).toISOString(); // date of today at local time, in iso format
         this.APP['isMobile'] = false; // will become true if browser is in running on mobile device
         this.APP['current_page'] = ''; // each page will update this variable (Eg. 'projects' or 'dashboard' ...)
@@ -104,8 +103,7 @@ export class AppModule {
         };
 
         this.APP['AppConfig'] = {
-            AppTitleDesktop: 'Manager self service',
-            AppTitleMobile: 'MSS'
+
         };
 
         this.APP['Data'] = null;

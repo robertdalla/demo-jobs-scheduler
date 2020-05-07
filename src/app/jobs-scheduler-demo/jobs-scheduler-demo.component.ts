@@ -1,28 +1,36 @@
 // angular core
-import { Component, Type, ElementRef, ViewChild, OnInit, OnDestroy, AfterViewInit, ViewEncapsulation, Inject, Input } from '@angular/core';
+import {
+    Component,
+    Type,
+    ElementRef,
+    TemplateRef,
+    ViewChild,
+    OnInit,
+    OnDestroy,
+    AfterViewInit,
+    ViewEncapsulation,
+    Inject,
+    Input
+} from '@angular/core';
+
+// Services
+import { HELPERSService } from './HELPERS.service';
 
 // third parties
 import { SimpleGlobal } from 'ng2-simple-global';
-import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Calendar } from '@fullcalendar/core';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-// components
-import { AddEventModalComponent } from './add-event.component';
-
 // config
 import { global_IS_LOCALDEV } from '../app-config';
 import { global_TODAY_DATE } from '../app-config';
+import {selector} from 'rxjs-compat/operator/publish';
 
 declare var $: any; // Support for Jquery
-
-
-const MODALS: {[name: string]: Type<any>} = {
-    AddEventModal: AddEventModalComponent,
-};
 
 
 @Component({
@@ -38,8 +46,14 @@ const MODALS: {[name: string]: Type<any>} = {
 
 export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
+    @ViewChild('add_event_modal') public add_event_modal: TemplateRef<any>;
+
+    new_event_modal_data: any = {};
+
+
     constructor(
 
+        public HELPERS: HELPERSService,
         public APP: SimpleGlobal,
         private modalService: NgbModal,
 
@@ -52,37 +66,41 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 SubContractor: {
                     Id: '1',
                     label: 'SubContractor',
+                    default_className: 'event-red',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '24:00', className: 'event-red' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '24:00', className: 'event-red' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '24:00', className: 'event-red' },
+                        { enabled: false, label: 'drag me Event 1', title: 'my event 1', duration: '24:00', className: 'event-red' },
+                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '24:00', className: 'event-red' },
+                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '24:00', className: 'event-red' },
                     ]
                 },
                 Scheduler: {
                     Id: '2',
                     label: 'Scheduler',
+                    default_className: 'event-green',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-green' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-green' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-green' },
+                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-green' },
+                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-green' },
+                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-green' },
                     ]
                 },
                 Employee: {
                     Id: '3',
                     label: 'Employee',
+                    default_className: 'event-azure',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-azure' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-azure' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-azure' },
+                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-azure' },
+                        { enabled: false, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-azure' },
+                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-azure' },
                     ]
                 },
                 Jobs: {
                     Id: '4',
                     label: 'Jobs (Unscheduled)',
+                    default_className: 'event-orange',
                     events: [
-                        { label: 'drag me Event 1', create: true, title: 'my event 1', duration: '12:00', className: 'event-orange' },
-                        { label: 'drag me Event 2', create: true, title: 'my event 2', duration: '04:00', className: 'event-orange' },
-                        { label: 'drag me Event 3', create: true, title: 'my event 3', duration: '01:00', className: 'event-orange' },
+                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-orange' },
+                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-orange' },
+                        { enabled: false, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-orange' },
                     ]
                 },
             },
@@ -215,22 +233,37 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         }
     }
 
+    new_event_set_all_day() {
+        // console.log('new event: set all day');
+        this.new_event_modal_data.start_time = { hour: 8, minute: 0, second: 0 };
+        this.new_event_modal_data.end_time = { hour: 18, minute: 0, second: 0 };
+    }
+
+    new_event_time_changed() {
+        // console.log('new event: date changed');
+
+    }
 
     object_to_JSON(item) {
         return JSON.stringify(item);
     }
 
 
-    ngAfterViewInit() {
+    ngOnInit() {
 
         const that = this;
 
-        // const $calendar = $('#jobs_Scheduler');
+    }
+
+    ngAfterViewInit() {
+
+        const that = this;
 
         const today = new Date();
         const y = today.getFullYear();
         const m = today.getMonth();
         const d = today.getDate();
+
 
         // Instantiate the Draggable DOM elements
         const draggable_El = <HTMLElement>document.getElementById('collapse_1');
@@ -263,9 +296,10 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             itemSelector: '.fc-draggable',
         });
 
+
         // Instantiate the FullCalenndar DOM element
         const calendarEl = <HTMLElement>document.getElementById('jobsScheduler');
-        const calendar = new Calendar(calendarEl, {
+        let calendar = new Calendar(calendarEl, {
             plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
             editable: true,
             eventLimit: true, // allow "more" link when too many events
@@ -276,6 +310,12 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             droppable: true,
             drop: function(info) {
                 // console.log(info);
+
+                let event_data = {};
+                if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
+                    event_data = JSON.parse(info.draggedEl.dataset.event);
+                }
+                console.log('Dragged data event = ', event_data);
             },
 
             viewSkeletonRender: function(info) {
@@ -312,92 +352,155 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function(selectionInfo ) {
-                that.modalService.open(MODALS.AddEventModal, {
+
+                /* Prepare the new event modal  */
+
+                const date = new Date();
+
+                that.new_event_modal_data = {
+                    title: 'New event title',
+                    fromDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
+                    toDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
+                    start_time: { hour: 9, minute: 0, second: 0 },
+                    end_time: { hour: 10, minute: 0, second: 0 },
+                    selected_choices_types: {
+                        label: null,
+                        className: 'event-red'
+                    },
+                    choices_types: [],
+                };
+
+                // Built list of available event type
+                // tslint:disable-next-line:forin
+                for (const property in that.APP['Data'].Draggable) {
+                    that.new_event_modal_data.choices_types.push({
+                        label: that.APP['Data'].Draggable[property].label,
+                        className: that.APP['Data'].Draggable[property].default_className
+                    });
+                }
+                // console.log('choices_types = ', this.new_event_modal_data.choices_types);
+
+                const AddEvent_modal = that.modalService.open(that.add_event_modal, {
                     ariaLabelledBy: 'modal-basic-title',
-                    centered: true
+                    centered: true,
+                    scrollable: true,
+                    size: 'lg',
+
                 }).result.then((result) => {
                     // Modal was closed
-                    console.log('Closed by ' + result);
+                    // console.log('Closed by ' + result);
+
+                    const start_time = that.new_event_modal_data.start_time;
+                    const end_time = that.new_event_modal_data.end_time;
+
+                    const new_event = {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: that.new_event_modal_data.title,
+                        start: new Date(y, m, d + 3, 6, 0),
+                        // end: end_time,
+                        allDay: false,
+                        className: that.new_event_modal_data.selected_choices_types.className,
+                        editable: true,
+                        extendedProps: {
+                            // Add here custom fields. FullCalendar will not modify or delete these fields
+                        }
+                    };
+                    console.log('Calendar new event: ', new_event);
+
+                    calendar.addEvent(new_event);
 
                 }, (reason) => {
                     // Modal was dismissed
                     if (reason === ModalDismissReasons.ESC) {
-                        console.log('Dismissed by pressing ESC');
+                        // console.log('Dismissed by pressing ESC');
                     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-                        console.log('Dismissed by clicking on a backdrop');
+                        // console.log('Dismissed by clicking on a backdrop');
                     } else {
-                        console.log('Dismissed with: ' + reason);
+                        // console.log('Dismissed with: ' + reason);
                     }
                 });
-
             },
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
             events: [
                 {
+                    id: '1',
                     title: 'All Day Event',
                     start: new Date(y, m, 1),
-                    className: 'event-azure'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d - 4, 6, 0),
-                    allDay: false,
-                    className: 'event-azure'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d + 3, 6, 0),
-                    allDay: false,
-                    className: 'event-azure'
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d - 1, 10, 30),
-                    allDay: false,
-                    className: 'event-green'
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d + 7, 12, 0),
-                    end: new Date(y, m, d + 7, 14, 0),
-                    allDay: false,
-                    className: 'event-red'
-                },
-                {
-                    title: 'Md-pro Launch',
-                    start: new Date(y, m, d - 2, 12, 0),
                     allDay: true,
                     className: 'event-azure'
                 },
                 {
+                    id: '2',
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d - 4, 6, 0),
+                    allDay: false,
+                    className: 'event-azure',
+                    editable: true,
+                },
+                {
+                    id: '3',
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d + 3, 6, 0),
+                    allDay: false,
+                    className: 'event-azure',
+                    editable: true,
+                },
+                {
+                    id: '5',
+                    title: 'Meeting',
+                    start: new Date(y, m, d - 1, 10, 30),
+                    allDay: false,
+                    className: 'event-green',
+                    editable: true,
+                },
+                {
+                    id: '6',
+                    title: 'Lunch',
+                    start: new Date(y, m, d + 7, 12, 0),
+                    end: new Date(y, m, d + 7, 14, 0),
+                    allDay: false,
+                    className: 'event-red',
+                    editable: true,
+                },
+                {
+                    id: '7',
+                    title: 'Md-pro Launch',
+                    start: new Date(y, m, d - 2, 12, 0),
+                    allDay: true,
+                    className: 'event-azure',
+                    editable: true,
+                },
+                {
+                    id: '8',
                     title: 'Birthday Party',
                     start: new Date(y, m, d + 1, 19, 0),
                     end: new Date(y, m, d + 1, 22, 30),
                     allDay: false,
-                    className: 'event-azure'
+                    className: 'event-azure',
+                    editable: true,
                 },
                 {
+                    id: '9',
                     title: 'Click for Creative Tim',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
-                    className: 'event-orange'
+                    allDay: false,
+                    className: 'event-orange',
+                    editable: true,
                 },
                 {
+                    id: '10',
                     title: 'Click for Google',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
-                    className: 'event-orange'
+                    allDay: false,
+                    className: 'event-orange',
+                    editable: true,
                 }
             ]
         });
         calendar.render();
-
-    }
-
-    ngOnInit() {
 
     }
 

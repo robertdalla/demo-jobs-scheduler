@@ -47,7 +47,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       return check;
     }
     this.APP['isMobile'] = check_if_mobile();
-    document.title = this.APP['isMobile'] ? this.APP['AppConfig'].AppTitleMobile || 'MSS' : this.APP['AppConfig'].AppTitleDesktop || 'Manager Self Service';
 
     this.APP['loading-spinner'].request_to_hide = false;
     this.APP['loading-spinner'].minimum_delay_expired = false;

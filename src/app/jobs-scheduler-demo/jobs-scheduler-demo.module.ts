@@ -7,10 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+// components
 import { JobsSchedulerDemoComponent } from './jobs-scheduler-demo.component';
+import { DatepickerRangePopupComponent } from './datepicker-rangePopup.component';
+
+// config
 import { JobsSchedulerRoutes } from './jobs-scheduler-demo.routing';
 
 @NgModule({
+
     imports: [
         CommonModule,
         RouterModule.forChild(JobsSchedulerRoutes),
@@ -18,7 +23,14 @@ import { JobsSchedulerRoutes } from './jobs-scheduler-demo.routing';
         NgbModule,
         SweetAlert2Module.forRoot(),
     ],
-    declarations: [JobsSchedulerDemoComponent]
+
+    declarations: [
+        JobsSchedulerDemoComponent,
+        DatepickerRangePopupComponent
+    ]
+
 })
 
-export class JobsSchedulerDemoModule {}
+export class JobsSchedulerDemoModule {
+
+}
