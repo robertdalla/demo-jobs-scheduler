@@ -114,7 +114,7 @@
     <div class="modal-header">
         <h4 class="modal-title"><b>New event</b></h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" id="add_event_modal">
         <div class="col-md-12">
 
             <!-- Title -->
@@ -124,7 +124,7 @@
             </div>
 
             <!-- Type of event -->
-            <form class="form-inline mb-2">
+            <form class="form-inline">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                      ngbDropdown [placement]="'bottom'">
                     <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Event type </a>
@@ -141,10 +141,13 @@
 
             <!-- Date range picker -->
             <form class="form-inline">
-                <div class="font-weight-bold mr-3" style="height: 50px; padding-top: 10px;">Date range</div>
+                <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
                 <datepicker-range-popup
                         [(fromDate)]="new_event_modal_data.fromDate"
-                        [(toDate)]="new_event_modal_data.toDate">
+                        [(fromDate_isValid)]="new_event_modal_data.fromDate_isValid"
+                        [(toDate)]="new_event_modal_data.toDate"
+                        [(toDate_isValid)]="new_event_modal_data.toDate_isValid"
+                        [labelEnabled]="true">
                 </datepicker-range-popup>
             </form>
 
@@ -154,38 +157,56 @@
             <div class="d-flex flex-row justify-content-between">
                 <div>
                     <div class="font-weight-bold">Time range</div>
-                    <div style="margin-top: 37px;">
+                    <div style="margin-top: 27px;">
                         <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                           (click)="new_event_set_all_day()">8am > 6pm
+                           (click)="new_event_set_all_day()">Set 8am to 6pm
                         </a>
                     </div>
                 </div>
 
+                <!-- Override AM/PM buttons styling for the <ngb-timepicker> component -->
+                <style>
+                    #add_event_modal .ngb-tp-meridian button[type=button] {
+                        font-size: 0.8571em;
+                        padding: 5px 15px;
+                        text-decoration: none;
+                        color: inherit;
+                        background: transparent;
+                        border: 2px solid #51cbce !important;
+                        opacity: 1;
+                        border-radius: 30px;
+                    }
+                </style>
+
                 <div>
-                    <div class="text-center"><small>Start time</small></div>
-                    <ngb-timepicker
-                            [(ngModel)]="new_event_modal_data.start_time"
-                            (ngModelChange)="new_event_time_changed()"
-                            [meridian]="true"
-                            [minuteStep]="30"
-                            [size]="'small'">
-                    </ngb-timepicker>
+                    <div class="text-center"><small>Start</small></div>
+                    <div style="margin-top: -10px">
+                        <ngb-timepicker
+                                [(ngModel)]="new_event_modal_data.start_time"
+                                (ngModelChange)="new_event_time_changed()"
+                                [meridian]="true"
+                                [minuteStep]="30"
+                                [size]="'small'">
+                        </ngb-timepicker>
+                    </div>
                 </div>
 
                 <div>
-                    <div class="text-center"><small>End time</small></div>
-                    <ngb-timepicker
-                            [(ngModel)]="new_event_modal_data.end_time"
-                            (ngModelChange)="new_event_time_changed()"
-                            [meridian]="true"
-                            [minuteStep]="30"
-                            [size]="'small'">
-                    </ngb-timepicker>
+                    <div class="text-center"><small>End</small></div>
+                    <div style="margin-top: -10px">
+                        <ngb-timepicker
+                                [(ngModel)]="new_event_modal_data.end_time"
+                                (ngModelChange)="new_event_time_changed()"
+                                [meridian]="true"
+                                [minuteStep]="30"
+                                [size]="'small'">
+                        </ngb-timepicker>
+                    </div>
                 </div>
             </div>
 
             <!-- For testing only: Display JSON content -->
-            <pre>new_event: {{new_event_modal_data | json}}</pre>
+<!--            <pre>new_event: {{new_event_modal_data | json}}</pre>-->
 
             <!--                <div>
                     <div class="form-check-radio">
@@ -215,7 +236,7 @@
     <div class="modal-footer">
         <div class="col-md-12 text-center">
             <button type="button" class="btn btn-info" (click)="modal.dismiss('cancel click')">Cancel</button>
-            <button type="button" class="btn btn-success" (click)="modal.close('Ok click')">Create</button>
+            <button type="button" class="btn btn-success" [disabled]="new_event_form_inValid()" (click)="modal.close('Ok click')">Create</button>
         </div>
     </div>
 

@@ -244,6 +244,18 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     }
 
+    new_event_form_inValid() {
+
+        let disabled = false;
+        const d = this.new_event_modal_data;
+        disabled = disabled || d.title.length < 2;
+        disabled = disabled || d.selected_choices_types.label === null;
+        disabled = disabled || d.fromDate_isValid !== true;
+        // disabled = disabled || d.toDate_isValid !== true;
+
+        return disabled;
+    }
+
     object_to_JSON(item) {
         return JSON.stringify(item);
     }
@@ -360,7 +372,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 that.new_event_modal_data = {
                     title: 'New event title',
                     fromDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
+                    fromDate_isValid: true,
                     toDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
+                    toDate_isValid: true,
                     start_time: { hour: 9, minute: 0, second: 0 },
                     end_time: { hour: 10, minute: 0, second: 0 },
                     selected_choices_types: {
