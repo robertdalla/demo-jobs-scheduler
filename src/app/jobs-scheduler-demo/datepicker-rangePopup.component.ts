@@ -1,11 +1,12 @@
 // angular core
 import {
     Component,
+    ElementRef,
     ViewEncapsulation,
     Input,
     Output,
     EventEmitter,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy, ViewChild, TemplateRef
 } from '@angular/core';
 
 // third parties
@@ -52,13 +53,20 @@ import { NgbDate, NgbCalendar, NgbDateParserFormatter } from '@ng-bootstrap/ng-b
 
 export class DatepickerRangePopupComponent {
 
-    @Input() labelEnabled: boolean;
+    @ViewChild('dpFromDate') public dpFromDate: ElementRef;
+    @ViewChild('dpToDate') public dpToDate: ElementRef;
 
     @Input() fromDate: NgbDate | null;
     @Output() fromDateChange = new EventEmitter();
+    @Input() fromDate_isValid: boolean;
+    @Output() fromDate_isValidChange = new EventEmitter();
 
     @Input() toDate: NgbDate | null;
     @Output() toDateChange = new EventEmitter();
+    @Input() toDate_isValid: boolean;
+    @Output() toDate_isValidChange = new EventEmitter();
+
+    @Input() labelEnabled: boolean;
 
     hoveredDate: NgbDate | null = null;
 
@@ -81,8 +89,14 @@ export class DatepickerRangePopupComponent {
             this.toDate = null;
             this.fromDate = date;
         }
+
+        this.dpFromDate.nativeElement.value = this.formatter.format(this.fromDate); // update the template input element value
         this.fromDateChange.emit(this.fromDate);
+        this.fromDate_isValidChange.emit(this.fromDate !== null);
+
+        this.dpToDate.nativeElement.value = this.formatter.format(this.toDate); // update the template input element value
         this.toDateChange.emit(this.toDate);
+        this.toDate_isValidChange.emit(this.toDate !== null);
     }
 
     isHovered(date: NgbDate) {
@@ -99,15 +113,21 @@ export class DatepickerRangePopupComponent {
 
     validateFromDateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
         const parsed = this.formatter.parse(input);
-        const value = parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-        this.fromDateChange.emit(value);
-        return value;
+        const isValid = parsed && this.calendar.isValid(NgbDate.from(parsed));
+        let new_value = currentValue;
+        if (isValid) new_value = NgbDate.from(parsed);
+        this.fromDateChange.emit(new_value);
+        this.fromDate_isValidChange.emit(isValid);
+        return new_value;
     }
 
     validateToDateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
         const parsed = this.formatter.parse(input);
-        const value = parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-        this.toDateChange.emit(value);
-        return value;
+        const isValid = parsed && this.calendar.isValid(NgbDate.from(parsed));
+        let new_value = currentValue;
+        if (isValid) new_value = NgbDate.from(parsed);
+        this.toDateChange.emit(new_value);
+        this.toDate_isValidChange.emit(isValid);
+        return new_value;
     }
 }
