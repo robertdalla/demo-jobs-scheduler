@@ -1,6 +1,31 @@
 <div class="main-content">
     <div class="row">
+        <div class="col-md-2"></div>
 
+        <div class="col-md-8">
+            <div class="d-flex flex-row-reverse justify-content-around">
+
+                <!-- Dropdown filters -->
+                <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                         ngbDropdown [placement]="'bottom'">
+                        <button class="btn btn-sm" ngbDropdownToggle>{{dropdown.value ? (dropdown.value.length <20 ? dropdown.value : (dropdown.value | slice : 0:25) +'...') : dropdown.label}} </button>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <ng-container *ngFor="let option of dropdown.data">
+                                <button ngbDropdownItem
+                                        [disabled]="option.disabled"
+                                        (click)="dropdown.value = option.label">{{option.label}}</button>
+                            </ng-container>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
         <div class="col-md-2 px-0">
             <div class="card">
                 <div class="card-body">
@@ -76,24 +101,6 @@
         </div>
 
         <div class="col-md-8">
-            <div class="d-flex flex-row-reverse justify-content-around">
-
-                <!-- Dropdown filters -->
-                <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                         ngbDropdown [placement]="'bottom'">
-                        <button class="btn btn-sm" ngbDropdownToggle>{{dropdown.value ? (dropdown.value.length <20 ? dropdown.value : (dropdown.value | slice : 0:25) +'...') : dropdown.label}} </button>
-                        <div class="dropdown-menu" ngbDropdownMenu>
-                            <ng-container *ngFor="let option of dropdown.data">
-                                <button ngbDropdownItem
-                                        [disabled]="option.disabled"
-                                        (click)="dropdown.value = option.label">{{option.label}}</button>
-                            </ng-container>
-                        </div>
-                    </div>
-                </ng-container>
-            </div>
-
             <div class="card card-calendar">
                 <div class="card-content">
                     <div id="jobsScheduler"></div>
@@ -101,10 +108,7 @@
             </div>
         </div>
 
-        <div class="col-md-2 px-0">
-
-        </div>
-
+        <div class="col-md-2 px-0"></div>
     </div>
 </div>
 
