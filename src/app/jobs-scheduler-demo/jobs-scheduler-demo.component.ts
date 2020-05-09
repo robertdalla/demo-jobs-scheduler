@@ -481,6 +481,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     event_data = JSON.parse(info.draggedEl.dataset.event);
                 }
                 console.log('Dragged data event = ', event_data);
+
+                info.draggedEl.parentNode.removeChild(info.draggedEl); // Remove the element from the "Draggable Events" list
             },
 
             viewSkeletonRender: function(info) {
