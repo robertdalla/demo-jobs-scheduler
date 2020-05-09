@@ -69,9 +69,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'SubContractor',
                     default_className: 'event-red',
                     events: [
-                        { enabled: false, label: 'drag me Event 1', title: 'my event 1', duration: '24:00', className: 'event-red' },
-                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '24:00', className: 'event-red' },
-                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '24:00', className: 'event-red' },
+                        { label: 'Event 1', title: 'my event 1', duration: '24:00', className: 'event-red' },
+                        { label: 'Event 2', title: 'my event 2', duration: '23:00', className: 'event-red' },
+                        { label: 'Event 3', title: 'my event 3', duration: '10:00', className: 'event-red' },
                     ]
                 },
                 Scheduler: {
@@ -79,9 +79,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Scheduler',
                     default_className: 'event-green',
                     events: [
-                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-green' },
-                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-green' },
-                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-green' },
+                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'event-green' },
+                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'event-green' },
+                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'event-green' },
                     ]
                 },
                 Employee: {
@@ -89,9 +89,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Employee',
                     default_className: 'event-azure',
                     events: [
-                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-azure' },
-                        { enabled: false, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-azure' },
-                        { enabled: true, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-azure' },
+                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'event-azure' },
+                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'event-azure' },
+                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'event-azure' },
                     ]
                 },
                 Jobs: {
@@ -99,9 +99,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Jobs (Unscheduled)',
                     default_className: 'event-orange',
                     events: [
-                        { enabled: true, label: 'drag me Event 1', title: 'my event 1', duration: '12:00', className: 'event-orange' },
-                        { enabled: true, label: 'drag me Event 2', title: 'my event 2', duration: '04:00', className: 'event-orange' },
-                        { enabled: false, label: 'drag me Event 3', title: 'my event 3', duration: '01:00', className: 'event-orange' },
+                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'event-orange' },
+                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'event-orange' },
+                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'event-orange' },
                     ]
                 },
             },
@@ -408,13 +408,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
 
     ngOnInit() {
-
         const that = this;
 
     }
 
     ngAfterViewInit() {
-
         const that = this;
 
         const today = new Date();
@@ -488,8 +486,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             viewSkeletonRender: function(info) {
                 // console.log(info);
 
-                if (info.view.type !== 'dayGridMonth') {
-
+                // On 'dayGridMonth' mode, only allow Droppable items if 24h duration
+                for (const prop in that.APP['Data'].Draggable) {
+                    that.APP['Data'].Draggable[prop].events.forEach(function(item) {
+                        item['droppable'] = info.view.type !== 'dayGridMonth' || item.duration === '24:00';
+                    });
                 }
             },
 
@@ -513,9 +514,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function(selectionInfo ) {
-                // console.log('selectionInfo: ', selectionInfo);
+                console.log('selectionInfo: ', selectionInfo);
 
                 that.new_event(selectionInfo); // Create a new event
+            },
+
+            eventClick: function( eventClickInfo ) {
+                console.log('eventClickInfo: ', eventClickInfo);
+
             },
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
