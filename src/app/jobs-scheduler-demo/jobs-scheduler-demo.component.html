@@ -98,6 +98,12 @@
                     </div>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-center">
+                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                   (click)="new_event(null)">Schedule event
+                </a>
+            </div>
         </div>
 
         <div class="col-md-8">
@@ -144,16 +150,18 @@
             </form>
 
             <!-- Date range picker -->
-            <form class="form-inline">
-                <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
-                <datepicker-range-popup
-                        [(fromDate)]="new_event_modal_data.fromDate"
-                        [(fromDate_isValid)]="new_event_modal_data.fromDate_isValid"
-                        [(toDate)]="new_event_modal_data.toDate"
-                        [(toDate_isValid)]="new_event_modal_data.toDate_isValid"
-                        [labelEnabled]="true">
-                </datepicker-range-popup>
-            </form>
+            <ng-container *ngIf="new_event_modal_data.type != 'timeGridDay'">
+                <form class="form-inline">
+                    <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
+                    <datepicker-range-popup
+                            [(fromDate)]="new_event_modal_data.fromDate"
+                            [(fromDate_isValid)]="new_event_modal_data.fromDate_isValid"
+                            [(toDate)]="new_event_modal_data.toDate"
+                            [(toDate_isValid)]="new_event_modal_data.toDate_isValid"
+                            [labelEnabled]="true">
+                    </datepicker-range-popup>
+                </form>
+            </ng-container>
 
             <hr>
 

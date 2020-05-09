@@ -49,6 +49,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     @ViewChild('add_event_modal') public add_event_modal: TemplateRef<any>;
 
     new_event_modal_data: any = {};
+    calendar: any ;
 
 
     constructor(
@@ -233,6 +234,151 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         }
     }
 
+    new_event(selectionInfo) {
+        let type, fromDate, toDate, start_time, end_time;
+
+        if (selectionInfo) {
+            // A date context was provided
+
+            type = selectionInfo.view.type;
+
+            if (type === 'dayGridMonth') {
+                fromDate = {
+                    year: new Date(selectionInfo.start).getFullYear(),
+                    month: new Date(selectionInfo.start).getMonth() + 1,
+                    day: new Date(selectionInfo.start).getDate()
+                };
+                toDate = fromDate;
+                start_time = { hour: 8, minute: 0, second: 0 };
+                end_time = { hour: 9, minute: 0, second: 0 };
+
+            } else if (type === 'timeGridWeek') {
+                fromDate = {
+                    year: new Date(selectionInfo.start).getFullYear(),
+                    month: new Date(selectionInfo.start).getMonth() + 1,
+                    day: new Date(selectionInfo.start).getDate()
+                };
+                toDate = fromDate;
+                start_time = {
+                    hour: new Date(selectionInfo.start).getHours(),
+                    minute: new Date(selectionInfo.start).getMinutes(),
+                    second: 0
+                };
+                end_time = {
+                    hour: new Date(selectionInfo.start).getHours() + 1,
+                    minute: new Date(selectionInfo.start).getMinutes(),
+                    second: 0
+                };
+
+            } else if (type === 'timeGridDay') {
+                fromDate = {
+                    year: new Date(selectionInfo.start).getFullYear(),
+                    month: new Date(selectionInfo.start).getMonth() + 1,
+                    day: new Date(selectionInfo.start).getDate()
+                };
+                toDate = fromDate;
+                start_time = {
+                    hour: new Date(selectionInfo.start).getHours(),
+                    minute: new Date(selectionInfo.start).getMinutes(),
+                    second: 0
+                };
+                end_time = {
+                    hour: new Date(selectionInfo.start).getHours() + 1,
+                    minute: new Date(selectionInfo.start).getMinutes(),
+                    second: 0
+                };
+            }
+
+        } else {
+            // No date context was provided
+
+            type = null;
+            fromDate = {
+                year: new Date().getFullYear(),
+                month: new Date().getMonth() + 1,
+                day: new Date().getDate()
+            };
+            toDate = fromDate;
+            start_time = { hour: 8, minute: 0, second: 0 };
+            end_time = { hour: 9, minute: 0, second: 0 };
+        }
+
+        this.new_event_modal_data = {
+            type: type,
+            title: 'New event title',
+            fromDate: fromDate,
+            fromDate_isValid: true,
+            toDate: toDate,
+            toDate_isValid: true,
+            start_time: start_time,
+            end_time: end_time,
+            selected_choices_types: {
+                label: null,
+                className: 'event-red'
+            },
+            choices_types: [],
+        };
+
+        // Built list of available event type
+        // tslint:disable-next-line:forin
+        for (const property in this.APP['Data'].Draggable) {
+            this.new_event_modal_data.choices_types.push({
+                label: this.APP['Data'].Draggable[property].label,
+                className: this.APP['Data'].Draggable[property].default_className
+            });
+        }
+        // console.log('choices_types = ', this.new_event_modal_data.choices_types);
+
+        const AddEvent_modal = this.modalService.open(this.add_event_modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true,
+            scrollable: true,
+            size: 'lg',
+
+        }).result.then((result) => {
+            // Modal was closed
+            // console.log('Closed by ' + result);
+
+            const end = this.new_event_modal_data.toDate ? new Date(
+                (this.new_event_modal_data.toDate.year),
+                this.new_event_modal_data.toDate.month -1,
+                this.new_event_modal_data.toDate.day,
+                this.new_event_modal_data.end_time.hour,
+                this.new_event_modal_data.end_time.minute,
+                0) : null;
+
+            const calendar_event = {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: this.new_event_modal_data.title,
+                start: new Date(
+                    this.new_event_modal_data.fromDate.year,
+                    this.new_event_modal_data.fromDate.month -1,
+                    this.new_event_modal_data.fromDate.day,
+                    this.new_event_modal_data.start_time.hour,
+                    this.new_event_modal_data.start_time.minute,
+                    0
+                ),
+                end: end,
+                allDay: false,
+                classNames: [this.new_event_modal_data.selected_choices_types.className],
+                editable: true,
+            };
+            // console.log('Calendar new event: ', calendar_event);
+
+            this.calendar.addEvent(calendar_event);
+
+        }, (reason) => {
+            // Modal was dismissed
+            if (reason === ModalDismissReasons.ESC) {
+                // console.log('Dismissed by pressing ESC');
+            } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+                // console.log('Dismissed by clicking on a backdrop');
+            } else {
+                // console.log('Dismissed with: ' + reason);
+            }
+        });
+    }
+
     new_event_set_all_day() {
         // console.log('new event: set all day');
         this.new_event_modal_data.start_time = { hour: 8, minute: 0, second: 0 };
@@ -311,13 +457,20 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
         // Instantiate the FullCalenndar DOM element
         const calendarEl = <HTMLElement>document.getElementById('jobsScheduler');
-        let calendar = new Calendar(calendarEl, {
+        that.calendar = new Calendar(calendarEl, {
             plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
+            themeSystem: 'bootstrap',
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             defaultDate: today,
             selectable: true,
             navLinks: true, // can click day/week names to navigate views
+
+            header: {
+                left: 'title, myCustomButton',
+                center: 'dayGridMonth, timeGridWeek, timeGridDay',
+                right: 'prev, next, today'
+            },
 
             droppable: true,
             drop: function(info) {
@@ -336,12 +489,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 if (info.view.type !== 'dayGridMonth') {
 
                 }
-            },
-
-            header: {
-                left: 'title',
-                center: 'dayGridMonth, timeGridWeek, timeGridDay',
-                right: 'prev, next, today'
             },
 
             views: {
@@ -364,75 +511,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function(selectionInfo ) {
+                // console.log('selectionInfo: ', selectionInfo);
 
-                /* Prepare the new event modal  */
-
-                const date = new Date();
-
-                that.new_event_modal_data = {
-                    title: 'New event title',
-                    fromDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
-                    fromDate_isValid: true,
-                    toDate: {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
-                    toDate_isValid: true,
-                    start_time: { hour: 9, minute: 0, second: 0 },
-                    end_time: { hour: 10, minute: 0, second: 0 },
-                    selected_choices_types: {
-                        label: null,
-                        className: 'event-red'
-                    },
-                    choices_types: [],
-                };
-
-                // Built list of available event type
-                // tslint:disable-next-line:forin
-                for (const property in that.APP['Data'].Draggable) {
-                    that.new_event_modal_data.choices_types.push({
-                        label: that.APP['Data'].Draggable[property].label,
-                        className: that.APP['Data'].Draggable[property].default_className
-                    });
-                }
-                // console.log('choices_types = ', this.new_event_modal_data.choices_types);
-
-                const AddEvent_modal = that.modalService.open(that.add_event_modal, {
-                    ariaLabelledBy: 'modal-basic-title',
-                    centered: true,
-                    scrollable: true,
-                    size: 'lg',
-
-                }).result.then((result) => {
-                    // Modal was closed
-                    // console.log('Closed by ' + result);
-
-                    const start_time = that.new_event_modal_data.start_time;
-                    const end_time = that.new_event_modal_data.end_time;
-
-                    const new_event = {
-                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                        title: that.new_event_modal_data.title,
-                        start: new Date(y, m, d + 3, 6, 0),
-                        // end: end_time,
-                        allDay: false,
-                        className: that.new_event_modal_data.selected_choices_types.className,
-                        editable: true,
-                        extendedProps: {
-                            // Add here custom fields. FullCalendar will not modify or delete these fields
-                        }
-                    };
-                    console.log('Calendar new event: ', new_event);
-
-                    calendar.addEvent(new_event);
-
-                }, (reason) => {
-                    // Modal was dismissed
-                    if (reason === ModalDismissReasons.ESC) {
-                        // console.log('Dismissed by pressing ESC');
-                    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-                        // console.log('Dismissed by clicking on a backdrop');
-                    } else {
-                        // console.log('Dismissed with: ' + reason);
-                    }
-                });
+                that.new_event(selectionInfo); // Create a new event
             },
 
             // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
@@ -514,7 +595,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 }
             ]
         });
-        calendar.render();
+        that.calendar.render();
 
     }
 
