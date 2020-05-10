@@ -62,14 +62,12 @@ Add the new generated package-lock.json file in the repo.
 
 ```sh
 ng serve
-or
-ng serve --prod --vendor-chunk=true
 ```
 
 > Step6: build the app for production
 
 ```sh
-ng build --prod --build-optimizer --vendor-chunk=true
+ng build
 ```
 
 > Step7: deploy the app in your production hosting server

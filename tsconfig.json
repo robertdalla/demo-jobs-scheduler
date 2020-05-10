@@ -1,16 +1,25 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "baseUrl": "src",
+    "removeComments": true,
+    "pretty": false,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "paths": {
+      "@angular/*": ["./node_modules/@angular/*"]
+    },
+    "angularCompilerOptions": {
+      "fullTemplateTypeCheck": true,
+      "preserveWhitespaces": true,
+    },
     "typeRoots": [
-      "node_modules/@types"
+      "./node_modules/@types"
     ],
     "lib": [
       "es2018",
