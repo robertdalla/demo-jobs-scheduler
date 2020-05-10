@@ -37,13 +37,12 @@
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse" style="">
-                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events; index as index">
-                                    <div class="fc-event noUi-target mb-1"
-                                         [ngClass]="[(item.droppable ? 'fc-draggable' : 'blurred'), item.className]"
-                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
-                                    </div>
-                                </ng-container>
+                            <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse">
+                                <div class="event-draggable noUi-target mb-1"
+                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events"
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
+                                </div>
                             </div>
                         </div>
 
@@ -53,13 +52,12 @@
                                     <i class="nc-icon nc-minimal-down"></i>
                                 </a>
                             </div>
-                            <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse" style="">
-                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events; index as index">
-                                    <div class="fc-event noUi-target mb-1"
-                                         [ngClass]="[(item.droppable ? 'fc-draggable' : 'blurred'), item.className]"
-                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
-                                    </div>
-                                </ng-container>
+                            <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse">
+                                <div class="event-draggable noUi-target mb-1"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events"
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
+                                </div>
                             </div>
                         </div>
 
@@ -70,12 +68,11 @@
                                 </a>
                             </div>
                             <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Employee.events; index as index">
-                                    <div class="fc-event noUi-target mb-1"
-                                         [ngClass]="[(item.droppable ? 'fc-draggable' : 'blurred'), item.className]"
-                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
-                                    </div>
-                                </ng-container>
+                                <div class="event-draggable noUi-target mb-1"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Employee.events"
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
+                                </div>
                             </div>
                         </div>
 
@@ -86,12 +83,11 @@
                                 </a>
                             </div>
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <ng-container *ngFor="let item of this.APP['Data'].Draggable.Jobs.events; index as index">
-                                    <div class="fc-event noUi-target mb-1"
-                                         [ngClass]="[(item.droppable ? 'fc-draggable' : 'blurred'), item.className]"
-                                         [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
-                                    </div>
-                                </ng-container>
+                                <div class="event-draggable noUi-target mb-1"
+                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs.events"
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
+                                </div>
                             </div>
                         </div>
 
@@ -137,18 +133,18 @@
             <form class="form-inline">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                      ngbDropdown [placement]="'bottom'">
-                    <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Event type </a>
+                    <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Job type </a>
                     <div class="dropdown-menu" ngbDropdownMenu>
-                        <ng-container *ngFor="let option of new_event_modal_data.choices_types">
+                        <ng-container *ngFor="let option of new_event_modal_data.choices1">
                             <button ngbDropdownItem
-                                    (click)="new_event_modal_data.selected_choices_types = option">{{option.label}}</button>
+                                    (click)="new_event_modal_data.selected_choices1 = option">{{option.label}}</button>
                         </ng-container>
                     </div>
                 </div>
 
                 <div class="mx-3 p-sm-1 fc-event"
-                     *ngIf="new_event_modal_data.selected_choices_types.label"
-                     [ngClass]="[new_event_modal_data.selected_choices_types.className]">{{new_event_modal_data.selected_choices_types.label}}
+                     *ngIf="new_event_modal_data.selected_choices1.label"
+                     [ngClass]="[new_event_modal_data.selected_choices1.className]">{{new_event_modal_data.selected_choices1.label}}
                 </div>
             </form>
 

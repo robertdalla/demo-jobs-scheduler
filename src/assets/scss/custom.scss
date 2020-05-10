@@ -1,4 +1,24 @@
+@import 'paper-dashboard/variables';
 
 .blurred {
     opacity: 0.5;
+}
+
+.event-draggable {
+    display: block;
+    font-size: 1em;
+    line-height: 1.3;
+}
+
+.fc-event_event-azure {
+    background-color: $light-azure;
+}
+.fc-event_event-green {
+    background-color: $light-green;
+}
+.fc-event_event-orange {
+    background-color: $light-orange;
+}
+.fc-event_event-red {
+    background-color: $light-red;
 }
