@@ -67,6 +67,7 @@ export class DatepickerRangePopupComponent {
     @Output() toDate_isValidChange = new EventEmitter();
 
     @Input() labelEnabled: boolean;
+    @Input() placement: string;
 
     hoveredDate: NgbDate | null = null;
 

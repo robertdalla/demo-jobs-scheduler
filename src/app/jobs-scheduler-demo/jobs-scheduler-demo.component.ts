@@ -61,47 +61,53 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     ) {
 
         // Demo data
+
+        const today = new Date();
+        const y = today.getFullYear();
+        const m = today.getMonth();
+        const d = today.getDate();
+
         const demoDATA: any = {
 
             Draggable: {
                 SubContractor: {
                     Id: '1',
                     label: 'SubContractor',
-                    default_className: 'event-red',
+                    draggable_className: 'fc-event_event-red',
                     events: [
-                        { label: 'Event 1', title: 'my event 1', duration: '24:00', className: 'fc-event_event-red' },
-                        { label: 'Event 2', title: 'my event 2', duration: '23:00', className: 'fc-event_event-red' },
-                        { label: 'Event 3', title: 'my event 3', duration: '10:00', className: 'fc-event_event-red' },
+                        { title: 'my event 1 SubContractor', duration: '24:00', className: 'fc-event_event-red' },
+                        { title: 'my event 2 SubContractor', duration: '4:00', className: 'fc-event_event-red' },
+                        { title: 'my event 3 SubContractor', duration: '2:00', className: 'fc-event_event-red' },
                     ]
                 },
                 Scheduler: {
                     Id: '2',
                     label: 'Scheduler',
-                    default_className: 'event-green',
+                    draggable_className: 'fc-event_event-green',
                     events: [
-                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'fc-event_event-green' },
-                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'fc-event_event-green' },
-                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'fc-event_event-green' },
+                        { title: 'my event 1 Scheduler', duration: '1:00', className: 'fc-event_event-green' },
+                        { title: 'my event 2 Scheduler', duration: '6:00', className: 'fc-event_event-green' },
+                        { title: 'my event 3 Scheduler', duration: '2:00', className: 'fc-event_event-green' },
                     ]
                 },
                 Employee: {
                     Id: '3',
                     label: 'Employee',
-                    default_className: 'event-azure',
+                    draggable_className: 'fc-event_event-azure',
                     events: [
-                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'fc-event_event-azure' },
-                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'fc-event_event-azure' },
-                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'fc-event_event-azure' },
+                        { title: 'my event 1 Employee', duration: '5:00', className: 'fc-event_event-azure' },
+                        { title: 'my event 2 Employee', duration: '4:00', className: 'fc-event_event-azure' },
+                        { title: 'my event 3 Employee', duration: '2:00', className: 'fc-event_event-azure' },
                     ]
                 },
                 Jobs: {
                     Id: '4',
                     label: 'Jobs (Unscheduled)',
-                    default_className: 'event-orange',
+                    draggable_className: 'fc-event_event-orange',
                     events: [
-                        { label: 'Event 1', title: 'my event 1', duration: '12:00', className: 'fc-event_event-orange' },
-                        { label: 'Event 2', title: 'my event 2', duration: '04:00', className: 'fc-event_event-orange' },
-                        { label: 'Event 3', title: 'my event 3', duration: '01:00', className: 'fc-event_event-orange' },
+                        { title: 'my event 1 Jobs', duration: '2:00', className: 'fc-event_event-orange' },
+                        { title: 'my event 2 Jobs', duration: '8:00', className: 'fc-event_event-orange' },
+                        { title: 'my event 3 Jobs', duration: '3:00', className: 'fc-event_event-orange' },
                     ]
                 },
             },
@@ -220,134 +226,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         { disabled: false, label: 'Bad' },
                     ],
                 },
-            ]
-        };
-
-        if (global_IS_LOCALDEV) {
-            // This is demo mode
-            this.APP['Data'] = demoDATA;
-
-        } else {
-            // This is production mode
-
-            this.APP['Data'] = demoDATA;
-        }
-    }
-
-
-    object_to_JSON(item) {
-        return JSON.stringify(item);
-    }
-
-
-    ngAfterViewInit() {
-        const that = this;
-
-        const today = new Date();
-        const y = today.getFullYear();
-        const m = today.getMonth();
-        const d = today.getDate();
-
-
-        // Instantiate the Draggable DOM elements
-        const draggable_El = <HTMLElement>document.getElementById('collapse_1');
-        new Draggable(draggable_El, {
-            itemSelector: '.fc-draggable',
-
-            // Use the method below when we want to create events from Javascript instead of from the HTML'data-event' attribute from the template
-            // eventData: function(eventEl) {
-            //     // console.log('Draggable element data-event = ', eventEl);
-            //     const data = JSON.parse(eventEl.getAttribute('data-event'));
-            //     // console.log('data = ', data);
-            //     return {
-            //         create: data.create,
-            //         title: data.title,
-            //         duration: data.duration,
-            //         className: data.className
-            //     };
-            // }
-        });
-        const draggable_E2 = <HTMLElement>document.getElementById('collapse_2');
-        new Draggable(draggable_E2, {
-            itemSelector: '.fc-draggable',
-        });
-        const draggable_E3 = <HTMLElement>document.getElementById('collapse_3');
-        new Draggable(draggable_E3, {
-            itemSelector: '.fc-draggable',
-        });
-        const draggable_E4 = <HTMLElement>document.getElementById('collapse_4');
-        new Draggable(draggable_E4, {
-            itemSelector: '.fc-draggable',
-        });
-
-
-        // Instantiate the FullCalenndar DOM element
-        const calendarEl = <HTMLElement>document.getElementById('jobsScheduler');
-        that.calendar = new Calendar(calendarEl, {
-            plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin ],
-            themeSystem: 'bootstrap',
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            defaultDate: today,
-            selectable: true,
-            navLinks: true, // can click day/week names to navigate views
-
-            header: {
-                left: 'title, myCustomButton',
-                center: 'dayGridMonth, timeGridWeek, timeGridDay',
-                right: 'prev, next, today'
-            },
-
-            droppable: true,
-            drop: function(info) {
-                // console.log(info);
-
-                let event_data = {};
-                if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
-                    event_data = JSON.parse(info.draggedEl.dataset.event);
-                }
-                console.log('Dragged data event = ', event_data);
-
-                info.draggedEl.parentNode.removeChild(info.draggedEl); // Remove the element from the "Draggable Events" list
-            },
-
-            viewSkeletonRender: function(info) {
-                // console.log(info);
-
-            },
-
-            views: {
-                dayGridMonth: { // name of view
-                    // titleFormat: { year: '2020', month: '05', day: '03' } // year wrong format, crashes the calendar !
-                    // other view-specific options here
-                },
-                dayGrid: {
-                    // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
-                },
-                timeGrid: {
-                    // options apply to timeGridWeek and timeGridDay views
-                },
-                week: {
-                    // options apply to dayGridWeek and timeGridWeek views
-                },
-                day: {
-                    // options apply to dayGridDay and timeGridDay views
-                }
-            },
-
-            select: function(selectionInfo ) {
-                console.log('selectionInfo: ', selectionInfo);
-
-                that.new_event(selectionInfo); // Create a new event
-            },
-
-            eventClick: function( eventClickInfo ) {
-                console.log('eventClickInfo: ', eventClickInfo);
-
-            },
-
-            // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
-            events: [
+            ],
+            fullCalendar_events: [
                 {
                     id: '1',
                     title: 'All Day Event',
@@ -424,6 +304,133 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     editable: true,
                 }
             ]
+        };
+
+        if (global_IS_LOCALDEV) {
+            // This is demo mode
+            this.APP['Data'] = demoDATA;
+
+        } else {
+            // This is production mode
+
+            this.APP['Data'] = demoDATA;
+        }
+    }
+
+
+    object_to_JSON(item) {
+        return JSON.stringify(item);
+    }
+
+
+    ngAfterViewInit() {
+        const that = this;
+
+        // Instantiate the Draggable DOM elements
+        const draggable_El = <HTMLElement>document.getElementById('collapse_1');
+        new Draggable(draggable_El, {
+            itemSelector: '.fc-draggable',
+
+            // Use the method below when we want to create events from Javascript instead of from the HTML'data-event' attribute from the template
+            // eventData: function(eventEl) {
+            //     // console.log('Draggable element data-event = ', eventEl);
+            //     const data = JSON.parse(eventEl.getAttribute('data-event'));
+            //     // console.log('data = ', data);
+            //     return {
+            //         create: data.create,
+            //         title: data.title,
+            //         duration: data.duration,
+            //         className: data.className
+            //     };
+            // }
+        });
+        const draggable_E2 = <HTMLElement>document.getElementById('collapse_2');
+        new Draggable(draggable_E2, {
+            itemSelector: '.fc-draggable',
+        });
+        const draggable_E3 = <HTMLElement>document.getElementById('collapse_3');
+        new Draggable(draggable_E3, {
+            itemSelector: '.fc-draggable',
+        });
+        const draggable_E4 = <HTMLElement>document.getElementById('collapse_4');
+        new Draggable(draggable_E4, {
+            itemSelector: '.fc-draggable',
+        });
+
+
+        // Instantiate the FullCalenndar DOM element
+        const calendarEl = <HTMLElement>document.getElementById('jobsScheduler');
+        that.calendar = new Calendar(calendarEl, {
+            plugins: [
+                interactionPlugin,
+                dayGridPlugin,
+                timeGridPlugin
+            ],
+            themeSystem: 'bootstrap',
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            defaultDate: new Date(),
+            selectable: true,
+            navLinks: true, // can click day/week names to navigate views
+            duration: { hour: 12 },
+
+            header: {
+                left: 'title, myCustomButton',
+                center: 'dayGridMonth, timeGridWeek, timeGridDay',
+                right: 'prev, next, today'
+            },
+
+            droppable: true,
+            drop: function(info) {
+                // console.log(info);
+
+                let event_data = {};
+                if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
+                    event_data = JSON.parse(info.draggedEl.dataset.event);
+                }
+                console.log('Dragged data event = ', event_data);
+
+                info.draggedEl.parentNode.removeChild(info.draggedEl); // Remove the element from the "Draggable Events" list
+            },
+
+            viewSkeletonRender: function(info) {
+                // console.log(info);
+
+            },
+
+            views: {
+                dayGridMonth: { // name of view
+                    // titleFormat: { year: '2020', month: '05', day: '03' } // year wrong format, crashes the calendar !
+                    // other view-specific options here
+                },
+                dayGrid: {
+                    // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
+                },
+                timeGrid: {
+                    // options apply to timeGridWeek and timeGridDay views
+                },
+                week: {
+                    // options apply to dayGridWeek and timeGridWeek views
+                },
+                day: {
+                    // options apply to dayGridDay and timeGridDay views
+                }
+            },
+
+            select: function(selectionInfo ) {
+                // console.log('selectionInfo: ', selectionInfo);
+
+                that.new_event(selectionInfo); // Create a new event
+            },
+
+            eventClick: function( eventClickInfo ) {
+                console.log('eventClickInfo: ', eventClickInfo);
+
+            },
+
+            // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
+            events: that.APP['Data'].fullCalendar_events,
+
         });
         that.calendar.render();
 
@@ -431,76 +438,52 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
 
     new_event(selectionInfo) {
-        let type, fromDate, toDate, start_time, end_time;
+        let fullCalendar_view_type, fromDate, toDate, start_time, end_time;
 
         if (selectionInfo) {
-            // A date context was provided
+            // Internal fullCalendar fired new event
 
-            type = selectionInfo.view.type;
+            const start_Y = new Date(selectionInfo.start).getFullYear();
+            const start_M = new Date(selectionInfo.start).getMonth();
+            const start_D = new Date(selectionInfo.start).getDate();
+            const start_H = new Date(selectionInfo.start).getHours();
+            const start_MN = new Date(selectionInfo.start).getMinutes();
 
-            if (type === 'dayGridMonth') {
-                fromDate = {
-                    year: new Date(selectionInfo.start).getFullYear(),
-                    month: new Date(selectionInfo.start).getMonth() + 1,
-                    day: new Date(selectionInfo.start).getDate()
-                };
+            fullCalendar_view_type = selectionInfo.view.type;
+
+            if (fullCalendar_view_type === 'dayGridMonth') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
                 toDate = fromDate;
                 start_time = { hour: 8, minute: 0, second: 0 };
                 end_time = { hour: 9, minute: 0, second: 0 };
 
-            } else if (type === 'timeGridWeek') {
-                fromDate = {
-                    year: new Date(selectionInfo.start).getFullYear(),
-                    month: new Date(selectionInfo.start).getMonth() + 1,
-                    day: new Date(selectionInfo.start).getDate()
-                };
+            } else if (fullCalendar_view_type === 'timeGridWeek') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
                 toDate = fromDate;
-                start_time = {
-                    hour: new Date(selectionInfo.start).getHours(),
-                    minute: new Date(selectionInfo.start).getMinutes(),
-                    second: 0
-                };
-                end_time = {
-                    hour: new Date(selectionInfo.start).getHours() + 1,
-                    minute: new Date(selectionInfo.start).getMinutes(),
-                    second: 0
-                };
+                start_time = { hour: start_H, minute: start_MN, second: 0 };
+                end_time = { hour: start_H + 1, minute: start_MN, second: 0 };
 
-            } else if (type === 'timeGridDay') {
-                fromDate = {
-                    year: new Date(selectionInfo.start).getFullYear(),
-                    month: new Date(selectionInfo.start).getMonth() + 1,
-                    day: new Date(selectionInfo.start).getDate()
-                };
+            } else if (fullCalendar_view_type === 'timeGridDay') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
                 toDate = fromDate;
-                start_time = {
-                    hour: new Date(selectionInfo.start).getHours(),
-                    minute: new Date(selectionInfo.start).getMinutes(),
-                    second: 0
-                };
-                end_time = {
-                    hour: new Date(selectionInfo.start).getHours() + 1,
-                    minute: new Date(selectionInfo.start).getMinutes(),
-                    second: 0
-                };
+                start_time = { hour: start_H, minute: start_MN, second: 0 };
+                end_time = {hour: start_H + 1, minute: start_MN, second: 0 };
             }
 
         } else {
-            // No date context was provided
+            // External UI based
 
-            type = null;
-            fromDate = {
-                year: new Date().getFullYear(),
-                month: new Date().getMonth() + 1,
-                day: new Date().getDate()
-            };
+            fullCalendar_view_type = null;
+            fromDate = { year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate() };
             toDate = fromDate;
-            start_time = { hour: 8, minute: 0, second: 0 };
-            end_time = { hour: 9, minute: 0, second: 0 };
+            start_time = { hour: 0, minute: 2, second: 0 }; // Mapping in template is { days, hours, minutes }
+            end_time = null;
         }
 
         this.new_event_modal_data = {
-            type: type,
+            modal_mode: selectionInfo ? 'scheduler' : 'job',
+            modal_title: selectionInfo ? 'New schedule' : 'New Job',
+            fullCalendar_view_type: fullCalendar_view_type,
             title: 'New event title',
             fromDate: fromDate,
             fromDate_isValid: true,
@@ -510,21 +493,23 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             end_time: end_time,
             selected_choices1: {
                 label: null,
-                className: 'event-red'
+                className: 'fc-event_event-red'
             },
             choices1: [],
         };
 
-        // Built list of available event type
+        // Build list of available event type
         // tslint:disable-next-line:forin
         for (const property in this.APP['Data'].Draggable) {
             this.new_event_modal_data.choices1.push({
+                Prop_Draggable: property,
                 label: this.APP['Data'].Draggable[property].label,
-                className: this.APP['Data'].Draggable[property].default_className
+                className: this.APP['Data'].Draggable[property].draggable_className
             });
         }
         // console.log('choices1 = ', this.new_event_modal_data.choices1);
 
+        // Open Modal
         const AddEvent_modal = this.modalService.open(this.add_event_modal, {
             ariaLabelledBy: 'modal-basic-title',
             centered: true,
@@ -532,36 +517,61 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             size: 'lg',
 
         }).result.then((result) => {
-            // Modal was closed
-            // console.log('Closed by ' + result);
+            // console.log('Modal was closed by ' + result);
+            console.log('new_event_modal_data', this.new_event_modal_data);
 
-            const end = this.new_event_modal_data.toDate ? new Date(
-                (this.new_event_modal_data.toDate.year),
-                this.new_event_modal_data.toDate.month -1,
-                this.new_event_modal_data.toDate.day,
-                this.new_event_modal_data.end_time.hour,
-                this.new_event_modal_data.end_time.minute,
-                0) : null;
+            if (selectionInfo) {
+                // Internal fullCalendar fired new event
 
-            const calendar_event = {
-                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                title: this.new_event_modal_data.title,
-                start: new Date(
+                const start = new Date(
                     this.new_event_modal_data.fromDate.year,
-                    this.new_event_modal_data.fromDate.month -1,
+                    this.new_event_modal_data.fromDate.month - 1,
                     this.new_event_modal_data.fromDate.day,
                     this.new_event_modal_data.start_time.hour,
                     this.new_event_modal_data.start_time.minute,
                     0
-                ),
-                end: end,
-                allDay: false,
-                classNames: [this.new_event_modal_data.selected_choices1.className],
-                editable: true,
-            };
-            // console.log('Calendar new event: ', calendar_event);
+                );
 
-            this.calendar.addEvent(calendar_event);
+                const end = this.new_event_modal_data.toDate ? new Date(
+                    (this.new_event_modal_data.toDate.year),
+                    this.new_event_modal_data.toDate.month - 1,
+                    this.new_event_modal_data.toDate.day,
+                    this.new_event_modal_data.end_time.hour,
+                    this.new_event_modal_data.end_time.minute,
+                    0) : null;
+
+                const calendar_event = {
+                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                    title: this.new_event_modal_data.title,
+                    start: start,
+                    end: end,
+                    allDay: false,
+                    classNames: [this.new_event_modal_data.selected_choices1.className],
+                    editable: true,
+                };
+                console.log('fullCalendar new job: ', calendar_event);
+
+                this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
+
+            } else {
+                // External UI based
+
+                const duration = (this.new_event_modal_data.start_time.hour * 24) + this.new_event_modal_data.start_time.minute; // Duration in hours
+
+                const job = {
+                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                    title: this.new_event_modal_data.title,
+                    allDay: false,
+                    className: this.new_event_modal_data.selected_choices1.className || '',
+                    editable: true,
+                    duration: duration + ':' + (this.new_event_modal_data.start_time.second ? '30' : '00'),
+                    duration_num: duration,
+                };
+                console.log('External new job: ', job);
+
+                const Prop_Draggable = this.new_event_modal_data.selected_choices1.Prop_Draggable;
+                this.APP['Data'].Draggable[Prop_Draggable].events.push(job);
+            }
 
         }, (reason) => {
             // Modal was dismissed
@@ -575,10 +585,18 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         });
     }
 
-    new_event_set_all_day() {
-        // console.log('new event: set all day');
-        this.new_event_modal_data.start_time = { hour: 8, minute: 0, second: 0 };
-        this.new_event_modal_data.end_time = { hour: 18, minute: 0, second: 0 };
+    new_event_set_duration(days, hours, minutes) {
+        this.new_event_modal_data.start_time = { hour: days, minute: hours, second: minutes }; // IMPORTANT: keep mapping as it
+    }
+
+    new_event_set_range(h_start, h_end) {
+        this.new_event_modal_data.start_time = { hour: h_start, minute: 0, second: 0 };
+        this.new_event_modal_data.end_time = { hour: h_end, minute: 0, second: 0 };
+    }
+
+    new_event_duration_changed() {
+        // console.log('new event: duration changed');
+
     }
 
     new_event_time_changed() {
@@ -600,7 +618,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
 
     ngOnInit() {
-        const that = this;
+
     }
 
     ngOnDestroy() {

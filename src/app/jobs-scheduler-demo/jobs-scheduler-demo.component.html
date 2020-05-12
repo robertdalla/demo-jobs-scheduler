@@ -27,6 +27,13 @@
 
     <div class="row">
         <div class="col-md-2 px-0">
+
+            <div class="d-flex justify-content-center">
+                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                   (click)="new_event(null)">New job
+                </a>
+            </div>
+
             <div class="card">
                 <div class="card-body">
                     <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
@@ -40,8 +47,8 @@
                             <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse">
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.SubContractor.label}}
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -55,8 +62,8 @@
                             <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse">
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Scheduler.label}}
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -70,8 +77,8 @@
                             <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.Employee.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Employee.label}}
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -85,20 +92,14 @@
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.Jobs.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration == '24:00' ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.label}} {{this.APP['Data'].Draggable.Jobs.label}}
+                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </div>
-
-            <div class="d-flex justify-content-center">
-                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                   (click)="new_event(null)">Schedule event
-                </a>
             </div>
         </div>
 
@@ -118,18 +119,18 @@
 <ng-template #add_event_modal let-modal>
 
     <div class="modal-header">
-        <h4 class="modal-title"><b>Schedule event</b></h4>
+        <h4 class="modal-title"><b>{{new_event_modal_data.modal_title}}</b></h4>
     </div>
     <div class="modal-body" id="add_event_modal">
         <div class="col-md-12">
 
             <!-- Title -->
             <div class="form-group">
-                <div class="font-weight-bold">Event title</div>
+                <div class="font-weight-bold">Job title</div>
                 <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="new_event_modal_data.title">
             </div>
 
-            <!-- Type of event -->
+            <!-- Type -->
             <form class="form-inline">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                      ngbDropdown [placement]="'bottom'">
@@ -148,73 +149,128 @@
                 </div>
             </form>
 
-            <!-- Date range picker -->
-            <ng-container *ngIf="new_event_modal_data.type != 'timeGridDay'">
-                <form class="form-inline">
-                    <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
-                    <datepicker-range-popup
-                            [(fromDate)]="new_event_modal_data.fromDate"
-                            [(fromDate_isValid)]="new_event_modal_data.fromDate_isValid"
-                            [(toDate)]="new_event_modal_data.toDate"
-                            [(toDate_isValid)]="new_event_modal_data.toDate_isValid"
-                            [labelEnabled]="true">
-                    </datepicker-range-popup>
-                </form>
-            </ng-container>
+            <ng-template [ngIf]="new_event_modal_data.modal_mode !='scheduler'" [ngIfElse]="scheduler"></ng-template>
+            <ng-template [ngIf]="new_event_modal_data.modal_mode !='job'" [ngIfElse]="job"></ng-template>
 
-            <hr>
 
-            <!-- Time range picker -->
-            <div class="d-flex flex-row justify-content-between">
-                <div>
-                    <div class="font-weight-bold">Time range</div>
-                    <div style="margin-top: 27px;">
-                        <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                           (click)="new_event_set_all_day()">Set 8am to 6pm
-                        </a>
+            <!-- Scheduler mode -->
+            <ng-template #job>
+
+                <hr>
+
+                <!-- Time range picker -->
+                <div class="d-flex flex-row justify-content-start">
+                    <div class="mr-5">
+                        <div class="font-weight-bold mt-1">Duration</div>
+                        <div class="mt-2">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_duration(00, 24, 0)">Set all day
+                            </a>
+                        </div>
                     </div>
+
+                    <div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div>&nbsp;&nbsp;<small>Days</small>&nbsp;&nbsp;</div>
+                            <div>&nbsp;<small>Hours</small>&nbsp;</div>
+                            <div><small>Minutes</small></div>
+                        </div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="new_event_modal_data.start_time"
+                                    (ngModelChange)="new_event_time_changed()"
+                                    [spinners]="true"
+                                    [meridian]="false"
+                                    [seconds]="true"
+                                    [secondStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Override AM/PM buttons styling for the <ngb-timepicker> component -->
-                <style>
-                    #add_event_modal .ngb-tp-meridian button[type=button] {
-                        font-size: 0.8571em;
-                        padding: 5px 15px;
-                        text-decoration: none;
-                        color: inherit;
-                        background: transparent;
-                        border: 2px solid #51cbce !important;
-                        opacity: 1;
-                        border-radius: 30px;
-                    }
-                </style>
+            </ng-template>
 
-                <div>
-                    <div class="text-center"><small>Start</small></div>
-                    <div style="margin-top: -10px">
-                        <ngb-timepicker
-                                [(ngModel)]="new_event_modal_data.start_time"
-                                (ngModelChange)="new_event_time_changed()"
-                                [meridian]="true"
-                                [minuteStep]="30"
-                                [size]="'small'">
-                        </ngb-timepicker>
+
+            <!-- Scheduler mode -->
+            <ng-template #scheduler>
+
+                <!-- Date range picker -->
+                <ng-container *ngIf="new_event_modal_data.fullCalendar_view_type != 'timeGridDay'">
+                    <form class="form-inline">
+                        <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
+                        <datepicker-range-popup
+                                [(fromDate)]="new_event_modal_data.fromDate"
+                                [(fromDate_isValid)]="new_event_modal_data.fromDate_isValid"
+                                [(toDate)]="new_event_modal_data.toDate"
+                                [(toDate_isValid)]="new_event_modal_data.toDate_isValid"
+                                [labelEnabled]="true"
+                                [placement]="'Top'">
+                        </datepicker-range-popup>
+                    </form>
+                </ng-container>
+
+                <hr>
+
+                <!-- Time range picker -->
+                <div class="d-flex flex-row justify-content-between">
+                    <div>
+                        <div class="font-weight-bold">Time range</div>
+                        <div style="margin-top: 1em;">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_range(8, 6)">Set 8am to 6pm
+                            </a>
+                        </div>
+                        <div style="position: absolute; bottom: 0;">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_range(0, 24)">Set all day
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Override AM/PM buttons styling for the <ngb-timepicker> component -->
+                    <style>
+                        #add_event_modal .ngb-tp-meridian button[type=button] {
+                            font-size: 0.8571em;
+                            padding: 5px 15px;
+                            text-decoration: none;
+                            color: inherit;
+                            background: transparent;
+                            border: 2px solid #51cbce !important;
+                            opacity: 1;
+                            border-radius: 30px;
+                        }
+                    </style>
+
+                    <div>
+                        <div class="text-center"><small>Start</small></div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="new_event_modal_data.start_time"
+                                    (ngModelChange)="new_event_duration_changed()"
+                                    [spinners]="true"
+                                    [meridian]="true"
+                                    [minuteStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-center"><small>End</small></div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="new_event_modal_data.end_time"
+                                    (ngModelChange)="new_event_time_changed()"
+                                    [meridian]="true"
+                                    [minuteStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
                     </div>
                 </div>
-
-                <div>
-                    <div class="text-center"><small>End</small></div>
-                    <div style="margin-top: -10px">
-                        <ngb-timepicker
-                                [(ngModel)]="new_event_modal_data.end_time"
-                                (ngModelChange)="new_event_time_changed()"
-                                [meridian]="true"
-                                [minuteStep]="30"
-                                [size]="'small'">
-                        </ngb-timepicker>
-                    </div>
-                </div>
-            </div>
+            </ng-template>
 
             <!-- For testing only: Display JSON content -->
 <!--            <pre>new_event: {{new_event_modal_data | json}}</pre>-->
@@ -246,8 +302,8 @@
     </div>
     <div class="modal-footer">
         <div class="col-md-12 text-center">
-            <button type="button" class="btn btn-info" (click)="modal.dismiss('cancel click')">Cancel</button>
-            <button type="button" class="btn btn-success" [disabled]="new_event_form_inValid()" (click)="modal.close('Ok click')">Create</button>
+            <button type="button" class="btn btn-info mr-md-3" (click)="modal.dismiss('cancel click')">Cancel</button>
+            <button type="button" class="btn btn-success" [disabled]="new_event_form_inValid()" (click)="modal.close('Ok click')">Ok</button>
         </div>
     </div>
 
