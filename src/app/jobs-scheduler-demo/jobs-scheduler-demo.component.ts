@@ -1,6 +1,7 @@
 // angular core
 import {
     Component,
+    Directive,
     Type,
     ElementRef,
     TemplateRef,
@@ -438,6 +439,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
 
     new_event(selectionInfo) {
+        const that = this;
         let fullCalendar_view_type, fromDate, toDate, start_time, end_time;
 
         if (selectionInfo) {
@@ -491,23 +493,38 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             toDate_isValid: true,
             start_time: start_time,
             end_time: end_time,
-            selected_choices1: {
+
+            choices_Job_Type: [],
+            selected_choices_Job_Type: {
                 label: null,
                 className: 'fc-event_event-red'
             },
-            choices1: [],
+
+            choices_Tag_Type: [],
+            selected_choices_Tag_Type: [],
         };
 
-        // Build list of available event type
+        // Build list of available Job type
         // tslint:disable-next-line:forin
         for (const property in this.APP['Data'].Draggable) {
-            this.new_event_modal_data.choices1.push({
+            this.new_event_modal_data.choices_Job_Type.push({
                 Prop_Draggable: property,
                 label: this.APP['Data'].Draggable[property].label,
                 className: this.APP['Data'].Draggable[property].draggable_className
             });
         }
-        // console.log('choices1 = ', this.new_event_modal_data.choices1);
+        // console.log('choices_Job_Type = ', this.new_event_modal_data.choices_Job_Type);
+
+        // Build list of available Tags type
+        // tslint:disable-next-line:forin
+        for (let i = 0; i < this.APP['Data'].Dropdown_filters.length; i++) {
+            this.new_event_modal_data.choices_Tag_Type.push({
+                index: i,
+                label: this.APP['Data'].Dropdown_filters[i].label,
+                checked: false,
+            });
+        }
+        // console.log('choices_Tag_Type = ', this.new_event_modal_data.choices_Tag_Type);
 
         // Open Modal
         const AddEvent_modal = this.modalService.open(this.add_event_modal, {
@@ -546,7 +563,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     start: start,
                     end: end,
                     allDay: false,
-                    classNames: [this.new_event_modal_data.selected_choices1.className],
+                    classNames: [this.new_event_modal_data.selected_choices_Job_Type.className],
                     editable: true,
                 };
                 console.log('fullCalendar new job: ', calendar_event);
@@ -562,14 +579,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
                     title: this.new_event_modal_data.title,
                     allDay: false,
-                    className: this.new_event_modal_data.selected_choices1.className || '',
+                    className: this.new_event_modal_data.selected_choices_Job_Type.className || '',
                     editable: true,
                     duration: duration + ':' + (this.new_event_modal_data.start_time.second ? '30' : '00'),
                     duration_num: duration,
                 };
                 console.log('External new job: ', job);
 
-                const Prop_Draggable = this.new_event_modal_data.selected_choices1.Prop_Draggable;
+                const Prop_Draggable = this.new_event_modal_data.selected_choices_Job_Type.Prop_Draggable;
                 this.APP['Data'].Draggable[Prop_Draggable].events.push(job);
             }
 
@@ -583,6 +600,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 // console.log('Dismissed with: ' + reason);
             }
         });
+    }
+
+    new_event_tags_catagories (item) {
+        item.checked = !item.checked;
+        this.new_event_modal_data.selected_choices_Tag_Type = item;
     }
 
     new_event_set_duration(days, hours, minutes) {
@@ -609,7 +631,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         let disabled = false;
         const d = this.new_event_modal_data;
         disabled = disabled || d.title.length < 2;
-        disabled = disabled || d.selected_choices1.label === null;
+        disabled = disabled || d.selected_choices_Job_Type.label === null;
         disabled = disabled || d.fromDate_isValid !== true;
         // disabled = disabled || d.toDate_isValid !== true;
 

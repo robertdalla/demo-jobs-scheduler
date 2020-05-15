@@ -8,7 +8,7 @@
                 <!-- Dropdown filters -->
                 <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                         ngbDropdown [placement]="'bottom'">
+                         ngbDropdown [placement]="'bottom-left'">
                         <button class="btn btn-sm" ngbDropdownToggle>{{dropdown.value ? (dropdown.value.length <20 ? dropdown.value : (dropdown.value | slice : 0:25) +'...') : dropdown.label}} </button>
                         <div class="dropdown-menu" ngbDropdownMenu>
                             <ng-container *ngFor="let option of dropdown.data">
@@ -122,7 +122,7 @@
         <h4 class="modal-title"><b>{{new_event_modal_data.modal_title}}</b></h4>
     </div>
     <div class="modal-body" id="add_event_modal">
-        <div class="col-md-12">
+        <div class="col-md-12 px-0">
 
             <!-- Title -->
             <div class="form-group">
@@ -130,24 +130,55 @@
                 <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="new_event_modal_data.title">
             </div>
 
-            <!-- Type -->
-            <form class="form-inline">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                     ngbDropdown [placement]="'bottom'">
-                    <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Job type </a>
-                    <div class="dropdown-menu" ngbDropdownMenu>
-                        <ng-container *ngFor="let option of new_event_modal_data.choices1">
-                            <button ngbDropdownItem
-                                    (click)="new_event_modal_data.selected_choices1 = option">{{option.label}}</button>
-                        </ng-container>
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Type -->
+                    <form class="form-inline">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                             ngbDropdown [placement]="'bottom-left'">
+                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
+                            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
+                                <ng-container *ngFor="let option of new_event_modal_data.choices_Job_Type">
+                                    <button ngbDropdownItem (click)="new_event_modal_data.selected_choices_Job_Type = option">{{option.label}}</button>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="p-sm-1 fc-event"
+                         *ngIf="new_event_modal_data.selected_choices_Job_Type.label"
+                         [ngClass]="[new_event_modal_data.selected_choices_Job_Type.className]">{{new_event_modal_data.selected_choices_Job_Type.label}}
                     </div>
                 </div>
 
-                <div class="mx-3 p-sm-1 fc-event"
-                     *ngIf="new_event_modal_data.selected_choices1.label"
-                     [ngClass]="[new_event_modal_data.selected_choices1.className]">{{new_event_modal_data.selected_choices1.label}}
+                <div class="col-md-3 px-0">
+                    <!-- Tags -->
+                    <form class="form-inline">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                             ngbDropdown [placement]="'bottom-left'" autoClose="outside">
+                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags categories </a>
+                            <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
+                                <ng-container *ngFor="let option of new_event_modal_data.choices_Tag_Type">
+                                    <span ngbDropdownItem [ngClass]="option.checked && 'checked'" (click)="new_event_tags_catagories(option)">{{option.label}}</span>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="row">
+
+
+                    </div>
                 </div>
-            </form>
+
+                <div class="col-md-6 px-0">
+
+                    <tag-input [(ngModel)]='tagItems' theme='regular-theme'></tag-input>
+
+<!--                    <pre>new_event: {{new_event_modal_data.selected_choices_Tag_Type | json}}</pre>-->
+
+                </div>
+            </div>
+
 
             <ng-template [ngIf]="new_event_modal_data.modal_mode !='scheduler'" [ngIfElse]="scheduler"></ng-template>
             <ng-template [ngIf]="new_event_modal_data.modal_mode !='job'" [ngIfElse]="job"></ng-template>
@@ -271,33 +302,6 @@
                     </div>
                 </div>
             </ng-template>
-
-            <!-- For testing only: Display JSON content -->
-<!--            <pre>new_event: {{new_event_modal_data | json}}</pre>-->
-
-            <!--                <div>
-                    <div class="form-check-radio">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio"
-                                   [(ngModel)]="new_event_modal_data.all_day"
-                                   [checked]="!new_event_modal_data.all_day"
-                                   [value]="false"
-                                   (ngModelChange)="new_event_set_all_day()"> Time range
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                    <div class="form-check-radio">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio"
-                                   [(ngModel)]="new_event_modal_data.all_day"
-                                   [checked]="new_event_modal_data.all_day"
-                                   [value]="true"
-                                   (ngModelChange)="new_event_set_all_day()"> All day
-                            <span class="form-check-sign"></span>
-                        </label>
-                    </div>
-                </div>-->
-
         </div>
     </div>
     <div class="modal-footer">
@@ -308,3 +312,44 @@
     </div>
 
 </ng-template>
+
+
+<!-- For testing only: Display JSON content -->
+<!--            <pre>new_event: {{new_event_modal_data | json}}</pre>-->
+
+
+<!--                <div>-->
+<!--                    <div class="form-check-radio">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input class="form-check-input" type="radio"-->
+<!--                                   [(ngModel)]="new_event_modal_data.all_day"-->
+<!--                                   [checked]="!new_event_modal_data.all_day"-->
+<!--                                   [value]="false"-->
+<!--                                   (ngModelChange)="new_event_set_all_day()"> Time range-->
+<!--                            <span class="form-check-sign"></span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                    <div class="form-check-radio">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input class="form-check-input" type="radio"-->
+<!--                                   [(ngModel)]="new_event_modal_data.all_day"-->
+<!--                                   [checked]="new_event_modal_data.all_day"-->
+<!--                                   [value]="true"-->
+<!--                                   (ngModelChange)="new_event_set_all_day()"> All day-->
+<!--                            <span class="form-check-sign"></span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--            <ng-select-->
+<!--                    [items]="new_event_modal_data.choices_Tag_Type"-->
+<!--                    [multiple]="true"-->
+<!--                    [hideSelected]="false"-->
+<!--                    [closeOnSelect]="false"-->
+<!--                    [selectableGroupAsModel]="false"-->
+<!--                    [searchable]="false"-->
+<!--                    bindLabel="label"-->
+<!--                    placeholder="Select tag categories"-->
+<!--                    [(ngModel)]="new_event_modal_data.selected_choices_Tag_Type">-->
+<!--            </ng-select>-->

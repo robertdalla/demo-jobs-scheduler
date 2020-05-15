@@ -34,6 +34,7 @@
               "./node_modules/@fullcalendar/list/main.css",
               "./node_modules/@fullcalendar/bootstrap/main.css",
               "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "./node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/assets/scss/paper-dashboard.scss",
               "src/assets/css/demo.css"
             ],

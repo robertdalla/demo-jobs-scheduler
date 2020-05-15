@@ -35,6 +35,7 @@
     "@fullcalendar/list": "^4.4.0",
     "@fullcalendar/timegrid": "^4.4.0",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "@ng-select/ng-select": "^4.0.0",
     "@ngui/map": "0.30.3",
     "@sweetalert2/ngx-sweetalert2": "^8.1.0",
     "@types/googlemaps": "3.36.5",
