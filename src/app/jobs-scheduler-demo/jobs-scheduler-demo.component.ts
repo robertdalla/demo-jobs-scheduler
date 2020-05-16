@@ -117,114 +117,123 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 {
                     Id: '1',
                     label: 'Employees',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: true, label: 'Ellesha Alvarado' },
-                        { disabled: false, label: 'Jorja Kirby' },
-                        { disabled: false, label: 'Thomas Barker' },
-                        { disabled: false, label: 'Rafe Hines' },
-                        { disabled: false, label: 'Wren Haworth' },
-                        { disabled: false, label: 'Rahim Kent' },
+                        { Id: '1', enabled: false, selected: false, label: 'Ellesha Alvarado' },
+                        { Id: '2', enabled: true, selected: false, label: 'Jorja Kirby' },
+                        { Id: '3', enabled: true, selected: false, label: 'Thomas Barker' },
+                        { Id: '4', enabled: true, selected: false, label: 'Rafe Hines' },
+                        { Id: '5', enabled: true, selected: false, label: 'Wren Haworth' },
+                        { Id: '6', enabled: true, selected: false, label: 'Rahim Kent' },
                     ],
                 },
                 {
                     Id: '2',
                     label: 'Scheduler',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Scheduler 1' },
-                        { disabled: false, label: 'Scheduler 2' },
-                        { disabled: false, label: 'Scheduler 3' },
+                        { Id: '1', enabled: true, selected: false, label: 'Scheduler 1' },
+                        { Id: '2', enabled: true, selected: false, label: 'Scheduler 2' },
+                        { Id: '3', enabled: true, selected: false, label: 'Scheduler 3' },
                     ],
                 },
                 {
                     Id: '3',
                     label: 'Fixer',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Fixer 1' },
-                        { disabled: false, label: 'Fixer 2' },
-                        { disabled: false, label: 'Fixer 3' },
+                        { Id: '1', enabled: true, selected: false, label: 'Fixer 1' },
+                        { Id: '2', enabled: true, selected: false, label: 'Fixer 2' },
+                        { Id: '3', enabled: true, selected: false, label: 'Fixer 3' },
                     ],
                 },
                 {
                     Id: '4',
                     label: 'Customer',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Accord Homes' },
-                        { disabled: false, label: 'A B Freese' },
-                        { disabled: false, label: 'Cameron Daff' },
-                        { disabled: false, label: 'Rawcorp Pty Ltd' },
-                        { disabled: false, label: 'Urban Building Services' },
-                        { disabled: false, label: 'East Coast Designer Builders Pty Ltd' },
-                        { disabled: false, label: 'Eddie Blaiklock Builder' },
-                        { disabled: false, label: 'Nerek Construction' },
-                        { disabled: false, label: 'Lauder Jeff' },
-                        { disabled: false, label: 'Saurus Contracting' },
-                        { disabled: false, label: 'Dalponte Building Services' },
-                        { disabled: false, label: 'Dave Baldwin' },
-                        { disabled: false, label: 'O\'Loan Build' },
-                        { disabled: false, label: 'Ray Mahoney Builder' },
-                        { disabled: false, label: 'Bale Constructions' },
-                        { disabled: false, label: 'Vivid Home Builders' },
-                        { disabled: false, label: 'Leisure Living Homes, Mackay' },
-                        { disabled: false, label: 'Galaxi Homes' },
-                        { disabled: false, label: 'Lamb Gary Building Contractor' },
-                        { disabled: false, label: 'Fergus Builders' },
+                        { Id: '1', enabled: true, selected: false, label: 'Accord Homes' },
+                        { Id: '2', enabled: true, selected: false, label: 'A B Freese' },
+                        { Id: '3', enabled: true, selected: false, label: 'Cameron Daff' },
+                        { Id: '4', enabled: true, selected: false, label: 'Rawcorp Pty Ltd' },
+                        { Id: '5', enabled: true, selected: false, label: 'Urban Building Services' },
+                        { Id: '6', enabled: true, selected: false, label: 'East Coast Designer Builders Pty Ltd' },
+                        { Id: '7', enabled: true, selected: false, label: 'Eddie Blaiklock Builder' },
+                        { Id: '8', enabled: true, selected: false, label: 'Nerek Construction' },
+                        { Id: '9', enabled: true, selected: false, label: 'Lauder Jeff' },
+                        { Id: '10', enabled: true, selected: false, label: 'Saurus Contracting' },
+                        { Id: '11', enabled: true, selected: false, label: 'Dalponte Building Services' },
+                        { Id: '12', enabled: true, selected: false, label: 'Dave Baldwin' },
+                        { Id: '13', enabled: true, selected: false, label: 'O\'Loan Build' },
+                        { Id: '14', enabled: true, selected: false, label: 'Ray Mahoney Builder' },
+                        { Id: '15', enabled: true, selected: false, label: 'Bale Constructions' },
+                        { Id: '16', enabled: true, selected: false, label: 'Vivid Home Builders' },
+                        { Id: '17', enabled: true, selected: false, label: 'Leisure Living Homes, Mackay' },
+                        { Id: '18', enabled: true, selected: false, label: 'Galaxi Homes' },
+                        { Id: '19', enabled: true, selected: false, label: 'Lamb Gary Building Contractor' },
+                        { Id: '20', enabled: true, selected: false, label: 'Fergus Builders' },
                     ],
                 },
                 {
                     Id: '5',
                     label: 'Division',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Construction' },
-                        { disabled: false, label: 'Plumbing' },
-                        { disabled: false, label: 'Electrical' },
+                        { Id: '1', enabled: true, selected: false, label: 'Construction' },
+                        { Id: '2', enabled: true, selected: false, label: 'Plumbing' },
+                        { Id: '3', enabled: true, selected: false, label: 'Electrical' },
                     ],
                 },
                 {
                     Id: '6',
                     label: 'Branch',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'QLD' },
-                        { disabled: false, label: 'NSW' },
-                        { disabled: false, label: 'VIC' },
-                        { disabled: false, label: 'WA' },
-                        { disabled: false, label: 'NT' },
+                        { Id: '1', enabled: true, selected: false, label: 'QLD' },
+                        { Id: '2', enabled: true, selected: false, label: 'NSW' },
+                        { Id: '3', enabled: true, selected: false, label: 'VIC' },
+                        { Id: '4', enabled: true, selected: false, label: 'WA' },
+                        { Id: '5', enabled: true, selected: false, label: 'NT' },
                     ],
                 },
                 {
                     Id: '7',
                     label: 'Product',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Product 1' },
-                        { disabled: false, label: 'Product 2' },
-                        { disabled: false, label: 'Product 3' },
-                        { disabled: false, label: 'Product 4' },
+                        { Id: '1', enabled: true, selected: false, label: 'Product 1' },
+                        { Id: '2', enabled: true, selected: false, label: 'Product 2' },
+                        { Id: '3', enabled: true, selected: false, label: 'Product 3' },
+                        { Id: '4', enabled: true, selected: false, label: 'Product 4' },
                     ],
                 },
                 {
                     Id: '8',
                     label: 'Stage',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Stage 1' },
-                        { disabled: false, label: 'Stage 2' },
-                        { disabled: false, label: 'Stage 3' },
+                        { Id: '1', enabled: true, selected: false, label: 'Stage 1' },
+                        { Id: '2', enabled: true, selected: false, label: 'Stage 2' },
+                        { Id: '3', enabled: true, selected: false, label: 'Stage 3' },
                     ],
                 },
                 {
                     Id: '9',
                     label: 'Health',
-                    value: null,
+                    value: [],
+                    selected: false,
                     data: [
-                        { disabled: false, label: 'Good' },
-                        { disabled: false, label: 'Average' },
-                        { disabled: false, label: 'Bad' },
+                        { Id: '1', enabled: true, selected: false, label: 'Good' },
+                        { Id: '2', enabled: true, selected: false, label: 'Average' },
+                        { Id: '3', enabled: true, selected: false, label: 'Bad' },
                     ],
                 },
             ],
@@ -501,7 +510,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             choices_Tag_Type: [],
-            selected_choices_Tag_Type: [],
         };
 
         // Build list of available Job type
@@ -509,6 +517,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         for (const property in this.APP['Data'].Draggable) {
             this.new_event_modal_data.choices_Job_Type.push({
                 Prop_Draggable: property,
+                Id: this.APP['Data'].Draggable[property].Id,
                 label: this.APP['Data'].Draggable[property].label,
                 className: this.APP['Data'].Draggable[property].draggable_className
             });
@@ -519,9 +528,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         // tslint:disable-next-line:forin
         for (let i = 0; i < this.APP['Data'].Dropdown_filters.length; i++) {
             this.new_event_modal_data.choices_Tag_Type.push({
-                index: i,
+                Id: this.APP['Data'].Dropdown_filters[i].Id,
                 label: this.APP['Data'].Dropdown_filters[i].label,
-                checked: false,
+                data: this.APP['Data'].Dropdown_filters[i].data,
+                value: [],
+                selected: false,
             });
         }
         // console.log('choices_Tag_Type = ', this.new_event_modal_data.choices_Tag_Type);
@@ -583,6 +594,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     editable: true,
                     duration: duration + ':' + (this.new_event_modal_data.start_time.second ? '30' : '00'),
                     duration_num: duration,
+                    tags: this.my_event_selected_Tag_chips(),
                 };
                 console.log('External new job: ', job);
 
@@ -602,9 +614,38 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         });
     }
 
-    new_event_tags_catagories (item) {
-        item.checked = !item.checked;
-        this.new_event_modal_data.selected_choices_Tag_Type = item;
+    dropdown_filter_clicked(item, option) {
+        if (option.enabled) {
+            // Set 'selected' flag on a single item only
+            item.data.forEach(function myFunction(data_item, index) {
+                data_item.selected = data_item.Id === option.Id;
+            });
+
+            item.value[0] = option;
+        }
+    }
+
+    new_event_dropdown_Job_Type_clicked(item) {
+        // Set 'selected' flag on a single item only
+        this.new_event_modal_data.choices_Job_Type.forEach(function (data_item, index) {
+            data_item.selected = data_item.Id === item.Id;
+        });
+
+        this.new_event_modal_data.selected_choices_Job_Type = item
+    }
+
+    my_event_selected_Tag_chips() {
+        let data: any = [];
+        this.new_event_modal_data.choices_Tag_Type.forEach(function (item, index) {
+            if (item.selected && item.value.length) {
+                data.push({
+                    Id: item.Id,
+                    label: item.label,
+                    value: { Id: item.value[0].Id, label: item.value[0].label },
+                });
+            }
+        });
+        return data;
     }
 
     new_event_set_duration(days, hours, minutes) {
@@ -618,23 +659,19 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     new_event_duration_changed() {
         // console.log('new event: duration changed');
-
     }
 
     new_event_time_changed() {
         // console.log('new event: date changed');
-
     }
 
     new_event_form_inValid() {
-
         let disabled = false;
         const d = this.new_event_modal_data;
         disabled = disabled || d.title.length < 2;
         disabled = disabled || d.selected_choices_Job_Type.label === null;
         disabled = disabled || d.fromDate_isValid !== true;
         // disabled = disabled || d.toDate_isValid !== true;
-
         return disabled;
     }
 

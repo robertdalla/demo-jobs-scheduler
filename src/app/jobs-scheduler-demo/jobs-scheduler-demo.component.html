@@ -5,16 +5,18 @@
         <div class="col-md-8">
             <div class="d-flex flex-row-reverse justify-content-around">
 
-                <!-- Dropdown filters -->
-                <ng-container *ngFor="let dropdown of this.APP['Data'].Dropdown_filters">
+                <!-- Dropdown filters (single select)-->
+                <ng-container *ngFor="let item of this.APP['Data'].Dropdown_filters">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                         ngbDropdown [placement]="'bottom-left'">
-                        <button class="btn btn-sm" ngbDropdownToggle>{{dropdown.value ? (dropdown.value.length <20 ? dropdown.value : (dropdown.value | slice : 0:25) +'...') : dropdown.label}} </button>
-                        <div class="dropdown-menu" ngbDropdownMenu>
-                            <ng-container *ngFor="let option of dropdown.data">
-                                <button ngbDropdownItem
-                                        [disabled]="option.disabled"
-                                        (click)="dropdown.value = option.label">{{option.label}}</button>
+                         ngbDropdown [placement]="'bottom-left'" autoClose="both">
+                        <button class="btn btn-sm" ngbDropdownToggle>{{item.value.length ? (item.value[0].label.length <20 ? item.value[0].label : (item.value[0].label | slice : 0:25) +'...') : item.label}} </button>
+                        <div class="dropdown-menu" ngbDropdownMenu style="max-height: 400px; overflow-y: auto;">
+                            <ng-container *ngFor="let option of item.data">
+                                <div ngbDropdownItem
+                                     [ngClass]="option.selected && 'checked'"
+                                     [style.cursor]="!option.enabled && 'not-allowed'"
+                                     (click)="dropdown_filter_clicked(item, option)">{{option.label}}
+                                </div>
                             </ng-container>
                         </div>
                     </div>
@@ -131,62 +133,86 @@
             </div>
 
             <div class="row">
-                <div class="col-md-3">
-                    <!-- Type -->
+                <div class="col-md-3 pr-sm-0">
+
+                    <!-- Dropdown Job Type (single select) -->
                     <form class="form-inline">
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                             ngbDropdown [placement]="'bottom-left'">
+                             ngbDropdown [placement]="'bottom-left'" autoClose="both">
                             <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
                             <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
-                                <ng-container *ngFor="let option of new_event_modal_data.choices_Job_Type">
-                                    <button ngbDropdownItem (click)="new_event_modal_data.selected_choices_Job_Type = option">{{option.label}}</button>
+                                <ng-container *ngFor="let item of new_event_modal_data.choices_Job_Type">
+                                    <div ngbDropdownItem
+                                         [ngClass]="item.selected && 'checked'"
+                                         (click)="new_event_dropdown_Job_Type_clicked(item)">{{item.label}}
+                                    </div>
                                 </ng-container>
                             </div>
                         </div>
                     </form>
-                    <div class="p-sm-1 fc-event"
+
+                    <!-- Selected Job Type -->
+                    <div class="ml-1 p-sm-1 fc-event"
                          *ngIf="new_event_modal_data.selected_choices_Job_Type.label"
                          [ngClass]="[new_event_modal_data.selected_choices_Job_Type.className]">{{new_event_modal_data.selected_choices_Job_Type.label}}
                     </div>
                 </div>
 
-                <div class="col-md-3 px-0">
-                    <!-- Tags -->
+                <div class="col-md-2 px-0">
+
+                    <!-- Dropdown Tags (multi-select) -->
                     <form class="form-inline">
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                              ngbDropdown [placement]="'bottom-left'" autoClose="outside">
-                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags categories </a>
+                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
                             <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
-                                <ng-container *ngFor="let option of new_event_modal_data.choices_Tag_Type">
-                                    <span ngbDropdownItem [ngClass]="option.checked && 'checked'" (click)="new_event_tags_catagories(option)">{{option.label}}</span>
+                                <ng-container *ngFor="let item of new_event_modal_data.choices_Tag_Type">
+                                    <div ngbDropdownItem
+                                          [ngClass]="item.selected && 'checked'"
+                                          (click)="item.selected = !item.selected">{{item.label}}
+                                    </div>
                                 </ng-container>
                             </div>
                         </div>
                     </form>
-
-                    <div class="row">
-
-
-                    </div>
                 </div>
 
-                <div class="col-md-6 px-0">
+                <div class="col-md-7 px-0">
 
-                    <tag-input [(ngModel)]='tagItems' theme='regular-theme'></tag-input>
-
-<!--                    <pre>new_event: {{new_event_modal_data.selected_choices_Tag_Type | json}}</pre>-->
-
+                    <!-- Tag chips inputs -->
+                    <ng-container *ngFor="let item of new_event_modal_data.choices_Tag_Type">
+                        <span *ngIf="item.selected" class="d-inline-flex">
+                            <tag-input [(ngModel)]="item.value"
+                                       [maxItems]="1"
+                                       [removable]="true"
+                                       [onlyFromAutocomplete]="true"
+                                       [displayBy]="'label'"
+                                       [identifyBy]="'Id'"
+                                       [secondaryPlaceholder]="item.label + ' ?'"
+                                       theme="default">
+                                <tag-input-dropdown [autocompleteItems]="item.data"
+                                                    [showDropdownIfEmpty]="true"
+                                                    [minimumTextLength]="0"
+                                                    [displayBy]="'label'"
+                                                    [identifyBy]="'Id'"
+                                                    [appendToBody]="false">
+                                    <ng-template let-item="item" let-index="index">
+                                        <div [style.cursor]="!item.enabled && 'not-allowed'">{{item.label}}</div>
+                                    </ng-template>
+                                </tag-input-dropdown>
+                            </tag-input>
+                        </span>
+                    </ng-container>
                 </div>
             </div>
 
+            <pre>Selected Tags: {{my_event_selected_Tag_chips() | json}}</pre>
 
             <ng-template [ngIf]="new_event_modal_data.modal_mode !='scheduler'" [ngIfElse]="scheduler"></ng-template>
             <ng-template [ngIf]="new_event_modal_data.modal_mode !='job'" [ngIfElse]="job"></ng-template>
 
-
             <!-- Scheduler mode -->
             <ng-template #job>
-
                 <hr>
 
                 <!-- Time range picker -->
