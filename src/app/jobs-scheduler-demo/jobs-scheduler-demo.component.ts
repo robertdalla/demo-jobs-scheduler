@@ -576,6 +576,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     allDay: false,
                     classNames: [this.new_event_modal_data.selected_choices_Job_Type.className],
                     editable: true,
+                    tags: this.my_event_selected_Tag_chips(),
                 };
                 console.log('fullCalendar new job: ', calendar_event);
 
