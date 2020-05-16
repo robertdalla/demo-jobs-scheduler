@@ -118,7 +118,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '1',
                     label: 'Employees',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: false, selected: false, label: 'Ellesha Alvarado' },
                         { Id: '2', enabled: true, selected: false, label: 'Jorja Kirby' },
@@ -132,7 +131,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '2',
                     label: 'Scheduler',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Scheduler 1' },
                         { Id: '2', enabled: true, selected: false, label: 'Scheduler 2' },
@@ -143,7 +141,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '3',
                     label: 'Fixer',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Fixer 1' },
                         { Id: '2', enabled: true, selected: false, label: 'Fixer 2' },
@@ -154,7 +151,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '4',
                     label: 'Customer',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Accord Homes' },
                         { Id: '2', enabled: true, selected: false, label: 'A B Freese' },
@@ -182,7 +178,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '5',
                     label: 'Division',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Construction' },
                         { Id: '2', enabled: true, selected: false, label: 'Plumbing' },
@@ -193,7 +188,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '6',
                     label: 'Branch',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'QLD' },
                         { Id: '2', enabled: true, selected: false, label: 'NSW' },
@@ -206,7 +200,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '7',
                     label: 'Product',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Product 1' },
                         { Id: '2', enabled: true, selected: false, label: 'Product 2' },
@@ -218,7 +211,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '8',
                     label: 'Stage',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Stage 1' },
                         { Id: '2', enabled: true, selected: false, label: 'Stage 2' },
@@ -229,7 +221,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     Id: '9',
                     label: 'Health',
                     value: [],
-                    selected: false,
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Good' },
                         { Id: '2', enabled: true, selected: false, label: 'Average' },
@@ -618,11 +609,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     dropdown_filter_clicked(item, option) {
         if (option.enabled) {
             // Set 'selected' flag on a single item only
-            item.data.forEach(function myFunction(data_item, index) {
-                data_item.selected = data_item.Id === option.Id;
+            item.data.forEach(function (data_item, index) {
+                if (data_item.Id === option.Id) {
+                    data_item.selected = !data_item.selected;
+                    item.value = data_item.selected ? [data_item] : [];
+                }else {
+                    data_item.selected = false;
+                }
             });
-
-            item.value[0] = option;
         }
     }
 

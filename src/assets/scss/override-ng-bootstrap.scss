@@ -32,6 +32,10 @@
 
 .dropdown-menu {
 
+    .dropdown-item {
+        padding-right: 0.5em;
+    }
+
     .dropdown-item.checked {
         background-color: $placeholder-gray;
     }

@@ -16,6 +16,7 @@
                                      [ngClass]="option.selected && 'checked'"
                                      [style.cursor]="!option.enabled && 'not-allowed'"
                                      (click)="dropdown_filter_clicked(item, option)">{{option.label}}
+                                    <span [hidden]="!option.selected" class="ml-lg-2"><i class="nc-icon nc-simple-remove" style="color: inherit"></i></span>
                                 </div>
                             </ng-container>
                         </div>
