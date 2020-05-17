@@ -1,15 +1,7 @@
 <div class="main-content" style="margin-top: 70px;">
     <div class="row">
         <div class="col-md-2">
-
-            <!-- New Job -->
-            <div style="position: relative; top:50%; transform: translateY(-50%);"><!-- vertical align -->
-                <div class="text-center">
-                    <a ngbButton class="btn btn-sm btn-outline-primary btn-round w-100"
-                       (click)="new_event(null)">New job
-                    </a>
-                </div>
-            </div>
+            <div class="d-block"></div>
         </div>
 
         <div class="col-md-8">
@@ -57,7 +49,20 @@
         <div class="col-md-2 px-0">
 
             <div class="card">
+                <div class="card-header">
+                    <div class="text-center">
+                        <h5 class="mb-0 text-uppercase">Jobs</h5>
+                    </div>
+                </div>
                 <div class="card-body">
+
+                    <!-- New Job -->
+                    <div class="text-center">
+                        <a ngbButton class="btn btn-sm btn-outline-primary btn-round w-100"
+                           (click)="new_event(null)">New job
+                        </a>
+                    </div>
+
                     <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
 
                         <div class="card card-plain">
@@ -399,3 +404,7 @@
 <!--                    placeholder="Select tag categories"-->
 <!--                    [(ngModel)]="new_event_modal_data.selected_choices_Tag_Type">-->
 <!--            </ng-select>-->
+
+
+<!-- vertical align -->
+<!--<div style="position: relative; top:50%; transform: translateY(-50%);"></div>-->
