@@ -1,7 +1,15 @@
 <div class="main-content" style="margin-top: 70px;">
     <div class="row">
         <div class="col-md-2">
-            <div class="d-block"></div>
+
+            <!-- New Job -->
+            <div style="position: relative; top:50%; transform: translateY(-50%);"><!-- vertical align -->
+                <div class="text-center">
+                    <a ngbButton class="btn btn-sm btn-outline-primary btn-round w-100"
+                       (click)="new_event(null)">New job
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-8">
@@ -47,12 +55,6 @@
 
     <div class="row">
         <div class="col-md-2 px-0">
-
-            <div class="d-flex justify-content-center">
-                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                   (click)="new_event(null)">New job
-                </a>
-            </div>
 
             <div class="card">
                 <div class="card-body">
