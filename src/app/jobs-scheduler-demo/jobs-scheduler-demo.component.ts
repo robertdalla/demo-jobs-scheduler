@@ -607,7 +607,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         });
     }
 
-    dropdown_filter_requestAutocompleteItems(items) {
+    tags_filter_requestAutocompleteItems(items) {
         let data: any = [];
         if (Array.isArray(items)) {
             items.forEach(function (data_item, index) {
@@ -617,6 +617,18 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             });
         }
         return data;
+    }
+
+    tags_filter_onSelected(item) {
+        console.log('tags_filter_onSelected', item);
+    }
+
+    tags_filter_onItemAdded(item) {
+        console.log('tags_filter_onItemAdded', item);
+    }
+
+    tags_filter_onItemRemoved(item) {
+        console.log('tags_filter_onItemRemoved', item);
     }
 
     new_event_dropdown_Job_Type_clicked(item) {

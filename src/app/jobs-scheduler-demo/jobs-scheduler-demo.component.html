@@ -13,15 +13,18 @@
                         <div class="d-inline-block">
 
                             <!-- Tag chips inputs -->
-                            <tag-input [(ngModel)]="item.value"
+                            <tag-input theme="bootstrap-info"
+                                       [(ngModel)]="item.value"
                                        [maxItems]="1"
                                        [removable]="true"
                                        [onlyFromAutocomplete]="true"
                                        [displayBy]="'label'"
                                        [identifyBy]="'Id'"
                                        [secondaryPlaceholder]="item.label + ' ?'"
-                                       theme="bootstrap-info">
-                                <tag-input-dropdown [autocompleteItems]="dropdown_filter_requestAutocompleteItems(item.data)"
+                                       (onSelect)="tags_filter_onSelected($event)"
+                                       (onAdd)="tags_filter_onItemAdded($event)"
+                                       (onRemove)="tags_filter_onItemRemoved($event)">
+                                <tag-input-dropdown [autocompleteItems]="tags_filter_requestAutocompleteItems(item.data)"
                                                     [showDropdownIfEmpty]="true"
                                                     [displayBy]="'label'"
                                                     [identifyBy]="'Id'"
@@ -199,14 +202,14 @@
                     <!-- Tag chips inputs -->
                     <ng-container *ngFor="let item of new_event_modal_data.choices_Tag_Type">
                         <span *ngIf="item.selected" class="d-inline-flex">
-                            <tag-input [(ngModel)]="item.value"
+                            <tag-input theme="bootstrap-info"
+                                       [(ngModel)]="item.value"
                                        [maxItems]="1"
                                        [removable]="true"
                                        [onlyFromAutocomplete]="true"
                                        [displayBy]="'label'"
                                        [identifyBy]="'Id'"
-                                       [secondaryPlaceholder]="item.label + ' ?'"
-                                       theme="default">
+                                       [secondaryPlaceholder]="item.label + ' ?'">
                                 <tag-input-dropdown [autocompleteItems]="dropdown_filter_requestAutocompleteItems(item.data)"
                                                     [showDropdownIfEmpty]="true"
                                                     [displayBy]="'label'"
