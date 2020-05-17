@@ -5,7 +5,7 @@
         </div>
 
         <div class="col-md-8">
-            <div class="d-block bg-light shadow-lg mb-2" style="border-radius: 10px;">
+            <div class="d-block shadow-sm mb-2" style="border-radius: 10px; background-color: #F5FFFF;">
                 <div class="text-center">
 
                     <!-- Dropdown filters (single select)-->
@@ -21,9 +21,8 @@
                                        [displayBy]="'label'"
                                        [identifyBy]="'Id'"
                                        [secondaryPlaceholder]="item.label + ' ?'"
-                                       (onSelect)="tags_filter_onSelected($event)"
-                                       (onAdd)="tags_filter_onItemAdded($event)"
-                                       (onRemove)="tags_filter_onItemRemoved($event)">
+                                       (onAdd)="tags_filter_onItemAdded(item)"
+                                       (onRemove)="tags_filter_onItemRemoved(item)">
                                 <tag-input-dropdown [autocompleteItems]="tags_filter_requestAutocompleteItems(item.data)"
                                                     [showDropdownIfEmpty]="true"
                                                     [displayBy]="'label'"
