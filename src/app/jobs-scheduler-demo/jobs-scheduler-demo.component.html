@@ -1,31 +1,45 @@
 <div class="main-content">
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <div class="d-block"></div>
+        </div>
 
         <div class="col-md-8">
-            <div class="d-flex flex-row-reverse justify-content-around">
+            <div class="d-block bg-light shadow-sm mb-2">
+                <div class="text-center">
 
-                <!-- Dropdown filters (single select)-->
-                <ng-container *ngFor="let item of this.APP['Data'].Dropdown_filters">
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                         ngbDropdown [placement]="'bottom-left'" autoClose="both">
-                        <button class="btn btn-sm" ngbDropdownToggle>{{item.value.length ? (item.value[0].label.length <20 ? item.value[0].label : (item.value[0].label | slice : 0:25) +'...') : item.label}} </button>
-                        <div class="dropdown-menu" ngbDropdownMenu style="max-height: 400px; overflow-y: auto;">
-                            <ng-container *ngFor="let option of item.data">
-                                <div ngbDropdownItem
-                                     [ngClass]="option.selected && 'checked'"
-                                     [style.cursor]="!option.enabled && 'not-allowed'"
-                                     (click)="dropdown_filter_clicked(item, option)">{{option.label}}
-                                    <span [hidden]="!option.selected" class="ml-lg-2"><i class="nc-icon nc-simple-remove" style="color: inherit"></i></span>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </ng-container>
+                    <!-- Dropdown filters (single select)-->
+                    <ng-container *ngFor="let item of this.APP['Data'].Dropdown_filters">
+                        <div class="d-inline-block">
+
+                            <!-- Tag chips inputs -->
+                            <tag-input [(ngModel)]="item.value"
+                                       [maxItems]="1"
+                                       [removable]="true"
+                                       [onlyFromAutocomplete]="true"
+                                       [displayBy]="'label'"
+                                       [identifyBy]="'Id'"
+                                       [secondaryPlaceholder]="item.label + ' ?'"
+                                       theme="bootstrap-info">
+                                <tag-input-dropdown [autocompleteItems]="dropdown_filter_requestAutocompleteItems(item.data)"
+                                                    [showDropdownIfEmpty]="true"
+                                                    [displayBy]="'label'"
+                                                    [identifyBy]="'Id'"
+                                                    [appendToBody]="true">
+                                    <ng-template let-item="item" let-index="index">{{item.label}}
+                                    </ng-template>
+                                </tag-input-dropdown>
+                            </tag-input>
+                            </div>
+
+                    </ng-container>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <div class="d-block"></div>
+        </div>
     </div>
 
     <div class="row">
@@ -114,7 +128,9 @@
             </div>
         </div>
 
-        <div class="col-md-2 px-0"></div>
+        <div class="col-md-2 px-0">
+            <div class="d-block"></div>
+        </div>
     </div>
 </div>
 
@@ -191,14 +207,12 @@
                                        [identifyBy]="'Id'"
                                        [secondaryPlaceholder]="item.label + ' ?'"
                                        theme="default">
-                                <tag-input-dropdown [autocompleteItems]="item.data"
+                                <tag-input-dropdown [autocompleteItems]="dropdown_filter_requestAutocompleteItems(item.data)"
                                                     [showDropdownIfEmpty]="true"
-                                                    [minimumTextLength]="0"
                                                     [displayBy]="'label'"
                                                     [identifyBy]="'Id'"
                                                     [appendToBody]="false">
-                                    <ng-template let-item="item" let-index="index">
-                                        <div [style.cursor]="!item.enabled && 'not-allowed'">{{item.label}}</div>
+                                    <ng-template let-item="item" let-index="index">{{item.label}}
                                     </ng-template>
                                 </tag-input-dropdown>
                             </tag-input>

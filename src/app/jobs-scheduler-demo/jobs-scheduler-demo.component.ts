@@ -13,6 +13,7 @@ import {
     Inject,
     Input
 } from '@angular/core';
+import { Observable } from 'rxjs';
 
 // Services
 import { HELPERSService } from './HELPERS.service';
@@ -132,7 +133,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Scheduler',
                     value: [],
                     data: [
-                        { Id: '1', enabled: true, selected: false, label: 'Scheduler 1' },
+                        { Id: '1', enabled: false, selected: false, label: 'Scheduler 1' },
                         { Id: '2', enabled: true, selected: false, label: 'Scheduler 2' },
                         { Id: '3', enabled: true, selected: false, label: 'Scheduler 3' },
                     ],
@@ -606,18 +607,16 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         });
     }
 
-    dropdown_filter_clicked(item, option) {
-        if (option.enabled) {
-            // Set 'selected' flag on a single item only
-            item.data.forEach(function (data_item, index) {
-                if (data_item.Id === option.Id) {
-                    data_item.selected = !data_item.selected;
-                    item.value = data_item.selected ? [data_item] : [];
-                }else {
-                    data_item.selected = false;
+    dropdown_filter_requestAutocompleteItems(items) {
+        let data: any = [];
+        if (Array.isArray(items)) {
+            items.forEach(function (data_item, index) {
+                if (data_item.enabled) {
+                    data.push(data_item);
                 }
             });
         }
+        return data;
     }
 
     new_event_dropdown_Job_Type_clicked(item) {
