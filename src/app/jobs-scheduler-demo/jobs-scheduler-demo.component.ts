@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 // angular core
 import {
     Component,
@@ -72,14 +73,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         const demoDATA: any = {
 
             Draggable: {
-                SubContractor: {
+                Employee: {
                     Id: '1',
-                    label: 'SubContractor',
-                    draggable_className: 'fc-event_event-red',
+                    label: 'Employee',
+                    draggable_className: 'fc-event_event-azure',
                     events: [
-                        { title: 'my event 1 SubContractor', duration: '24:00', className: 'fc-event_event-red' },
-                        { title: 'my event 2 SubContractor', duration: '4:00', className: 'fc-event_event-red' },
-                        { title: 'my event 3 SubContractor', duration: '2:00', className: 'fc-event_event-red' },
+                        { title: 'Job 1 Employee', duration: '5:00', className: 'fc-event_event-azure' },
+                        { title: 'Job 2 Employee', duration: '4:00', className: 'fc-event_event-azure' },
+                        { title: 'Job 3 Employee', duration: '2:00', className: 'fc-event_event-azure' },
                     ]
                 },
                 Scheduler: {
@@ -87,29 +88,29 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Scheduler',
                     draggable_className: 'fc-event_event-green',
                     events: [
-                        { title: 'my event 1 Scheduler', duration: '1:00', className: 'fc-event_event-green' },
-                        { title: 'my event 2 Scheduler', duration: '6:00', className: 'fc-event_event-green' },
-                        { title: 'my event 3 Scheduler', duration: '2:00', className: 'fc-event_event-green' },
+                        { title: 'Job 1 Scheduler', duration: '1:00', className: 'fc-event_event-green' },
+                        { title: 'Job 2 Scheduler', duration: '6:00', className: 'fc-event_event-green' },
+                        { title: 'Job 3 Scheduler', duration: '2:00', className: 'fc-event_event-green' },
                     ]
                 },
-                Employee: {
+                SubContractor: {
                     Id: '3',
-                    label: 'Employee',
-                    draggable_className: 'fc-event_event-azure',
+                    label: 'SubContractor',
+                    draggable_className: 'fc-event_event-red',
                     events: [
-                        { title: 'my event 1 Employee', duration: '5:00', className: 'fc-event_event-azure' },
-                        { title: 'my event 2 Employee', duration: '4:00', className: 'fc-event_event-azure' },
-                        { title: 'my event 3 Employee', duration: '2:00', className: 'fc-event_event-azure' },
+                        { title: 'Job 1 SubContractor', duration: '24:00', className: 'fc-event_event-red' },
+                        { title: 'Job 2 SubContractor', duration: '4:00', className: 'fc-event_event-red' },
+                        { title: 'Job 3 SubContractor', duration: '2:00', className: 'fc-event_event-red' },
                     ]
                 },
                 Jobs: {
                     Id: '4',
                     label: 'Jobs (Unscheduled)',
-                    draggable_className: 'fc-event_event-orange',
+                    draggable_className: 'fc-event_event-yellow',
                     events: [
-                        { title: 'my event 1 Jobs', duration: '2:00', className: 'fc-event_event-orange' },
-                        { title: 'my event 2 Jobs', duration: '8:00', className: 'fc-event_event-orange' },
-                        { title: 'my event 3 Jobs', duration: '3:00', className: 'fc-event_event-orange' },
+                        { title: 'Job 1', duration: '2:00', className: 'fc-event_event-yellow' },
+                        { title: 'Job 2', duration: '8:00', className: 'fc-event_event-yellow' },
+                        { title: 'Job 3', duration: '3:00', className: 'fc-event_event-yellow' },
                     ]
                 },
             },
@@ -120,7 +121,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Employees',
                     value: [],
                     data: [
-                        { Id: '1', enabled: false, selected: false, label: 'Ellesha Alvarado' },
+                        { Id: '1', enabled: true, selected: false, label: 'Ellesha Alvarado' },
                         { Id: '2', enabled: true, selected: false, label: 'Jorja Kirby' },
                         { Id: '3', enabled: true, selected: false, label: 'Thomas Barker' },
                         { Id: '4', enabled: true, selected: false, label: 'Rafe Hines' },
@@ -140,17 +141,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 },
                 {
                     Id: '3',
-                    label: 'Fixer',
-                    value: [],
-                    data: [
-                        { Id: '1', enabled: true, selected: false, label: 'Fixer 1' },
-                        { Id: '2', enabled: true, selected: false, label: 'Fixer 2' },
-                        { Id: '3', enabled: true, selected: false, label: 'Fixer 3' },
-                    ],
-                },
-                {
-                    Id: '4',
-                    label: 'Customer',
+                    label: 'SubContractor',
                     value: [],
                     data: [
                         { Id: '1', enabled: true, selected: false, label: 'Accord Homes' },
@@ -176,7 +167,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '5',
+                    Id: '4',
                     label: 'Division',
                     value: [],
                     data: [
@@ -186,7 +177,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '6',
+                    Id: '5',
                     label: 'Branch',
                     value: [],
                     data: [
@@ -198,7 +189,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '7',
+                    Id: '6',
                     label: 'Product',
                     value: [],
                     data: [
@@ -209,7 +200,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '8',
+                    Id: '7',
                     label: 'Stage',
                     value: [],
                     data: [
@@ -219,7 +210,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '9',
+                    Id: '8',
                     label: 'Health',
                     value: [],
                     data: [
@@ -232,77 +223,141 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             fullCalendar_events: [
                 {
                     id: '1',
-                    title: 'All Day Event',
+                    title: 'Ellesha Alvarado',
                     start: new Date(y, m, 1),
                     allDay: true,
-                    className: 'fc-event_event-azure'
+                    className: 'fc-event_event-azure',
+                    editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '1',
+                                label: 'Employees',
+                                value: { Id: '1', label: 'Ellesha Alvarado' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '2',
-                    title: 'Repeating Event',
+                    title: 'Jorja Kirby',
                     start: new Date(y, m, d - 4, 6, 0),
                     allDay: false,
                     className: 'fc-event_event-azure',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '1',
+                                label: 'Employees',
+                                value: { Id: '2', label: 'Jorja Kirby' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '3',
-                    title: 'Repeating Event',
+                    title: 'Thomas Barker',
                     start: new Date(y, m, d + 3, 6, 0),
                     allDay: false,
                     className: 'fc-event_event-azure',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '1',
+                                label: 'Employees',
+                                value: { Id: '3', label: 'Thomas Barker' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '5',
-                    title: 'Meeting',
+                    title: 'Scheduler 2',
                     start: new Date(y, m, d - 1, 10, 30),
                     allDay: false,
                     className: 'fc-event_event-green',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '2',
+                                label: 'Scheduler',
+                                value: { Id: '2', label: 'Scheduler 2' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '6',
-                    title: 'Lunch',
+                    title: 'Rawcorp Pty Ltd',
                     start: new Date(y, m, d + 7, 12, 0),
                     end: new Date(y, m, d + 7, 14, 0),
                     allDay: false,
                     className: 'fc-event_event-red',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '3',
+                                label: 'SubContractor',
+                                value: { Id: '4', label: 'Rawcorp Pty Ltd' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '7',
-                    title: 'Md-pro Launch',
+                    title: 'Rafe Hines',
                     start: new Date(y, m, d - 2, 12, 0),
                     allDay: true,
                     className: 'fc-event_event-azure',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '1',
+                                label: 'Employees',
+                                value: { Id: '4', label: 'Rafe Hines' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '8',
-                    title: 'Birthday Party',
+                    title: 'Wren Haworth',
                     start: new Date(y, m, d + 1, 19, 0),
                     end: new Date(y, m, d + 1, 22, 30),
                     allDay: false,
                     className: 'fc-event_event-azure',
                     editable: true,
+                    extendedProps: {
+                        tags: [
+                            {
+                                Id: '1',
+                                label: 'Employees',
+                                value: { Id: '5', label: 'Wren Haworth' },
+                            },
+                        ]
+                    }
                 },
                 {
                     id: '9',
-                    title: 'Click for Creative Tim',
+                    title: 'Job (Unsheduled)',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
                     allDay: false,
-                    className: 'fc-event_event-orange',
+                    className: 'fc-event_event-yellow',
                     editable: true,
                 },
                 {
                     id: '10',
-                    title: 'Click for Google',
+                    title: 'Job (Unsheduled)',
                     start: new Date(y, m, 21),
                     end: new Date(y, m, 22),
                     allDay: false,
-                    className: 'fc-event_event-orange',
+                    className: 'fc-event_event-yellow',
                     editable: true,
                 }
             ]
@@ -430,8 +485,47 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
             },
 
-            // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
-            events: that.APP['Data'].fullCalendar_events,
+            eventRender: function(info) {
+                // console.log('eventRender', info);
+                // console.log('extendedProps', info.event.extendedProps);
+
+                if (typeof info.event.extendedProps.tags !== 'undefined' && Array.isArray(info.event.extendedProps.tags)) {
+                    let tagged = false, filtered = false, match = false;
+
+                    info.event.extendedProps.tags.forEach(function (tag, index) {
+                        tagged = true; // At least one tag is set
+                        const filters = that.APP['Data'].Dropdown_filters;
+                        for (let f = 0; f < filters.length; f++) {
+                            if (typeof filters[f].value !== 'undefined' && Array.isArray(filters[f].value) && filters[f].value.length) {
+                                filtered = filtered || filters[f].Id === tag.Id;
+                                for (let fv = 0; fv < filters[f].value.length; fv++) {
+                                    if (filters[f].Id === tag.Id && filters[f].value[fv].Id === tag.value.Id) {
+                                        match = true; // Render this event since a filter and a tag match
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    return !tagged || !filtered || match; // Render this event if no filter was set
+
+                } else {
+                    // Render this event since no flags are assigned
+                    return true;
+                }
+
+                // extendedProps: {
+                //     tags: [
+                //         {
+                //             Id: '1',
+                //             label: 'Employees',
+                //             value: { Id: '1', label: 'Ellesha Alvarado' },
+                //         },
+                //     ]
+                // }
+            },
+
+            events: that.APP['Data'].fullCalendar_events, // Onject pre-loaded events
 
         });
         that.calendar.render();
@@ -487,7 +581,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             modal_mode: selectionInfo ? 'scheduler' : 'job',
             modal_title: selectionInfo ? 'New schedule' : 'New Job',
             fullCalendar_view_type: fullCalendar_view_type,
-            title: 'New event title',
+            title: '',
             fromDate: fromDate,
             fromDate_isValid: true,
             toDate: toDate,
@@ -568,7 +662,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     allDay: false,
                     classNames: [this.new_event_modal_data.selected_choices_Job_Type.className],
                     editable: true,
-                    tags: this.my_event_selected_Tag_chips(),
+                    extendedProps: {
+                        tags: this.my_event_selected_Tag_chips(),
+                    },
                 };
                 console.log('fullCalendar new job: ', calendar_event);
 
@@ -587,7 +683,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     editable: true,
                     duration: duration + ':' + (this.new_event_modal_data.start_time.second ? '30' : '00'),
                     duration_num: duration,
-                    tags: this.my_event_selected_Tag_chips(),
+                    extendedProps: {
+                        tags: this.my_event_selected_Tag_chips(),
+                    },
                 };
                 console.log('External new job: ', job);
 
@@ -619,16 +717,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         return data;
     }
 
-    tags_filter_onSelected(item) {
-        console.log('tags_filter_onSelected', item);
-    }
-
     tags_filter_onItemAdded(item) {
-        console.log('tags_filter_onItemAdded', item);
+        // console.log('tags_filter_onItemAdded item =', item);
+        this.calendar.rerenderEvents();
     }
 
     tags_filter_onItemRemoved(item) {
-        console.log('tags_filter_onItemRemoved', item);
+        // console.log('tags_filter_onItemRemoved item = ', item);
+        this.calendar.rerenderEvents();
     }
 
     new_event_dropdown_Job_Type_clicked(item) {
