@@ -49,9 +49,9 @@ declare var $: any; // Support for Jquery
 
 export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    @ViewChild('add_event_modal') public add_event_modal: TemplateRef<any>;
+    @ViewChild('job_modal') public job_modal: TemplateRef<any>;
 
-    new_event_modal_data: any = {};
+    job_modal_data: any = {};
     calendar: any ;
 
 
@@ -78,9 +78,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Employee',
                     draggable_className: 'fc-event_event-azure',
                     events: [
-                        { title: 'Job 1 Employee', duration: '5:00', className: 'fc-event_event-azure' },
-                        { title: 'Job 2 Employee', duration: '4:00', className: 'fc-event_event-azure' },
-                        { title: 'Job 3 Employee', duration: '2:00', className: 'fc-event_event-azure' },
+                        { title: 'Job 1 Employee', className: 'fc-event_event-azure' },
+                        { title: 'Job 2 Employee', className: 'fc-event_event-azure' },
+                        { title: 'Job 3 Employee', className: 'fc-event_event-azure' },
                     ]
                 },
                 Scheduler: {
@@ -88,9 +88,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Scheduler',
                     draggable_className: 'fc-event_event-green',
                     events: [
-                        { title: 'Job 1 Scheduler', duration: '1:00', className: 'fc-event_event-green' },
-                        { title: 'Job 2 Scheduler', duration: '6:00', className: 'fc-event_event-green' },
-                        { title: 'Job 3 Scheduler', duration: '2:00', className: 'fc-event_event-green' },
+                        { title: 'Job 1 Scheduler', className: 'fc-event_event-green' },
+                        { title: 'Job 2 Scheduler', className: 'fc-event_event-green' },
+                        { title: 'Job 3 Scheduler', className: 'fc-event_event-green' },
                     ]
                 },
                 SubContractor: {
@@ -98,9 +98,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'SubContractor',
                     draggable_className: 'fc-event_event-red',
                     events: [
-                        { title: 'Job 1 SubContractor', duration: '24:00', className: 'fc-event_event-red' },
-                        { title: 'Job 2 SubContractor', duration: '4:00', className: 'fc-event_event-red' },
-                        { title: 'Job 3 SubContractor', duration: '2:00', className: 'fc-event_event-red' },
+                        { title: 'Job 1 SubContractor', duration_num: 24, className: 'fc-event_event-red' },
+                        { title: 'Job 2 SubContractor', className: 'fc-event_event-red' },
+                        { title: 'Job 3 SubContractor', className: 'fc-event_event-red' },
                     ]
                 },
                 Jobs: {
@@ -108,16 +108,16 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     label: 'Jobs (Unscheduled)',
                     draggable_className: 'fc-event_event-yellow',
                     events: [
-                        { title: 'Job 1', duration: '2:00', className: 'fc-event_event-yellow' },
-                        { title: 'Job 2', duration: '8:00', className: 'fc-event_event-yellow' },
-                        { title: 'Job 3', duration: '3:00', className: 'fc-event_event-yellow' },
+                        { title: 'Job 1', className: 'fc-event_event-yellow' },
+                        { title: 'Job 2', className: 'fc-event_event-yellow' },
+                        { title: 'Job 3', className: 'fc-event_event-yellow' },
                     ]
                 },
             },
 
             Dropdown_filters: [
                 {
-                    Id: '1',
+                    filter_Id: '1',
                     label: 'Employees',
                     value: [],
                     data: [
@@ -130,7 +130,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '2',
+                    filter_Id: '2',
                     label: 'Scheduler',
                     value: [],
                     data: [
@@ -140,7 +140,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '3',
+                    filter_Id: '3',
                     label: 'SubContractor',
                     value: [],
                     data: [
@@ -167,7 +167,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '4',
+                    filter_Id: '4',
                     label: 'Division',
                     value: [],
                     data: [
@@ -177,7 +177,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '5',
+                    filter_Id: '5',
                     label: 'Branch',
                     value: [],
                     data: [
@@ -189,7 +189,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '6',
+                    filter_Id: '6',
                     label: 'Product',
                     value: [],
                     data: [
@@ -200,7 +200,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '7',
+                    filter_Id: '7',
                     label: 'Stage',
                     value: [],
                     data: [
@@ -210,7 +210,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     ],
                 },
                 {
-                    Id: '8',
+                    filter_Id: '8',
                     label: 'Health',
                     value: [],
                     data: [
@@ -231,7 +231,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '1',
+                                filter_Id: '1',
                                 label: 'Employees',
                                 value: { Id: '1', label: 'Ellesha Alvarado' },
                             },
@@ -248,7 +248,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '1',
+                                filter_Id: '1',
                                 label: 'Employees',
                                 value: { Id: '2', label: 'Jorja Kirby' },
                             },
@@ -265,7 +265,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '1',
+                                filter_Id: '1',
                                 label: 'Employees',
                                 value: { Id: '3', label: 'Thomas Barker' },
                             },
@@ -282,7 +282,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '2',
+                                filter_Id: '2',
                                 label: 'Scheduler',
                                 value: { Id: '2', label: 'Scheduler 2' },
                             },
@@ -300,7 +300,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '3',
+                                filter_Id: '3',
                                 label: 'SubContractor',
                                 value: { Id: '4', label: 'Rawcorp Pty Ltd' },
                             },
@@ -317,7 +317,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '1',
+                                filter_Id: '1',
                                 label: 'Employees',
                                 value: { Id: '4', label: 'Rafe Hines' },
                             },
@@ -335,7 +335,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     extendedProps: {
                         tags: [
                             {
-                                Id: '1',
+                                filter_Id: '1',
                                 label: 'Employees',
                                 value: { Id: '5', label: 'Wren Haworth' },
                             },
@@ -375,8 +375,260 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     }
 
 
+
     object_to_JSON(item) {
         return JSON.stringify(item);
+    }
+
+    view_job(item) {
+
+
+        this.new_job(null, true); // Call the modal in job type and view mode
+    }
+
+    new_job(selectionInfo, view) {
+        const that = this;
+        let fullCalendar_view_type, fromDate, toDate, start_time, end_time;
+
+        if (selectionInfo) {
+            // Internal fullCalendar fired new event
+
+            const start_Y = new Date(selectionInfo.start).getFullYear();
+            const start_M = new Date(selectionInfo.start).getMonth();
+            const start_D = new Date(selectionInfo.start).getDate();
+            const start_H = new Date(selectionInfo.start).getHours();
+            const start_MN = new Date(selectionInfo.start).getMinutes();
+
+            fullCalendar_view_type = selectionInfo.view.type;
+
+            if (fullCalendar_view_type === 'dayGridMonth') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
+                toDate = fromDate;
+                start_time = { hour: 8, minute: 0, second: 0 };
+                end_time = { hour: 9, minute: 0, second: 0 };
+
+            } else if (fullCalendar_view_type === 'timeGridWeek') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
+                toDate = fromDate;
+                start_time = { hour: start_H, minute: start_MN, second: 0 };
+                end_time = { hour: start_H + 1, minute: start_MN, second: 0 };
+
+            } else if (fullCalendar_view_type === 'timeGridDay') {
+                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
+                toDate = fromDate;
+                start_time = { hour: start_H, minute: start_MN, second: 0 };
+                end_time = {hour: start_H + 1, minute: start_MN, second: 0 };
+            }
+
+        } else {
+            // External UI based
+
+            fullCalendar_view_type = null;
+            fromDate = { year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate() };
+            toDate = fromDate;
+            start_time = { hour: 0, minute: 2, second: 0 }; // Mapping in template is { days, hours, minutes }
+            end_time = null;
+        }
+
+        this.job_modal_data = {
+            modal_type: selectionInfo ? 'scheduler' : 'job',
+            modal_mode: view ? 'view' : 'edit',
+            modal_title: selectionInfo ? 'New schedule' : 'New Job',
+            fullCalendar_view_type: fullCalendar_view_type,
+            title: '',
+            fromDate: fromDate,
+            fromDate_isValid: true,
+            toDate: toDate,
+            toDate_isValid: true,
+            start_time: start_time,
+            end_time: end_time,
+
+            choices_Job_Type: [],
+            selected_choices_Job_Type: {
+                label: null,
+                className: 'fc-event_event-red'
+            },
+
+            choices_Tag_Type: [],
+        };
+
+        // Build list of available Job type
+        // tslint:disable-next-line:forin
+        for (const property in this.APP['Data'].Draggable) {
+            this.job_modal_data.choices_Job_Type.push({
+                Prop_Draggable: property,
+                Id: this.APP['Data'].Draggable[property].Id,
+                label: this.APP['Data'].Draggable[property].label,
+                className: this.APP['Data'].Draggable[property].draggable_className
+            });
+        }
+        // console.log('choices_Job_Type = ', this.job_modal_data.choices_Job_Type);
+
+        // Build list of available Tags type
+        // tslint:disable-next-line:forin
+        for (let i = 0; i < this.APP['Data'].Dropdown_filters.length; i++) {
+            this.job_modal_data.choices_Tag_Type.push({
+                filter_Id: this.APP['Data'].Dropdown_filters[i].filter_Id,
+                label: this.APP['Data'].Dropdown_filters[i].label,
+                data: this.APP['Data'].Dropdown_filters[i].data,
+                value: [],
+                selected: false,
+            });
+        }
+        // console.log('choices_Tag_Type = ', this.job_modal_data.choices_Tag_Type);
+
+        // Open Modal
+        const AddEvent_modal = this.modalService.open(this.job_modal, {
+            ariaLabelledBy: 'modal-basic-title',
+            centered: true,
+            scrollable: true,
+            size: 'lg',
+
+        }).result.then((result) => {
+            // console.log('Modal was closed by ' + result);
+            console.log('job_modal_data', this.job_modal_data);
+
+            if (selectionInfo) {
+                // Internal fullCalendar fired new event
+
+                const start = new Date(
+                    this.job_modal_data.fromDate.year,
+                    this.job_modal_data.fromDate.month - 1,
+                    this.job_modal_data.fromDate.day,
+                    this.job_modal_data.start_time.hour,
+                    this.job_modal_data.start_time.minute,
+                    0
+                );
+
+                const end = this.job_modal_data.toDate ? new Date(
+                    (this.job_modal_data.toDate.year),
+                    this.job_modal_data.toDate.month - 1,
+                    this.job_modal_data.toDate.day,
+                    this.job_modal_data.end_time.hour,
+                    this.job_modal_data.end_time.minute,
+                    0) : null;
+
+                const calendar_event = {
+                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                    title: this.job_modal_data.title,
+                    start: start,
+                    end: end,
+                    allDay: false,
+                    classNames: [this.job_modal_data.selected_choices_Job_Type.className],
+                    editable: true,
+                    extendedProps: {
+                        tags: this.my_event_selected_Tag_chips(),
+                    },
+                };
+                console.log('fullCalendar new job: ', calendar_event);
+
+                this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
+
+            } else {
+                // External UI based
+
+                const duration = (this.job_modal_data.start_time.hour * 24) + this.job_modal_data.start_time.minute; // Duration in hours
+
+                const job = {
+                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                    title: this.job_modal_data.title,
+                    allDay: false,
+                    className: this.job_modal_data.selected_choices_Job_Type.className || '',
+                    editable: true,
+                    duration: duration + ':' + (this.job_modal_data.start_time.second ? '30' : '00'),
+                    duration_num: duration,
+                    extendedProps: {
+                        tags: this.my_event_selected_Tag_chips(),
+                    },
+                };
+                console.log('External new job: ', job);
+
+                const Prop_Draggable = this.job_modal_data.selected_choices_Job_Type.Prop_Draggable;
+                this.APP['Data'].Draggable[Prop_Draggable].events.push(job);
+            }
+
+        }, (reason) => {
+            // Modal was dismissed
+            if (reason === ModalDismissReasons.ESC) {
+                // console.log('Dismissed by pressing ESC');
+            } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+                // console.log('Dismissed by clicking on a backdrop');
+            } else {
+                // console.log('Dismissed with: ' + reason);
+            }
+        });
+    }
+
+    tags_filter_requestAutocompleteItems(items) {
+        let data: any = [];
+        if (Array.isArray(items)) {
+            items.forEach(function (data_item, index) {
+                if (data_item.enabled) {
+                    data.push(data_item);
+                }
+            });
+        }
+        return data;
+    }
+
+    tags_filter_onItemAdded(item) {
+        // console.log('tags_filter_onItemAdded item =', item);
+        this.calendar.rerenderEvents();
+    }
+
+    tags_filter_onItemRemoved(item) {
+        // console.log('tags_filter_onItemRemoved item = ', item);
+        this.calendar.rerenderEvents();
+    }
+
+    new_event_dropdown_Job_Type_clicked(item) {
+        // Set 'selected' flag on a single item only
+        this.job_modal_data.choices_Job_Type.forEach(function (data_item, index) {
+            data_item.selected = data_item.Id === item.Id;
+        });
+
+        this.job_modal_data.selected_choices_Job_Type = item
+    }
+
+    my_event_selected_Tag_chips() {
+        let data: any = [];
+        this.job_modal_data.choices_Tag_Type.forEach(function (item, index) {
+            if (item.selected && item.value.length) {
+                data.push({
+                    filter_Id: item.filter_Id,
+                    label: item.label,
+                    value: { Id: item.value[0].Id, label: item.value[0].label },
+                });
+            }
+        });
+        return data;
+    }
+
+    new_event_set_duration(days, hours, minutes) {
+        this.job_modal_data.start_time = { hour: days, minute: hours, second: minutes }; // IMPORTANT: keep mapping as it
+    }
+
+    new_event_set_range(h_start, h_end) {
+        this.job_modal_data.start_time = { hour: h_start, minute: 0, second: 0 };
+        this.job_modal_data.end_time = { hour: h_end, minute: 0, second: 0 };
+    }
+
+    new_event_duration_changed() {
+        // console.log('new event: duration changed');
+    }
+
+    new_event_time_changed() {
+        // console.log('new event: date changed');
+    }
+
+    new_event_form_inValid() {
+        let disabled = false;
+        const d = this.job_modal_data;
+        disabled = disabled || d.title.length < 2;
+        disabled = disabled || d.selected_choices_Job_Type.label === null;
+        disabled = disabled || d.fromDate_isValid !== true;
+        // disabled = disabled || d.toDate_isValid !== true;
+        return disabled;
     }
 
 
@@ -477,7 +729,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             select: function(selectionInfo ) {
                 // console.log('selectionInfo: ', selectionInfo);
 
-                that.new_event(selectionInfo); // Create a new event
+                that.new_job(selectionInfo, false); // Create a new event
             },
 
             eventClick: function( eventClickInfo ) {
@@ -497,9 +749,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         const filters = that.APP['Data'].Dropdown_filters;
                         for (let f = 0; f < filters.length; f++) {
                             if (typeof filters[f].value !== 'undefined' && Array.isArray(filters[f].value) && filters[f].value.length) {
-                                filtered = filtered || filters[f].Id === tag.Id;
+                                filtered = filtered || filters[f].filter_Id === tag.filter_Id;
                                 for (let fv = 0; fv < filters[f].value.length; fv++) {
-                                    if (filters[f].Id === tag.Id && filters[f].value[fv].Id === tag.value.Id) {
+                                    if (filters[f].filter_Id === tag.filter_Id && filters[f].value[fv].Id === tag.value.Id) {
                                         match = true; // Render this event since a filter and a tag match
                                         break;
                                     }
@@ -526,257 +778,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             events: that.APP['Data'].fullCalendar_events, // Onject pre-loaded events
-
         });
         that.calendar.render();
-
     }
-
-
-    new_event(selectionInfo) {
-        const that = this;
-        let fullCalendar_view_type, fromDate, toDate, start_time, end_time;
-
-        if (selectionInfo) {
-            // Internal fullCalendar fired new event
-
-            const start_Y = new Date(selectionInfo.start).getFullYear();
-            const start_M = new Date(selectionInfo.start).getMonth();
-            const start_D = new Date(selectionInfo.start).getDate();
-            const start_H = new Date(selectionInfo.start).getHours();
-            const start_MN = new Date(selectionInfo.start).getMinutes();
-
-            fullCalendar_view_type = selectionInfo.view.type;
-
-            if (fullCalendar_view_type === 'dayGridMonth') {
-                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
-                toDate = fromDate;
-                start_time = { hour: 8, minute: 0, second: 0 };
-                end_time = { hour: 9, minute: 0, second: 0 };
-
-            } else if (fullCalendar_view_type === 'timeGridWeek') {
-                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
-                toDate = fromDate;
-                start_time = { hour: start_H, minute: start_MN, second: 0 };
-                end_time = { hour: start_H + 1, minute: start_MN, second: 0 };
-
-            } else if (fullCalendar_view_type === 'timeGridDay') {
-                fromDate = { year: start_Y, month: start_M + 1, day: start_D };
-                toDate = fromDate;
-                start_time = { hour: start_H, minute: start_MN, second: 0 };
-                end_time = {hour: start_H + 1, minute: start_MN, second: 0 };
-            }
-
-        } else {
-            // External UI based
-
-            fullCalendar_view_type = null;
-            fromDate = { year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate() };
-            toDate = fromDate;
-            start_time = { hour: 0, minute: 2, second: 0 }; // Mapping in template is { days, hours, minutes }
-            end_time = null;
-        }
-
-        this.new_event_modal_data = {
-            modal_mode: selectionInfo ? 'scheduler' : 'job',
-            modal_title: selectionInfo ? 'New schedule' : 'New Job',
-            fullCalendar_view_type: fullCalendar_view_type,
-            title: '',
-            fromDate: fromDate,
-            fromDate_isValid: true,
-            toDate: toDate,
-            toDate_isValid: true,
-            start_time: start_time,
-            end_time: end_time,
-
-            choices_Job_Type: [],
-            selected_choices_Job_Type: {
-                label: null,
-                className: 'fc-event_event-red'
-            },
-
-            choices_Tag_Type: [],
-        };
-
-        // Build list of available Job type
-        // tslint:disable-next-line:forin
-        for (const property in this.APP['Data'].Draggable) {
-            this.new_event_modal_data.choices_Job_Type.push({
-                Prop_Draggable: property,
-                Id: this.APP['Data'].Draggable[property].Id,
-                label: this.APP['Data'].Draggable[property].label,
-                className: this.APP['Data'].Draggable[property].draggable_className
-            });
-        }
-        // console.log('choices_Job_Type = ', this.new_event_modal_data.choices_Job_Type);
-
-        // Build list of available Tags type
-        // tslint:disable-next-line:forin
-        for (let i = 0; i < this.APP['Data'].Dropdown_filters.length; i++) {
-            this.new_event_modal_data.choices_Tag_Type.push({
-                Id: this.APP['Data'].Dropdown_filters[i].Id,
-                label: this.APP['Data'].Dropdown_filters[i].label,
-                data: this.APP['Data'].Dropdown_filters[i].data,
-                value: [],
-                selected: false,
-            });
-        }
-        // console.log('choices_Tag_Type = ', this.new_event_modal_data.choices_Tag_Type);
-
-        // Open Modal
-        const AddEvent_modal = this.modalService.open(this.add_event_modal, {
-            ariaLabelledBy: 'modal-basic-title',
-            centered: true,
-            scrollable: true,
-            size: 'lg',
-
-        }).result.then((result) => {
-            // console.log('Modal was closed by ' + result);
-            console.log('new_event_modal_data', this.new_event_modal_data);
-
-            if (selectionInfo) {
-                // Internal fullCalendar fired new event
-
-                const start = new Date(
-                    this.new_event_modal_data.fromDate.year,
-                    this.new_event_modal_data.fromDate.month - 1,
-                    this.new_event_modal_data.fromDate.day,
-                    this.new_event_modal_data.start_time.hour,
-                    this.new_event_modal_data.start_time.minute,
-                    0
-                );
-
-                const end = this.new_event_modal_data.toDate ? new Date(
-                    (this.new_event_modal_data.toDate.year),
-                    this.new_event_modal_data.toDate.month - 1,
-                    this.new_event_modal_data.toDate.day,
-                    this.new_event_modal_data.end_time.hour,
-                    this.new_event_modal_data.end_time.minute,
-                    0) : null;
-
-                const calendar_event = {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: this.new_event_modal_data.title,
-                    start: start,
-                    end: end,
-                    allDay: false,
-                    classNames: [this.new_event_modal_data.selected_choices_Job_Type.className],
-                    editable: true,
-                    extendedProps: {
-                        tags: this.my_event_selected_Tag_chips(),
-                    },
-                };
-                console.log('fullCalendar new job: ', calendar_event);
-
-                this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
-
-            } else {
-                // External UI based
-
-                const duration = (this.new_event_modal_data.start_time.hour * 24) + this.new_event_modal_data.start_time.minute; // Duration in hours
-
-                const job = {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: this.new_event_modal_data.title,
-                    allDay: false,
-                    className: this.new_event_modal_data.selected_choices_Job_Type.className || '',
-                    editable: true,
-                    duration: duration + ':' + (this.new_event_modal_data.start_time.second ? '30' : '00'),
-                    duration_num: duration,
-                    extendedProps: {
-                        tags: this.my_event_selected_Tag_chips(),
-                    },
-                };
-                console.log('External new job: ', job);
-
-                const Prop_Draggable = this.new_event_modal_data.selected_choices_Job_Type.Prop_Draggable;
-                this.APP['Data'].Draggable[Prop_Draggable].events.push(job);
-            }
-
-        }, (reason) => {
-            // Modal was dismissed
-            if (reason === ModalDismissReasons.ESC) {
-                // console.log('Dismissed by pressing ESC');
-            } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-                // console.log('Dismissed by clicking on a backdrop');
-            } else {
-                // console.log('Dismissed with: ' + reason);
-            }
-        });
-    }
-
-    tags_filter_requestAutocompleteItems(items) {
-        let data: any = [];
-        if (Array.isArray(items)) {
-            items.forEach(function (data_item, index) {
-                if (data_item.enabled) {
-                    data.push(data_item);
-                }
-            });
-        }
-        return data;
-    }
-
-    tags_filter_onItemAdded(item) {
-        // console.log('tags_filter_onItemAdded item =', item);
-        this.calendar.rerenderEvents();
-    }
-
-    tags_filter_onItemRemoved(item) {
-        // console.log('tags_filter_onItemRemoved item = ', item);
-        this.calendar.rerenderEvents();
-    }
-
-    new_event_dropdown_Job_Type_clicked(item) {
-        // Set 'selected' flag on a single item only
-        this.new_event_modal_data.choices_Job_Type.forEach(function (data_item, index) {
-            data_item.selected = data_item.Id === item.Id;
-        });
-
-        this.new_event_modal_data.selected_choices_Job_Type = item
-    }
-
-    my_event_selected_Tag_chips() {
-        let data: any = [];
-        this.new_event_modal_data.choices_Tag_Type.forEach(function (item, index) {
-            if (item.selected && item.value.length) {
-                data.push({
-                    Id: item.Id,
-                    label: item.label,
-                    value: { Id: item.value[0].Id, label: item.value[0].label },
-                });
-            }
-        });
-        return data;
-    }
-
-    new_event_set_duration(days, hours, minutes) {
-        this.new_event_modal_data.start_time = { hour: days, minute: hours, second: minutes }; // IMPORTANT: keep mapping as it
-    }
-
-    new_event_set_range(h_start, h_end) {
-        this.new_event_modal_data.start_time = { hour: h_start, minute: 0, second: 0 };
-        this.new_event_modal_data.end_time = { hour: h_end, minute: 0, second: 0 };
-    }
-
-    new_event_duration_changed() {
-        // console.log('new event: duration changed');
-    }
-
-    new_event_time_changed() {
-        // console.log('new event: date changed');
-    }
-
-    new_event_form_inValid() {
-        let disabled = false;
-        const d = this.new_event_modal_data;
-        disabled = disabled || d.title.length < 2;
-        disabled = disabled || d.selected_choices_Job_Type.label === null;
-        disabled = disabled || d.fromDate_isValid !== true;
-        // disabled = disabled || d.toDate_isValid !== true;
-        return disabled;
-    }
-
 
     ngOnInit() {
 
