@@ -383,10 +383,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     view_job(item) {
 
 
-        this.new_job(null, true); // Call the modal in job type and view mode
     }
 
-    new_job(selectionInfo, view) {
+    new_job(mode, selectionInfo) {
         const that = this;
         let fullCalendar_view_type, fromDate, toDate, start_time, end_time;
 
@@ -431,9 +430,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         }
 
         this.job_modal_data = {
+            modal_mode: mode,
             modal_type: selectionInfo ? 'scheduler' : 'job',
-            modal_mode: view ? 'view' : 'edit',
-            modal_title: selectionInfo ? 'New schedule' : 'New Job',
             fullCalendar_view_type: fullCalendar_view_type,
             title: '',
             fromDate: fromDate,
@@ -727,13 +725,13 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function(selectionInfo ) {
-                // console.log('selectionInfo: ', selectionInfo);
+                console.log('selectionInfo:', selectionInfo);
 
-                that.new_job(selectionInfo, false); // Create a new event
+                that.new_job( 'new', selectionInfo); // Create a new event
             },
 
             eventClick: function( eventClickInfo ) {
-                console.log('eventClickInfo: ', eventClickInfo);
+                console.log('eventClickInfo:', eventClickInfo);
 
             },
 

@@ -150,237 +150,214 @@
 
 <ng-template #job_modal let-modal>
 
-    <ng-template [ngIf]="job_modal_data.modal_mode !='view'" [ngIfElse]="view_mode"></ng-template>
-    <ng-template [ngIf]="job_modal_data.modal_mode !='edit'" [ngIfElse]="edit_mode"></ng-template>
+    <div class="modal-header">
+        <h4 class="modal-title"><b>{{job_modal_data.modal_type == 'job' ? 'New Job card' : 'New Job schedule'}}</b></h4>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 px-0">
 
-    <!-- View mode -->
-    <ng-template #view_mode>
-
-        <div class="modal-header">
-            <h4 class="modal-title"><b>Job card</b></h4>
-        </div>
-        <div class="modal-body">
-            <div class="col-md-12 px-0">
-
-
+            <!-- Title -->
+            <div class="form-group">
+                <div class="font-weight-bold"><span class="text-danger">* </span>Job title</div>
+                <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="job_modal_data.title">
             </div>
-        </div>
 
-    </ng-template><!-- #View mode -->
+            <div class="row">
+                <div class="col-md-3 pr-sm-0">
 
-
-    <!-- Edit mode -->
-    <ng-template #edit_mode>
-
-        <div class="modal-header">
-            <h4 class="modal-title"><b>{{job_modal_data.modal_title}}</b></h4>
-        </div>
-        <div class="modal-body">
-            <div class="col-md-12 px-0">
-
-                <!-- Title -->
-                <div class="form-group">
-                    <div class="font-weight-bold">Job title</div>
-                    <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="job_modal_data.title">
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3 pr-sm-0">
-
-                        <!-- Dropdown Job Type (single select) -->
-                        <form class="form-inline">
-                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                                 ngbDropdown [placement]="'bottom-left'" autoClose="both">
-                                <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
-                                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
-                                    <ng-container *ngFor="let item of job_modal_data.choices_Job_Type">
-                                        <div ngbDropdownItem
-                                             [ngClass]="item.selected && 'checked'"
-                                             (click)="new_event_dropdown_Job_Type_clicked(item)">{{item.label}}
-                                        </div>
-                                    </ng-container>
-                                </div>
+                    <!-- Dropdown Job Type (single select) -->
+                    <form class="form-inline">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                             ngbDropdown [placement]="'bottom-left'" autoClose="both">
+                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
+                            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
+                                <ng-container *ngFor="let item of job_modal_data.choices_Job_Type">
+                                    <div ngbDropdownItem
+                                         [ngClass]="item.selected && 'checked'"
+                                         (click)="new_event_dropdown_Job_Type_clicked(item)">{{item.label}}
+                                    </div>
+                                </ng-container>
                             </div>
-                        </form>
-
-                        <!-- Selected Job Type -->
-                        <div class="ml-1 p-sm-1 fc-event"
-                             *ngIf="job_modal_data.selected_choices_Job_Type.label"
-                             [ngClass]="[job_modal_data.selected_choices_Job_Type.className]">{{job_modal_data.selected_choices_Job_Type.label}}
                         </div>
-                    </div>
+                    </form>
 
-                    <div class="col-md-2 px-0">
-
-                        <!-- Dropdown Tags (multi-select) -->
-                        <form class="form-inline">
-                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                                 ngbDropdown [placement]="'bottom-left'" autoClose="outside">
-                                <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
-                                <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
-                                    <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
-                                        <div ngbDropdownItem
-                                              [ngClass]="item.selected && 'checked'"
-                                              (click)="item.selected = !item.selected">{{item.label}}
-                                        </div>
-                                    </ng-container>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-md-7 px-0">
-
-                        <!-- Tag chips inputs -->
-                        <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
-                            <span *ngIf="item.selected" class="d-inline-flex">
-                                <tag-input theme="bootstrap-info"
-                                           [(ngModel)]="item.value"
-                                           [maxItems]="1"
-                                           [removable]="true"
-                                           [onlyFromAutocomplete]="true"
-                                           [displayBy]="'label'"
-                                           [identifyBy]="'filter_Id'"
-                                           [secondaryPlaceholder]="item.label + ' ?'">
-                                    <tag-input-dropdown [autocompleteItems]="tags_filter_requestAutocompleteItems(item.data)"
-                                                        [showDropdownIfEmpty]="true"
-                                                        [displayBy]="'label'"
-                                                        [identifyBy]="'Id'"
-                                                        [appendToBody]="false">
-                                        <ng-template let-item="item" let-index="index">{{item.label}}
-                                        </ng-template>
-                                    </tag-input-dropdown>
-                                </tag-input>
-                            </span>
-                        </ng-container>
+                    <!-- Selected Job Type -->
+                    <div class="ml-1 p-sm-1 fc-event"
+                         *ngIf="job_modal_data.selected_choices_Job_Type.label"
+                         [ngClass]="[job_modal_data.selected_choices_Job_Type.className]">{{job_modal_data.selected_choices_Job_Type.label}}
                     </div>
                 </div>
 
-    <!--            <pre>Selected Tags: {{my_event_selected_Tag_chips() | json}}</pre>-->
+                <div class="col-md-2 px-0">
 
-                <ng-template [ngIf]="job_modal_data.modal_type !='scheduler'" [ngIfElse]="scheduler_edit_mode"></ng-template>
-                <ng-template [ngIf]="job_modal_data.modal_type !='job'" [ngIfElse]="job_edit_mode"></ng-template>
-
-                <!-- Job edit mode -->
-                <ng-template #job_edit_mode>
-                    <hr>
-
-                    <!-- Time range picker -->
-                    <div class="d-flex flex-row justify-content-start">
-                        <div class="mr-5">
-                            <div class="font-weight-bold mt-1">Duration</div>
-                            <div class="mt-2">
-                                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                                   (click)="new_event_set_duration(00, 24, 0)">Set all day
-                                </a>
+                    <!-- Dropdown Tags (multi-select) -->
+                    <form class="form-inline">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                             ngbDropdown [placement]="'bottom-left'" autoClose="outside">
+                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
+                            <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
+                                <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
+                                    <div ngbDropdownItem
+                                          [ngClass]="item.selected && 'checked'"
+                                          (click)="item.selected = !item.selected">{{item.label}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
+                    </form>
+                </div>
 
-                        <div>
-                            <div class="d-flex flex-row justify-content-around">
-                                <div>&nbsp;&nbsp;<small>Days</small>&nbsp;&nbsp;</div>
-                                <div>&nbsp;<small>Hours</small>&nbsp;</div>
-                                <div><small>Minutes</small></div>
-                            </div>
-                            <div style="margin-top: -10px">
-                                <ngb-timepicker
-                                        [(ngModel)]="job_modal_data.start_time"
-                                        (ngModelChange)="new_event_time_changed()"
-                                        [spinners]="true"
-                                        [meridian]="false"
-                                        [seconds]="true"
-                                        [secondStep]="30"
-                                        [size]="'small'">
-                                </ngb-timepicker>
-                            </div>
-                        </div>
+                <div class="col-md-7 px-0">
 
-                    </div>
-                </ng-template><!-- #Job edit mode -->
-
-
-                <!-- Scheduler edit mode -->
-                <ng-template #scheduler_edit_mode>
-
-                    <!-- Date range picker -->
-                    <ng-container *ngIf="job_modal_data.fullCalendar_view_type != 'timeGridDay'">
-                        <form class="form-inline">
-                            <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
-                            <datepicker-range-popup
-                                    [(fromDate)]="job_modal_data.fromDate"
-                                    [(fromDate_isValid)]="job_modal_data.fromDate_isValid"
-                                    [(toDate)]="job_modal_data.toDate"
-                                    [(toDate_isValid)]="job_modal_data.toDate_isValid"
-                                    [labelEnabled]="true"
-                                    [placement]="'Top'">
-                            </datepicker-range-popup>
-                        </form>
+                    <!-- Tag chips inputs -->
+                    <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
+                        <span *ngIf="item.selected" class="d-inline-flex">
+                            <tag-input theme="bootstrap-info"
+                                       [(ngModel)]="item.value"
+                                       [maxItems]="1"
+                                       [removable]="true"
+                                       [onlyFromAutocomplete]="true"
+                                       [displayBy]="'label'"
+                                       [identifyBy]="'filter_Id'"
+                                       [secondaryPlaceholder]="item.label + ' ?'">
+                                <tag-input-dropdown [autocompleteItems]="tags_filter_requestAutocompleteItems(item.data)"
+                                                    [showDropdownIfEmpty]="true"
+                                                    [displayBy]="'label'"
+                                                    [identifyBy]="'Id'"
+                                                    [appendToBody]="false">
+                                    <ng-template let-item="item" let-index="index">{{item.label}}
+                                    </ng-template>
+                                </tag-input-dropdown>
+                            </tag-input>
+                        </span>
                     </ng-container>
+                </div>
+            </div>
 
-                    <hr>
+<!--            <pre>Selected Tags: {{my_event_selected_Tag_chips() | json}}</pre>-->
 
-                    <!-- Time range picker -->
-                    <div class="d-flex flex-row justify-content-between">
-                        <div>
-                            <div class="font-weight-bold">Time range</div>
-                            <div style="margin-top: 1em;">
-                                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                                   (click)="new_event_set_range(8, 6)">Set 8am to 6pm
-                                </a>
-                            </div>
-                            <div style="position: absolute; bottom: 0;">
-                                <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
-                                   (click)="new_event_set_range(0, 24)">Set all day
-                                </a>
-                            </div>
-                        </div>
+            <ng-template [ngIf]="job_modal_data.modal_type !='scheduler'" [ngIfElse]="scheduler_edit_mode"></ng-template>
+            <ng-template [ngIf]="job_modal_data.modal_type !='job'" [ngIfElse]="job_edit_mode"></ng-template>
 
-                        <!-- Override AM/PM buttons styling for the <ngb-timepicker> component -->
-                        <style>
-                            #add_event_modal .ngb-tp-meridian button[type=button] {
-                                font-size: 0.8571em;
-                                padding: 5px 15px;
-                                text-decoration: none;
-                                color: inherit;
-                                background: transparent;
-                                border: 2px solid #51cbce !important;
-                                opacity: 1;
-                                border-radius: 30px;
-                            }
-                        </style>
+            <!-- Job edit mode -->
+            <ng-template #job_edit_mode>
+                <hr>
 
-                        <div>
-                            <div class="text-center"><small>Start</small></div>
-                            <div style="margin-top: -10px">
-                                <ngb-timepicker
-                                        [(ngModel)]="job_modal_data.start_time"
-                                        (ngModelChange)="new_event_duration_changed()"
-                                        [spinners]="true"
-                                        [meridian]="true"
-                                        [minuteStep]="30"
-                                        [size]="'small'">
-                                </ngb-timepicker>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="text-center"><small>End</small></div>
-                            <div style="margin-top: -10px">
-                                <ngb-timepicker
-                                        [(ngModel)]="job_modal_data.end_time"
-                                        (ngModelChange)="new_event_time_changed()"
-                                        [meridian]="true"
-                                        [minuteStep]="30"
-                                        [size]="'small'">
-                                </ngb-timepicker>
-                            </div>
+                <!-- Time range picker -->
+                <div class="d-flex flex-row justify-content-start">
+                    <div class="mr-5">
+                        <div class="font-weight-bold mt-1">Duration</div>
+                        <div class="mt-2">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_duration(00, 24, 0)">Set all day
+                            </a>
                         </div>
                     </div>
-                </ng-template><!-- #Scheduler edit mode -->
 
-            </div>
+                    <div>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div>&nbsp;&nbsp;<small>Days</small>&nbsp;&nbsp;</div>
+                            <div>&nbsp;<small>Hours</small>&nbsp;</div>
+                            <div><small>Minutes</small></div>
+                        </div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="job_modal_data.start_time"
+                                    (ngModelChange)="new_event_time_changed()"
+                                    [spinners]="true"
+                                    [meridian]="false"
+                                    [seconds]="true"
+                                    [secondStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template><!-- #Job edit mode -->
+
+
+            <!-- Scheduler edit mode -->
+            <ng-template #scheduler_edit_mode>
+
+                <!-- Date range picker -->
+                <ng-container *ngIf="job_modal_data.fullCalendar_view_type != 'timeGridDay'">
+                    <form class="form-inline">
+                        <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
+                        <datepicker-range-popup
+                                [(fromDate)]="job_modal_data.fromDate"
+                                [(fromDate_isValid)]="job_modal_data.fromDate_isValid"
+                                [(toDate)]="job_modal_data.toDate"
+                                [(toDate_isValid)]="job_modal_data.toDate_isValid"
+                                [labelEnabled]="true"
+                                [placement]="'Top'">
+                        </datepicker-range-popup>
+                    </form>
+                </ng-container>
+
+                <hr>
+
+                <!-- Time range picker -->
+                <div class="d-flex flex-row justify-content-between">
+                    <div>
+                        <div class="font-weight-bold">Time range</div>
+                        <div style="margin-top: 1em;">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_range(8, 6)">Set 8am to 6pm
+                            </a>
+                        </div>
+                        <div style="position: absolute; bottom: 0;">
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round"
+                               (click)="new_event_set_range(0, 24)">Set all day
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Override AM/PM buttons styling for the <ngb-timepicker> component -->
+                    <style>
+                        #add_event_modal .ngb-tp-meridian button[type=button] {
+                            font-size: 0.8571em;
+                            padding: 5px 15px;
+                            text-decoration: none;
+                            color: inherit;
+                            background: transparent;
+                            border: 2px solid #51cbce !important;
+                            opacity: 1;
+                            border-radius: 30px;
+                        }
+                    </style>
+
+                    <div>
+                        <div class="text-center"><small>Start</small></div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="job_modal_data.start_time"
+                                    (ngModelChange)="new_event_duration_changed()"
+                                    [spinners]="true"
+                                    [meridian]="true"
+                                    [minuteStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-center"><small>End</small></div>
+                        <div style="margin-top: -10px">
+                            <ngb-timepicker
+                                    [(ngModel)]="job_modal_data.end_time"
+                                    (ngModelChange)="new_event_time_changed()"
+                                    [meridian]="true"
+                                    [minuteStep]="30"
+                                    [size]="'small'">
+                            </ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </ng-template><!-- #Scheduler edit mode -->
+
         </div>
-    </ng-template><!-- #Edit mode -->
+    </div>
 
     <div class="modal-footer">
         <div class="col-md-12 text-center">
