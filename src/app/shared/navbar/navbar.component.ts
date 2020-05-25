@@ -42,6 +42,7 @@ export class NavbarComponent implements OnInit{
         if (body.classList.contains('sidebar-mini')) {
             misc.sidebar_mini_active = true;
         }
+       this.minimizeSidebar();
         this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
           const $layer = document.getElementsByClassName('close-layer')[0];
           if ($layer) {

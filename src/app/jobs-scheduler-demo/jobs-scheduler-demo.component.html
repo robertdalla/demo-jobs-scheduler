@@ -28,8 +28,7 @@
                                                     [displayBy]="'label'"
                                                     [identifyBy]="'Id'"
                                                     [appendToBody]="true">
-                                    <ng-template let-item="item" let-index="index">{{item.label}}
-                                    </ng-template>
+                                    <ng-template let-item="item">{{item.label}}</ng-template>
                                 </tag-input-dropdown>
                             </tag-input>
                             </div>
@@ -58,7 +57,7 @@
                     <!-- New Job -->
                     <div class="text-center">
                         <a ngbButton class="btn btn-sm btn-outline-primary btn-round w-100"
-                           (click)="new_job(null, false)">New job
+                           (click)="jobForm_modal('new', 'job', null)">New job
                         </a>
                     </div>
 
@@ -74,8 +73,15 @@
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.Employee.events"
                                      [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     (click)="view_job(item)"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
+                                     [attr.data-event]="object_to_JSON(item)"
+
+                                     [ngbPopover]="job_pop_Content"
+                                     popoverTitle=""
+                                     popoverClass="jobCard_pop"
+                                     placement="right-bottom"
+                                     triggers="manual"
+                                     #p="ngbPopover"
+                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Employee)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -90,8 +96,15 @@
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events"
                                      [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     (click)="view_job(null)"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
+                                     [attr.data-event]="object_to_JSON(item)"
+
+                                     [ngbPopover]="job_pop_Content"
+                                     popoverTitle=""
+                                     popoverClass="jobCard_pop"
+                                     placement="right-bottom"
+                                     triggers="manual"
+                                     #p="ngbPopover"
+                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Scheduler)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -106,8 +119,15 @@
                                 <div class="event-draggable noUi-target mb-1"
                                      *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events"
                                      [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     (click)="view_job(null)"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
+                                     [attr.data-event]="object_to_JSON(item)"
+
+                                     [ngbPopover]="job_pop_Content"
+                                     popoverTitle=""
+                                     popoverClass="jobCard_pop"
+                                     placement="right-bottom"
+                                     triggers="manual"
+                                     #p="ngbPopover"
+                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.SubContractor)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -119,11 +139,18 @@
                                 </a>
                             </div>
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <div class="event-draggable noUi-target mb-1"
+                                <div class="event-draggable noUi-target mb-1" lettoto="this.APP['Data'].Draggable.Jobs"
                                      *ngFor="let item of this.APP['Data'].Draggable.Jobs.events"
                                      [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     (click)="view_job(null)"
-                                     [attr.data-event]="object_to_JSON(item)">{{item.title}}
+                                     [attr.data-event]="object_to_JSON(item)"
+
+                                     [ngbPopover]="job_pop_Content"
+                                     popoverTitle=""
+                                     popoverClass="jobCard_pop"
+                                     placement="right-bottom"
+                                     triggers="manual"
+                                     #p="ngbPopover"
+                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Jobs)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -148,10 +175,37 @@
 </div>
 
 
+<ng-template #job_pop_Content let-item="item" let-draggable="draggable">
+    <div class="card">
+        <div class="card-body">
+
+            <div style="position: absolute; right: 0; top: 0;">
+                <button type="button" rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
+                    <i class="nc-icon nc-simple-remove" (click)="jobCard_pop_delete(draggable, item)"></i>
+                </button>
+                <button type="button" rel="tooltip" title="Update Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
+                    <i class="nc-icon nc-ruler-pencil" (click)="jobCard_pop_edit(draggable, item)"></i>
+                </button>
+            </div>
+
+            <h6 class="card-subtitle text-muted">Title :</h6>
+            <p>{{item.title}}</p>
+
+            <h6 class="card-subtitle text-muted">Duration :</h6>
+            <p>{{item.duration}} h</p>
+
+            <h6 class="card-subtitle text-muted">Tags :</h6>
+            <p class="mb-0" *ngFor="let tag of item.extendedProps.tags">{{tag.label}} | {{tag.value.label}}</p>
+
+        </div>
+    </div>
+</ng-template>
+
+
 <ng-template #job_modal let-modal>
 
     <div class="modal-header">
-        <h4 class="modal-title"><b>{{job_modal_data.modal_type == 'job' ? 'New Job card' : 'New Job schedule'}}</b></h4>
+        <h4 class="modal-title"><b>{{jobForm_data_modal.modal_mode == 'new' ? 'New ' : 'Update '}}{{jobForm_data_modal.modal_type == 'job' ? 'Job card' : 'Job schedule'}}</b></h4>
     </div>
     <div class="modal-body">
         <div class="col-md-12 px-0">
@@ -159,33 +213,39 @@
             <!-- Title -->
             <div class="form-group">
                 <div class="font-weight-bold"><span class="text-danger">* </span>Job title</div>
-                <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="job_modal_data.title">
+                <input class="form-control" type="text" placeholder="Enter a title" [(ngModel)]="jobForm_data_modal.title">
             </div>
 
             <div class="row">
-                <div class="col-md-3 pr-sm-0">
+                <div class="col-md-3 pr-2">
 
-                    <!-- Dropdown Job Type (single select) -->
-                    <form class="form-inline">
-                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
-                             ngbDropdown [placement]="'bottom-left'" autoClose="both">
-                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
-                            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
-                                <ng-container *ngFor="let item of job_modal_data.choices_Job_Type">
-                                    <div ngbDropdownItem
-                                         [ngClass]="item.selected && 'checked'"
-                                         (click)="new_event_dropdown_Job_Type_clicked(item)">{{item.label}}
-                                    </div>
-                                </ng-container>
+                    <ng-container [ngSwitch]="jobForm_data_modal.modal_mode">
+                        <!-- Dropdown Job Type (single select) -->
+                        <form *ngSwitchCase="'new'" class="form-inline">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
+                                 ngbDropdown [placement]="'bottom-left'" autoClose="both">
+                                <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
+                                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
+                                    <ng-container *ngFor="let item of jobForm_data_modal.choices_Job_Type">
+                                        <div ngbDropdownItem
+                                             [ngClass]="item.selected && 'checked'"
+                                             (click)="new_event_dropdown_Job_Type_clicked(item)">{{item.label}}
+                                        </div>
+                                    </ng-container>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
-                    <!-- Selected Job Type -->
-                    <div class="ml-1 p-sm-1 fc-event"
-                         *ngIf="job_modal_data.selected_choices_Job_Type.label"
-                         [ngClass]="[job_modal_data.selected_choices_Job_Type.className]">{{job_modal_data.selected_choices_Job_Type.label}}
-                    </div>
+                        <form *ngSwitchCase="'update'" class="form-inline">
+                            <div class="font-weight-bold pb-1">Job type</div>
+                        </form>
+
+                        <!-- Selected Job Type -->
+                        <div class="p-sm-1 fc-event"
+                             *ngIf="jobForm_data_modal.Job_Type_selected"
+                             [ngClass]="[jobForm_data_modal.Job_Type_selected.className]">{{jobForm_data_modal.Job_Type_selected.label}}
+                        </div>
+                    </ng-container >
                 </div>
 
                 <div class="col-md-2 px-0">
@@ -196,7 +256,7 @@
                              ngbDropdown [placement]="'bottom-left'" autoClose="outside">
                             <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
                             <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
-                                <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
+                                <ng-container *ngFor="let item of jobForm_data_modal.choices_Tag_Type">
                                     <div ngbDropdownItem
                                           [ngClass]="item.selected && 'checked'"
                                           (click)="item.selected = !item.selected">{{item.label}}
@@ -210,7 +270,7 @@
                 <div class="col-md-7 px-0">
 
                     <!-- Tag chips inputs -->
-                    <ng-container *ngFor="let item of job_modal_data.choices_Tag_Type">
+                    <ng-container *ngFor="let item of jobForm_data_modal.choices_Tag_Type">
                         <span *ngIf="item.selected" class="d-inline-flex">
                             <tag-input theme="bootstrap-info"
                                        [(ngModel)]="item.value"
@@ -225,8 +285,7 @@
                                                     [displayBy]="'label'"
                                                     [identifyBy]="'Id'"
                                                     [appendToBody]="false">
-                                    <ng-template let-item="item" let-index="index">{{item.label}}
-                                    </ng-template>
+                                    <ng-template let-item="item">{{item.label}}</ng-template>
                                 </tag-input-dropdown>
                             </tag-input>
                         </span>
@@ -236,8 +295,8 @@
 
 <!--            <pre>Selected Tags: {{my_event_selected_Tag_chips() | json}}</pre>-->
 
-            <ng-template [ngIf]="job_modal_data.modal_type !='scheduler'" [ngIfElse]="scheduler_edit_mode"></ng-template>
-            <ng-template [ngIf]="job_modal_data.modal_type !='job'" [ngIfElse]="job_edit_mode"></ng-template>
+            <ng-template [ngIf]="jobForm_data_modal.modal_type !='scheduler'" [ngIfElse]="scheduler_edit_mode"></ng-template>
+            <ng-template [ngIf]="jobForm_data_modal.modal_type !='job'" [ngIfElse]="job_edit_mode"></ng-template>
 
             <!-- Job edit mode -->
             <ng-template #job_edit_mode>
@@ -262,7 +321,7 @@
                         </div>
                         <div style="margin-top: -10px">
                             <ngb-timepicker
-                                    [(ngModel)]="job_modal_data.start_time"
+                                    [(ngModel)]="jobForm_data_modal.start_time"
                                     (ngModelChange)="new_event_time_changed()"
                                     [spinners]="true"
                                     [meridian]="false"
@@ -281,14 +340,14 @@
             <ng-template #scheduler_edit_mode>
 
                 <!-- Date range picker -->
-                <ng-container *ngIf="job_modal_data.fullCalendar_view_type != 'timeGridDay'">
+                <ng-container *ngIf="jobForm_data_modal.fullCalendar_view_type != 'timeGridDay'">
                     <form class="form-inline">
                         <div class="font-weight-bold mr-4" style="padding-top: 10px;">Date range</div>
                         <datepicker-range-popup
-                                [(fromDate)]="job_modal_data.fromDate"
-                                [(fromDate_isValid)]="job_modal_data.fromDate_isValid"
-                                [(toDate)]="job_modal_data.toDate"
-                                [(toDate_isValid)]="job_modal_data.toDate_isValid"
+                                [(fromDate)]="jobForm_data_modal.fromDate"
+                                [(fromDate_isValid)]="jobForm_data_modal.fromDate_isValid"
+                                [(toDate)]="jobForm_data_modal.toDate"
+                                [(toDate_isValid)]="jobForm_data_modal.toDate_isValid"
                                 [labelEnabled]="true"
                                 [placement]="'Top'">
                         </datepicker-range-popup>
@@ -331,7 +390,7 @@
                         <div class="text-center"><small>Start</small></div>
                         <div style="margin-top: -10px">
                             <ngb-timepicker
-                                    [(ngModel)]="job_modal_data.start_time"
+                                    [(ngModel)]="jobForm_data_modal.start_time"
                                     (ngModelChange)="new_event_duration_changed()"
                                     [spinners]="true"
                                     [meridian]="true"
@@ -345,7 +404,7 @@
                         <div class="text-center"><small>End</small></div>
                         <div style="margin-top: -10px">
                             <ngb-timepicker
-                                    [(ngModel)]="job_modal_data.end_time"
+                                    [(ngModel)]="jobForm_data_modal.end_time"
                                     (ngModelChange)="new_event_time_changed()"
                                     [meridian]="true"
                                     [minuteStep]="30"
@@ -370,15 +429,15 @@
 
 
 <!-- For testing only: Display JSON content -->
-<!--            <pre>new_event: {{job_modal_data | json}}</pre>-->
+<!--            <pre>new_event: {{jobForm_data_modal | json}}</pre>-->
 
 
 <!--                <div>-->
 <!--                    <div class="form-check-radio">-->
 <!--                        <label class="form-check-label">-->
 <!--                            <input class="form-check-input" type="radio"-->
-<!--                                   [(ngModel)]="job_modal_data.all_day"-->
-<!--                                   [checked]="!job_modal_data.all_day"-->
+<!--                                   [(ngModel)]="jobForm_data_modal.all_day"-->
+<!--                                   [checked]="!jobForm_data_modal.all_day"-->
 <!--                                   [value]="false"-->
 <!--                                   (ngModelChange)="new_event_set_all_day()"> Time range-->
 <!--                            <span class="form-check-sign"></span>-->
@@ -387,8 +446,8 @@
 <!--                    <div class="form-check-radio">-->
 <!--                        <label class="form-check-label">-->
 <!--                            <input class="form-check-input" type="radio"-->
-<!--                                   [(ngModel)]="job_modal_data.all_day"-->
-<!--                                   [checked]="job_modal_data.all_day"-->
+<!--                                   [(ngModel)]="jobForm_data_modal.all_day"-->
+<!--                                   [checked]="jobForm_data_modal.all_day"-->
 <!--                                   [value]="true"-->
 <!--                                   (ngModelChange)="new_event_set_all_day()"> All day-->
 <!--                            <span class="form-check-sign"></span>-->
@@ -398,7 +457,7 @@
 
 
 <!--            <ng-select-->
-<!--                    [items]="job_modal_data.choices_Tag_Type"-->
+<!--                    [items]="jobForm_data_modal.choices_Tag_Type"-->
 <!--                    [multiple]="true"-->
 <!--                    [hideSelected]="false"-->
 <!--                    [closeOnSelect]="false"-->
@@ -406,7 +465,7 @@
 <!--                    [searchable]="false"-->
 <!--                    bindLabel="label"-->
 <!--                    placeholder="Select tag categories"-->
-<!--                    [(ngModel)]="job_modal_data.selected_choices_Tag_Type">-->
+<!--                    [(ngModel)]="jobForm_data_modal.selected_choices_Tag_Type">-->
 <!--            </ng-select>-->
 
 
