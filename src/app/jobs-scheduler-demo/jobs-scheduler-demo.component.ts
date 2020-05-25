@@ -581,7 +581,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         if (popover.isOpen()) {
             popover.close();
         } else {
-            popover.open({item: item, draggable: draggable});
+            popover.open({popover: popover, item: item, draggable: draggable});
         }
     }
 

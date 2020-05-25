@@ -77,6 +77,7 @@
 
                                      [ngbPopover]="job_pop_Content"
                                      popoverTitle=""
+                                     [autoClose]="'outside'"
                                      popoverClass="jobCard_pop"
                                      placement="right-bottom"
                                      triggers="manual"
@@ -100,6 +101,7 @@
 
                                      [ngbPopover]="job_pop_Content"
                                      popoverTitle=""
+                                     [autoClose]="'outside'"
                                      popoverClass="jobCard_pop"
                                      placement="right-bottom"
                                      triggers="manual"
@@ -123,6 +125,7 @@
 
                                      [ngbPopover]="job_pop_Content"
                                      popoverTitle=""
+                                     [autoClose]="'outside'"
                                      popoverClass="jobCard_pop"
                                      placement="right-bottom"
                                      triggers="manual"
@@ -146,6 +149,7 @@
 
                                      [ngbPopover]="job_pop_Content"
                                      popoverTitle=""
+                                     [autoClose]="'outside'"
                                      popoverClass="jobCard_pop"
                                      placement="right-bottom"
                                      triggers="manual"
@@ -175,16 +179,22 @@
 </div>
 
 
-<ng-template #job_pop_Content let-item="item" let-draggable="draggable">
+<ng-template #job_pop_Content let-item="item" let-draggable="draggable" let-popover="popover">
     <div class="card">
         <div class="card-body">
 
             <div style="position: absolute; right: 0; top: 0;">
-                <button type="button" rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
-                    <i class="nc-icon nc-simple-remove" (click)="jobCard_pop_delete(draggable, item)"></i>
-                </button>
+                <span ngbDropdown>
+                    <button type="button" ngbDropdownToggle rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                    <div ngbDropdownMenu>
+                        <div ngbDropdownItem class="text-success">Do nothing !</div>
+                        <div ngbDropdownItem class="text-danger" (click)="popover.close(); jobCard_pop_delete(draggable, item)">I want to delete this Job</div>
+                    </div>
+                </span>
                 <button type="button" rel="tooltip" title="Update Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
-                    <i class="nc-icon nc-ruler-pencil" (click)="jobCard_pop_edit(draggable, item)"></i>
+                    <i class="nc-icon nc-ruler-pencil" (click)="popover.close(); jobCard_pop_edit(draggable, item)"></i>
                 </button>
             </div>
 
@@ -224,8 +234,10 @@
                         <form *ngSwitchCase="'new'" class="form-inline">
                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                                  ngbDropdown [placement]="'bottom-left'" autoClose="both">
-                                <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle><span class="text-danger">* </span>Job type </a>
-                                <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownConfig">
+                                <a ngbButton class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>
+                                    <span class="text-danger">* </span>Job type
+                                </a>
+                                <div class="dropdown-menu" ngbDropdownMenu>
                                     <ng-container *ngFor="let item of jobForm_data_modal.choices_Job_Type">
                                         <div ngbDropdownItem
                                              [ngClass]="item.selected && 'checked'"
@@ -254,7 +266,7 @@
                     <form class="form-inline">
                         <div class="btn-group" role="group" aria-label="Button group with nested dropdown"
                              ngbDropdown [placement]="'bottom-left'" autoClose="outside">
-                            <a ngbButton  class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
+                            <a ngbButton class="btn btn-sm btn-outline-primary btn-round" ngbDropdownToggle>Tags </a>
                             <div class="dropdown-menu" ngbDropdownMenu style="max-height: 200px; overflow-y: auto;">
                                 <ng-container *ngFor="let item of jobForm_data_modal.choices_Tag_Type">
                                     <div ngbDropdownItem
