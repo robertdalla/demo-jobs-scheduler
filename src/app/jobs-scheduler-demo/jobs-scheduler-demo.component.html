@@ -82,7 +82,7 @@
                                      placement="right-bottom"
                                      triggers="manual"
                                      #p="ngbPopover"
-                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Employee)">{{item.title}}
+                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Employee)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                      placement="right-bottom"
                                      triggers="manual"
                                      #p="ngbPopover"
-                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Scheduler)">{{item.title}}
+                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Scheduler)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                                      placement="right-bottom"
                                      triggers="manual"
                                      #p="ngbPopover"
-                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.SubContractor)">{{item.title}}
+                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.SubContractor)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                      placement="right-bottom"
                                      triggers="manual"
                                      #p="ngbPopover"
-                                     (click)="jobCard_pop_toggle(p, item, this.APP['Data'].Draggable.Jobs)">{{item.title}}
+                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Jobs)">{{item.title}}
                                 </div>
                             </div>
                         </div>
@@ -179,6 +179,16 @@
 </div>
 
 
+<!-- fullCalendar event pop-over -->
+<ng-template #event_pop_Content let-event="event">
+    <h6>Title: {{event.title}}</h6>
+    <div>
+        <p>draggable_Id: {{event.extendedProps.draggable_Id}}</p>
+    </div>
+</ng-template><!-- #fullCalendar event pop-over -->
+
+
+<!-- draggable jobs pop-over -->
 <ng-template #job_pop_Content let-item="item" let-draggable="draggable" let-popover="popover">
     <div class="card">
         <div class="card-body">
@@ -209,11 +219,11 @@
 
         </div>
     </div>
-</ng-template>
+</ng-template><!-- #draggable jobs pop-over -->
 
 
+<!--  draggable jobs or fullCalendar event modal -->
 <ng-template #job_modal let-modal>
-
     <div class="modal-header">
         <h4 class="modal-title"><b>{{jobForm_data_modal.modal_mode == 'new' ? 'New ' : 'Update '}}{{jobForm_data_modal.modal_type == 'job' ? 'Job card' : 'Job schedule'}}</b></h4>
     </div>
@@ -436,8 +446,7 @@
             <button type="button" class="btn btn-success" [disabled]="new_event_form_inValid()" (click)="modal.close('Ok click')">Save</button>
         </div>
     </div>
-
-</ng-template>
+</ng-template><!--  #draggable jobs or fullCalendar event modal -->
 
 
 <!-- For testing only: Display JSON content -->

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+// tslint:disable-next-line:max-line-length
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed for ngx-chips (already set in main module)
 
 // third parties
@@ -12,6 +13,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 // components
 import { JobsSchedulerDemoComponent } from './jobs-scheduler-demo.component';
 import { DatepickerRangePopupComponent } from './datepicker-rangePopup.component';
+import { PopoverWrapperComponent } from './PopoverWrapper.component';
 
 // config
 import { JobsSchedulerRoutes } from './jobs-scheduler-demo.routing';
@@ -33,6 +35,7 @@ import { JobsSchedulerRoutes } from './jobs-scheduler-demo.routing';
     declarations: [
         JobsSchedulerDemoComponent,
         DatepickerRangePopupComponent,
+        PopoverWrapperComponent,
     ]
 
 })
