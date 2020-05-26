@@ -4,9 +4,13 @@ import {
     Component,
     Directive,
     Type,
+    ComponentRef,
     ElementRef,
     TemplateRef,
     ViewChild,
+    ComponentFactoryResolver,
+    Injector,
+    ApplicationRef,
     OnInit,
     OnDestroy,
     AfterViewInit,
@@ -22,11 +26,15 @@ import {HELPERSService} from './HELPERS.service';
 // third parties
 import {SimpleGlobal} from 'ng2-simple-global';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import {Calendar} from '@fullcalendar/core';
 import interactionPlugin, {Draggable} from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+
+// components
+import { PopoverWrapperComponent } from './PopoverWrapper.component';
 
 // config
 import {global_IS_LOCALDEV} from '../app-config';
@@ -51,8 +59,16 @@ declare var $: any; // Support for Jquery
             background: lightgray;
             font-size: 100%;
         }
-
         .jobCard_pop .arrow::after {
+            border-top-color: lightgray;
+        }
+
+        .fc-event_popover {
+            width: 16rem;
+            background-color: lightgray;
+            font-size: 100%;
+        }
+        .fc-event_popover .arrow::after {
             border-top-color: lightgray;
         }
     `],
@@ -63,13 +79,20 @@ declare var $: any; // Support for Jquery
 export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
     @ViewChild('job_modal') public job_modal: TemplateRef<any>;
+    @ViewChild('event_pop_Content', { static: true }) public event_pop_Content: TemplateRef<any>;
 
     jobForm_data_modal: any = {};
     jobCard_data_pop: any = {};
     calendar: any;
 
+    popoversMap = new Map<any, ComponentRef<PopoverWrapperComponent>>();
+    popoverFactory = this.resolver.resolveComponentFactory(PopoverWrapperComponent);
 
     constructor(
+        private resolver: ComponentFactoryResolver,
+        private injector: Injector,
+        private appRef: ApplicationRef,
+
         public HELPERS: HELPERSService,
         public APP: SimpleGlobal,
         private modalService: NgbModal,
@@ -577,7 +600,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         return JSON.stringify(item);
     }
 
-    jobCard_pop_toggle(popover, item: any, draggable: any) {
+    jobCard_pop_Toggle(popover, item: any, draggable: any) {
         if (popover.isOpen()) {
             popover.close();
         } else {
@@ -784,6 +807,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     classNames: [this.jobForm_data_modal.Job_Type_selected.className],
                     editable: true,
                     extendedProps: {
+                        draggable_Id: this.jobForm_data_modal.Job_Type_selected.draggable_Id,
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
@@ -805,6 +829,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     duration: duration + ':' + (this.jobForm_data_modal.start_time.second ? '30' : '00'),
                     duration_num: duration,
                     extendedProps: {
+                        draggable_Id: this.jobForm_data_modal.Job_Type_selected.draggable_Id,
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
@@ -1036,12 +1061,43 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             eventClick: function (eventClickInfo) {
                 console.log('eventClickInfo:', eventClickInfo);
 
+                /**  Toggle event pop-over  */
+                const popover = that.popoversMap.get(eventClickInfo.el);
+                if (popover) {
+                    if (popover.instance.popover.isOpen()) {
+                        popover.instance.popover.close();
+                    } else {
+                        popover.instance.popover.open({ event: eventClickInfo.event });
+                    }
+                }
+            },
+
+            eventMouseEnter: function (mouseEnterInfo ) {
+                // const popover = that.popoversMap.get(mouseEnterInfo.el);
+                // if (popover) {
+                //     popover.instance.popover.open({ event: mouseEnterInfo.event });
+                // }
+            },
+
+            eventMouseLeave: function (mouseLeaveInfo ) {
+                // const popover = that.popoversMap.get(mouseLeaveInfo.el);
+                // if (popover) {
+                //     popover.instance.popover.close();
+                // }
             },
 
             eventRender: function (info) {
                 // console.log('eventRender', info);
                 // console.log('extendedProps', info.event.extendedProps);
 
+                /**  Event popover feature  */
+                const projectableNodes = Array.from(info.el.childNodes);
+                const compRef = that.popoverFactory.create(that.injector, [projectableNodes], info.el);
+                compRef.instance.template = that.event_pop_Content;
+                that.appRef.attachView(compRef.hostView);
+                that.popoversMap.set(info.el, compRef);
+
+                /**  Tag filters feature  */
                 if (typeof info.event.extendedProps.tags !== 'undefined' && Array.isArray(info.event.extendedProps.tags)) {
                     let tagged = false, filtered = false, match = false;
 
@@ -1061,10 +1117,18 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         }
                     });
                     return !tagged || !filtered || match; // Render this event if no filter was set
-
                 } else {
                     // Render this event since no flags are assigned
                     return true;
+                }
+            },
+
+            eventDestroy: function (info) {
+                const popover = that.popoversMap.get(info.el);
+                if (popover) {
+                    that.appRef.detachView(popover.hostView);
+                    popover.destroy();
+                    that.popoversMap.delete(info.el);
                 }
             },
 
