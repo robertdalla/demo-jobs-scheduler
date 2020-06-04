@@ -30,6 +30,10 @@
 
 /**  Dropdowns  **/
 
+.no-arrow .dropdown-toggle::after {
+    content: unset;
+}
+
 .dropdown-menu {
 
     .dropdown-item {
@@ -41,7 +45,6 @@
     }
 
     .dropdown-item:hover {
-        background-color: $default-color !important;
+        background-color: darken($placeholder-gray, 20%) !important;
     }
-
 }

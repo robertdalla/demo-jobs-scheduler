@@ -180,50 +180,75 @@
 
 
 <!-- fullCalendar event pop-over -->
-<ng-template #event_pop_Content let-event="event">
-    <h6>Title: {{event.title}}</h6>
+<ng-template #event_pop_Content let-event="event" let-popover="popover">
+
+    <div style="position: absolute; right: 0; top: 0;">
+        <span ngbDropdown class="no-arrow">
+            <button type="button" ngbDropdownToggle rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
+                <i class="nc-icon nc-simple-remove"></i>
+            </button>
+            <div ngbDropdownMenu>
+                <div ngbDropdownItem class="text-success">Cancel</div>
+                <div ngbDropdownItem class="text-danger" (click)="eventCard_pop_delete(event)">Delete this Job</div>
+            </div>
+        </span>
+        <button type="button" rel="tooltip" title="Update Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
+            <i class="nc-icon nc-ruler-pencil" (click)="popover.close();"></i>
+        </button>
+    </div>
+
+    <h6 class="card-subtitle text-muted">Title :</h6>
+    <p>{{event.title}}</p>
+
     <div>
         <p>draggable_Id: {{event.extendedProps.draggable_Id}}</p>
     </div>
+
 </ng-template><!-- #fullCalendar event pop-over -->
 
 
 <!-- draggable jobs pop-over -->
 <ng-template #job_pop_Content let-item="item" let-draggable="draggable" let-popover="popover">
-    <div class="card">
-        <div class="card-body">
 
-            <div style="position: absolute; right: 0; top: 0;">
-                <span ngbDropdown>
-                    <button type="button" ngbDropdownToggle rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
-                        <i class="nc-icon nc-simple-remove"></i>
-                    </button>
-                    <div ngbDropdownMenu>
-                        <div ngbDropdownItem class="text-success">Do nothing !</div>
-                        <div ngbDropdownItem class="text-danger" (click)="popover.close(); jobCard_pop_delete(draggable, item)">I want to delete this Job</div>
-                    </div>
-                </span>
-                <button type="button" rel="tooltip" title="Update Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
-                    <i class="nc-icon nc-ruler-pencil" (click)="popover.close(); jobCard_pop_edit(draggable, item)"></i>
-                </button>
+    <div style="position: absolute; right: 0; top: 0;">
+        <span ngbDropdown class="no-arrow">
+            <button type="button" ngbDropdownToggle rel="tooltip" title="Delete Job card" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral">
+                <i class="nc-icon nc-simple-remove"></i>
+            </button>
+            <div ngbDropdownMenu>
+                <div ngbDropdownItem class="text-info">Cancel</div>
+                <div ngbDropdownItem class="text-danger" (click)="popover.close(); jobCard_pop_delete(draggable, item)">Delete this Job</div>
             </div>
-
-            <h6 class="card-subtitle text-muted">Title :</h6>
-            <p>{{item.title}}</p>
-
-            <h6 class="card-subtitle text-muted">Duration :</h6>
-            <p>{{item.duration}} h</p>
-
-            <h6 class="card-subtitle text-muted">Tags :</h6>
-            <p class="mb-0" *ngFor="let tag of item.extendedProps.tags">{{tag.label}} | {{tag.value.label}}</p>
-
-        </div>
+        </span>
+        <span ngbDropdown class="no-arrow">
+            <button type="button" ngbDropdownToggle rel="tooltip" title="Clone Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
+                <i class="nc-icon nc-simple-add"></i>
+            </button>
+            <div ngbDropdownMenu>
+                <div ngbDropdownItem class="text-info">Cancel</div>
+                <div ngbDropdownItem class="text-danger" (click)="popover.close(); jobCard_pop_clone(draggable, item)">Clone this Job</div>
+            </div>
+        </span>
+        <button type="button" rel="tooltip" title="Update Job card" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral">
+            <i class="nc-icon nc-ruler-pencil" (click)="popover.close(); jobCard_pop_edit(draggable, item)"></i>
+        </button>
     </div>
+
+    <h6 class="card-subtitle text-muted">Title :</h6>
+    <p>{{item.title}}</p>
+
+    <h6 class="card-subtitle text-muted">Duration :</h6>
+    <p>{{item.duration}} h</p>
+
+    <h6 class="card-subtitle text-muted">Tags :</h6>
+    <p class="mb-0" *ngFor="let tag of item.extendedProps.tags">{{tag.label}} | {{tag.value.label}}</p>
+
 </ng-template><!-- #draggable jobs pop-over -->
 
 
 <!--  draggable jobs or fullCalendar event modal -->
 <ng-template #job_modal let-modal>
+
     <div class="modal-header">
         <h4 class="modal-title"><b>{{jobForm_data_modal.modal_mode == 'new' ? 'New ' : 'Update '}}{{jobForm_data_modal.modal_type == 'job' ? 'Job card' : 'Job schedule'}}</b></h4>
     </div>
@@ -446,6 +471,7 @@
             <button type="button" class="btn btn-success" [disabled]="new_event_form_inValid()" (click)="modal.close('Ok click')">Save</button>
         </div>
     </div>
+
 </ng-template><!--  #draggable jobs or fullCalendar event modal -->
 
 

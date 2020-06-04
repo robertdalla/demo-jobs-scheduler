@@ -26,7 +26,6 @@ import {HELPERSService} from './HELPERS.service';
 // third parties
 import {SimpleGlobal} from 'ng2-simple-global';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import {Calendar} from '@fullcalendar/core';
 import interactionPlugin, {Draggable} from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -56,20 +55,24 @@ declare var $: any; // Support for Jquery
         }
         .jobCard_pop {
             width: 25rem;
-            background: lightgray;
+            background-color: white;
+            border-radius: 15px;
             font-size: 100%;
+            padding: 10px 0;
         }
         .jobCard_pop .arrow::after {
-            border-top-color: lightgray;
+            border-top-color: white;
         }
 
         .fc-event_popover {
             width: 16rem;
-            background-color: lightgray;
+            background-color: white;
+            border-radius: 15px;
             font-size: 100%;
+            padding: 10px 0;
         }
         .fc-event_popover .arrow::after {
-            border-top-color: lightgray;
+            border-top-color: white;
         }
     `],
     // styleUrls: [''],
@@ -600,11 +603,33 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         return JSON.stringify(item);
     }
 
+    eventCard_pop_delete(event: any) {
+        // console.log('Event to delete:', event);
+        if (event) {
+            event.remove();
+        }
+    }
+
     jobCard_pop_Toggle(popover, item: any, draggable: any) {
         if (popover.isOpen()) {
             popover.close();
         } else {
             popover.open({popover: popover, item: item, draggable: draggable});
+        }
+    }
+
+    jobCard_pop_clone(draggable: any, item: any) {
+        if (draggable && item) {
+            // console.log('Draggable source:', draggable);
+            // console.log('Item to delete:', item);
+            for (let i = 0; i < draggable.events.length; i++) {
+                if (draggable.events[i].id === item.id) {
+                    const clone = JSON.parse(JSON.stringify(item));
+                    clone.id = (Math.floor(1000 + Math.random() * 1000000)).toString();
+                    draggable.events.splice(i + 1, 0, clone); // insert clone
+                    break;
+                }
+            }
         }
     }
 
@@ -614,7 +639,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             // console.log('Item to delete:', item);
             for (let i = 0; i < draggable.events.length; i++) {
                 if (draggable.events[i].id === item.id) {
-                    draggable.events.splice(i, 1);
+                    draggable.events.splice(i, 1); // remove item
                     break;
                 }
             }
