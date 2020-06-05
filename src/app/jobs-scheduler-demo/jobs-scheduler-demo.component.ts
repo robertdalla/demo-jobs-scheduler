@@ -65,7 +65,7 @@ declare var $: any; // Support for Jquery
         }
 
         .fc-event_popover {
-            width: 16rem;
+            width: 17rem;
             background-color: white;
             border-radius: 15px;
             font-size: 100%;
@@ -108,484 +108,552 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         const m = today.getMonth();
         const d = today.getDate();
 
-        const demoDATA: any = {
+        const demoDATA: any = {};
 
-            Draggable: {
-                Employee: {
-                    draggable_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    label: 'Employee',
-                    className: 'fc-event_event-azure',
-                    events: [
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 1 Employee',
-                            allDay: false,
-                            duration: '24:00',
-                            duration_num: 24,
-                            className: 'fc-event_event-azure',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '1',
-                                        label: 'Employees',
-                                        value: {Id: '6', label: 'Rahim Kent'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 2 Employee',
-                            allDay: false,
-                            duration: '02:00',
-                            duration_num: 2,
-                            className: 'fc-event_event-azure',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '1',
-                                        label: 'Employees',
-                                        value: {Id: '2', label: 'Jorja Kirby'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 3 Employee',
-                            allDay: false,
-                            duration: '04:00',
-                            duration_num: 4,
-                            className: 'fc-event_event-azure',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '1',
-                                        label: 'Employees',
-                                        value: {Id: '2', label: 'Jorja Kirby'},
-                                    },
-                                ]
-                            }
-                        },
-                    ]
-                },
-                Scheduler: {
-                    draggable_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    label: 'Scheduler',
-                    className: 'fc-event_event-green',
-                    events: [
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 1 Scheduler',
-                            allDay: false,
-                            duration: '01:00',
-                            duration_num: 1,
-                            className: 'fc-event_event-green',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '2',
-                                        label: 'Scheduler',
-                                        value: {Id: '2', label: 'Scheduler 2'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 2 Scheduler',
-                            allDay: false,
-                            duration: '01:30',
-                            duration_num: 1.5,
-                            className: 'fc-event_event-green',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '2',
-                                        label: 'Scheduler',
-                                        value: {Id: '2', label: 'Scheduler 2'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 3 Scheduler',
-                            allDay: false,
-                            duration: '02:00',
-                            duration_num: 2,
-                            className: 'fc-event_event-green',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '2',
-                                        label: 'Scheduler',
-                                        value: {Id: '3', label: 'Scheduler 3'},
-                                    },
-                                ]
-                            }
-                        },
-                    ]
-                },
-                SubContractor: {
-                    draggable_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    label: 'SubContractor',
-                    className: 'fc-event_event-red',
-                    events: [
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 1 SubContractor',
-                            allDay: false,
-                            duration: '24:00',
-                            duration_num: 24,
-                            className: 'fc-event_event-red',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '3',
-                                        label: 'SubContractor',
-                                        value: {Id: '1', label: 'Accord Homes'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 2 SubContractor',
-                            allDay: false,
-                            duration: '02:00',
-                            duration_num: 2,
-                            className: 'fc-event_event-red',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '3',
-                                        label: 'SubContractor',
-                                        value: {Id: '2', label: 'A B Freese'},
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 3 SubContractor',
-                            allDay: false,
-                            duration: '03:00',
-                            duration_num: 3,
-                            className: 'fc-event_event-red',
-                            editable: true,
-                            extendedProps: {
-                                tags: [
-                                    {
-                                        filter_Id: '3',
-                                        label: 'SubContractor',
-                                        value: {Id: '3', label: 'Cameron Daff'},
-                                    },
-                                ]
-                            }
-                        },
-                    ]
-                },
-                Jobs: {
-                    draggable_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    label: 'Jobs (Unscheduled)',
-                    className: 'fc-event_event-yellow',
-                    events: [
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 1',
-                            allDay: false,
-                            duration: '01:30',
-                            duration_num: 1.5,
-                            className: 'fc-event_event-yellow',
-                            editable: true,
-                            extendedProps: {
-                                tags: []
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 2',
-                            allDay: false,
-                            duration: '02:00',
-                            duration_num: 2,
-                            className: 'fc-event_event-yellow',
-                            editable: true,
-                            extendedProps: {
-                                tags: []
-                            }
-                        },
-                        {
-                            id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                            title: 'Job 3',
-                            allDay: false,
-                            duration: '01:00',
-                            duration_num: 1,
-                            className: 'fc-event_event-yellow',
-                            editable: true,
-                            extendedProps: {
-                                tags: []
-                            }
-                        },
-                    ]
-                },
+        demoDATA.Draggable = {
+            Employee: {
+                Job_Type_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                label: 'Employee',
+                className: 'fc-event_event-azure',
+                events: [
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 1 Employee',
+                        allDay: false,
+                        duration: '24:00',
+                        duration_num: 24,
+                        className: 'fc-event_event-azure',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '1',
+                                    label: 'Employees',
+                                    value: {Id: '6', label: 'Rahim Kent'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 2 Employee',
+                        allDay: false,
+                        duration: '02:00',
+                        duration_num: 2,
+                        className: 'fc-event_event-azure',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '1',
+                                    label: 'Employees',
+                                    value: {Id: '2', label: 'Jorja Kirby'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 3 Employee',
+                        allDay: false,
+                        duration: '04:00',
+                        duration_num: 4,
+                        className: 'fc-event_event-azure',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '1',
+                                    label: 'Employees',
+                                    value: {Id: '2', label: 'Jorja Kirby'},
+                                },
+                            ]
+                        }
+                    },
+                ]
             },
-
-            Dropdown_filters: [
-                {
-                    filter_Id: '1',
-                    label: 'Employees',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Ellesha Alvarado', enabled: true, selected: false},
-                        {Id: '2', label: 'Jorja Kirby', enabled: true, selected: false},
-                        {Id: '3', label: 'Thomas Barker', enabled: true, selected: false},
-                        {Id: '4', label: 'Rafe Hines', enabled: true, selected: false},
-                        {Id: '5', label: 'Wren Haworth', enabled: true, selected: false},
-                        {Id: '6', label: 'Rahim Kent', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '2',
-                    label: 'Scheduler',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Scheduler 1', enabled: false, selected: false},
-                        {Id: '2', label: 'Scheduler 2', enabled: true, selected: false},
-                        {Id: '3', label: 'Scheduler 3', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '3',
-                    label: 'SubContractor',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Accord Homes', enabled: true, selected: false},
-                        {Id: '2', label: 'A B Freese', enabled: true, selected: false},
-                        {Id: '3', label: 'Cameron Daff', enabled: true, selected: false},
-                        {Id: '4', label: 'Rawcorp Pty Ltd', enabled: true, selected: false},
-                        {Id: '5', label: 'Urban Building Services', enabled: true, selected: false},
-                        {Id: '6', label: 'East Coast Designer Builders Pty Ltd', enabled: true, selected: false},
-                        {Id: '7', label: 'Eddie Blaiklock Builder', enabled: true, selected: false},
-                        {Id: '8', label: 'Nerek Construction', enabled: true, selected: false},
-                        {Id: '9', label: 'Lauder Jeff', enabled: true, selected: false},
-                        {Id: '10', label: 'Saurus Contracting', enabled: true, selected: false},
-                        {Id: '11', label: 'Dalponte Building Services', enabled: true, selected: false},
-                        {Id: '12', label: 'Dave Baldwin', enabled: true, selected: false},
-                        {Id: '13', label: 'O\'Loan Build', enabled: true, selected: false},
-                        {Id: '14', label: 'Ray Mahoney Builder', enabled: true, selected: false},
-                        {Id: '15', label: 'Bale Constructions', enabled: true, selected: false},
-                        {Id: '16', label: 'Vivid Home Builders', enabled: true, selected: false},
-                        {Id: '17', label: 'Leisure Living Homes, Mackay', enabled: true, selected: false},
-                        {Id: '18', label: 'Galaxi Homes', enabled: true, selected: false},
-                        {Id: '19', label: 'Lamb Gary Building Contractor', enabled: true, selected: false},
-                        {Id: '20', label: 'Fergus Builders', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '4',
-                    label: 'Division',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Construction', enabled: true, selected: false},
-                        {Id: '2', label: 'Plumbing', enabled: true, selected: false},
-                        {Id: '3', label: 'Electrical', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '5',
-                    label: 'Branch',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'QLD', enabled: true, selected: false},
-                        {Id: '2', label: 'NSW', enabled: true, selected: false},
-                        {Id: '3', label: 'VIC', enabled: true, selected: false},
-                        {Id: '4', label: 'WA', enabled: true, selected: false},
-                        {Id: '5', label: 'NT', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '6',
-                    label: 'Product',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Product 1', enabled: true, selected: false},
-                        {Id: '2', label: 'Product 2', enabled: true, selected: false},
-                        {Id: '3', label: 'Product 3', enabled: true, selected: false},
-                        {Id: '4', label: 'Product 4', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '7',
-                    label: 'Stage',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Stage 1', enabled: true, selected: false},
-                        {Id: '2', label: 'Stage 2', enabled: true, selected: false},
-                        {Id: '3', label: 'Stage 3', enabled: true, selected: false},
-                    ],
-                },
-                {
-                    filter_Id: '8',
-                    label: 'Health',
-                    value: [],
-                    data: [
-                        {Id: '1', label: 'Good', enabled: true, selected: false},
-                        {Id: '2', label: 'Average', enabled: true, selected: false},
-                        {Id: '3', label: 'Bad', enabled: true, selected: false},
-                    ],
-                },
-            ],
-            fullCalendar_events: [
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Ellesha Alvarado',
-                    start: new Date(y, m, 1),
-                    allDay: true,
-                    className: 'fc-event_event-azure',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '1',
-                                label: 'Employees',
-                                value: {Id: '1', label: 'Ellesha Alvarado'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Jorja Kirby',
-                    start: new Date(y, m, d - 4, 6, 0),
-                    allDay: false,
-                    className: 'fc-event_event-azure',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '1',
-                                label: 'Employees',
-                                value: {Id: '2', label: 'Jorja Kirby'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Thomas Barker',
-                    start: new Date(y, m, d + 3, 6, 0),
-                    allDay: false,
-                    className: 'fc-event_event-azure',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '1',
-                                label: 'Employees',
-                                value: {Id: '3', label: 'Thomas Barker'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Scheduler 2',
-                    start: new Date(y, m, d - 1, 10, 30),
-                    allDay: false,
-                    className: 'fc-event_event-green',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '2',
-                                label: 'Scheduler',
-                                value: {Id: '2', label: 'Scheduler 2'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Rawcorp Pty Ltd',
-                    start: new Date(y, m, d + 7, 12, 0),
-                    end: new Date(y, m, d + 7, 14, 0),
-                    allDay: false,
-                    className: 'fc-event_event-red',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '3',
-                                label: 'SubContractor',
-                                value: {Id: '4', label: 'Rawcorp Pty Ltd'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Rafe Hines',
-                    start: new Date(y, m, d - 2, 12, 0),
-                    allDay: true,
-                    className: 'fc-event_event-azure',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '1',
-                                label: 'Employees',
-                                value: {Id: '4', label: 'Rafe Hines'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Wren Haworth',
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30),
-                    allDay: false,
-                    className: 'fc-event_event-azure',
-                    editable: true,
-                    extendedProps: {
-                        tags: [
-                            {
-                                filter_Id: '1',
-                                label: 'Employees',
-                                value: {Id: '5', label: 'Wren Haworth'},
-                            },
-                        ]
-                    }
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Job (Unsheduled)',
-                    start: new Date(y, m, 21),
-                    end: new Date(y, m, 22),
-                    allDay: false,
-                    className: 'fc-event_event-yellow',
-                    editable: true,
-                },
-                {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
-                    title: 'Job (Unsheduled)',
-                    start: new Date(y, m, 21),
-                    end: new Date(y, m, 22),
-                    allDay: false,
-                    className: 'fc-event_event-yellow',
-                    editable: true,
-                }
-            ]
+            Scheduler: {
+                Job_Type_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                label: 'Scheduler',
+                className: 'fc-event_event-green',
+                events: [
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 1 Scheduler',
+                        allDay: false,
+                        duration: '01:00',
+                        duration_num: 1,
+                        className: 'fc-event_event-green',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '2',
+                                    label: 'Scheduler',
+                                    value: {Id: '2', label: 'Scheduler 2'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 2 Scheduler',
+                        allDay: false,
+                        duration: '01:30',
+                        duration_num: 1.5,
+                        className: 'fc-event_event-green',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '2',
+                                    label: 'Scheduler',
+                                    value: {Id: '2', label: 'Scheduler 2'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 3 Scheduler',
+                        allDay: false,
+                        duration: '02:00',
+                        duration_num: 2,
+                        className: 'fc-event_event-green',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '2',
+                                    label: 'Scheduler',
+                                    value: {Id: '3', label: 'Scheduler 3'},
+                                },
+                            ]
+                        }
+                    },
+                ]
+            },
+            SubContractor: {
+                Job_Type_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                label: 'SubContractor',
+                className: 'fc-event_event-red',
+                events: [
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 1 SubContractor',
+                        allDay: false,
+                        duration: '24:00',
+                        duration_num: 24,
+                        className: 'fc-event_event-red',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '3',
+                                    label: 'SubContractor',
+                                    value: {Id: '1', label: 'Accord Homes'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 2 SubContractor',
+                        allDay: false,
+                        duration: '02:00',
+                        duration_num: 2,
+                        className: 'fc-event_event-red',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '3',
+                                    label: 'SubContractor',
+                                    value: {Id: '2', label: 'A B Freese'},
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 3 SubContractor',
+                        allDay: false,
+                        duration: '03:00',
+                        duration_num: 3,
+                        className: 'fc-event_event-red',
+                        editable: true,
+                        extendedProps: {
+                            tags: [
+                                {
+                                    filter_Id: '3',
+                                    label: 'SubContractor',
+                                    value: {Id: '3', label: 'Cameron Daff'},
+                                },
+                            ]
+                        }
+                    },
+                ]
+            },
+            Jobs: {
+                Job_Type_Id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                label: 'Jobs (Unscheduled)',
+                className: 'fc-event_event-yellow',
+                events: [
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 1',
+                        allDay: false,
+                        duration: '01:30',
+                        duration_num: 1.5,
+                        className: 'fc-event_event-yellow',
+                        editable: true,
+                        extendedProps: {
+                            tags: []
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 2',
+                        allDay: false,
+                        duration: '02:00',
+                        duration_num: 2,
+                        className: 'fc-event_event-yellow',
+                        editable: true,
+                        extendedProps: {
+                            tags: []
+                        }
+                    },
+                    {
+                        id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                        title: 'Job 3',
+                        allDay: false,
+                        duration: '01:00',
+                        duration_num: 1,
+                        className: 'fc-event_event-yellow',
+                        editable: true,
+                        extendedProps: {
+                            tags: []
+                        }
+                    },
+                ]
+            },
         };
+
+        demoDATA.Dropdown_filters = [
+            {
+                filter_Id: '1',
+                label: 'Employees',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Ellesha Alvarado', enabled: true, selected: false},
+                    {Id: '2', label: 'Jorja Kirby', enabled: true, selected: false},
+                    {Id: '3', label: 'Thomas Barker', enabled: true, selected: false},
+                    {Id: '4', label: 'Rafe Hines', enabled: true, selected: false},
+                    {Id: '5', label: 'Wren Haworth', enabled: true, selected: false},
+                    {Id: '6', label: 'Rahim Kent', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '2',
+                label: 'Scheduler',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Scheduler 1', enabled: false, selected: false},
+                    {Id: '2', label: 'Scheduler 2', enabled: true, selected: false},
+                    {Id: '3', label: 'Scheduler 3', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '3',
+                label: 'SubContractor',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Accord Homes', enabled: true, selected: false},
+                    {Id: '2', label: 'A B Freese', enabled: true, selected: false},
+                    {Id: '3', label: 'Cameron Daff', enabled: true, selected: false},
+                    {Id: '4', label: 'Rawcorp Pty Ltd', enabled: true, selected: false},
+                    {Id: '5', label: 'Urban Building Services', enabled: true, selected: false},
+                    {Id: '6', label: 'East Coast Designer Builders Pty Ltd', enabled: true, selected: false},
+                    {Id: '7', label: 'Eddie Blaiklock Builder', enabled: true, selected: false},
+                    {Id: '8', label: 'Nerek Construction', enabled: true, selected: false},
+                    {Id: '9', label: 'Lauder Jeff', enabled: true, selected: false},
+                    {Id: '10', label: 'Saurus Contracting', enabled: true, selected: false},
+                    {Id: '11', label: 'Dalponte Building Services', enabled: true, selected: false},
+                    {Id: '12', label: 'Dave Baldwin', enabled: true, selected: false},
+                    {Id: '13', label: 'O\'Loan Build', enabled: true, selected: false},
+                    {Id: '14', label: 'Ray Mahoney Builder', enabled: true, selected: false},
+                    {Id: '15', label: 'Bale Constructions', enabled: true, selected: false},
+                    {Id: '16', label: 'Vivid Home Builders', enabled: true, selected: false},
+                    {Id: '17', label: 'Leisure Living Homes, Mackay', enabled: true, selected: false},
+                    {Id: '18', label: 'Galaxi Homes', enabled: true, selected: false},
+                    {Id: '19', label: 'Lamb Gary Building Contractor', enabled: true, selected: false},
+                    {Id: '20', label: 'Fergus Builders', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '4',
+                label: 'Division',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Construction', enabled: true, selected: false},
+                    {Id: '2', label: 'Plumbing', enabled: true, selected: false},
+                    {Id: '3', label: 'Electrical', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '5',
+                label: 'Branch',
+                value: [],
+                data: [
+                    {Id: '1', label: 'QLD', enabled: true, selected: false},
+                    {Id: '2', label: 'NSW', enabled: true, selected: false},
+                    {Id: '3', label: 'VIC', enabled: true, selected: false},
+                    {Id: '4', label: 'WA', enabled: true, selected: false},
+                    {Id: '5', label: 'NT', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '6',
+                label: 'Product',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Product 1', enabled: true, selected: false},
+                    {Id: '2', label: 'Product 2', enabled: true, selected: false},
+                    {Id: '3', label: 'Product 3', enabled: true, selected: false},
+                    {Id: '4', label: 'Product 4', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '7',
+                label: 'Stage',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Stage 1', enabled: true, selected: false},
+                    {Id: '2', label: 'Stage 2', enabled: true, selected: false},
+                    {Id: '3', label: 'Stage 3', enabled: true, selected: false},
+                ],
+            },
+            {
+                filter_Id: '8',
+                label: 'Health',
+                value: [],
+                data: [
+                    {Id: '1', label: 'Good', enabled: true, selected: false},
+                    {Id: '2', label: 'Average', enabled: true, selected: false},
+                    {Id: '3', label: 'Bad', enabled: true, selected: false},
+                ],
+            },
+        ];
+
+        demoDATA.fullCalendar_events = [
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Ellesha Alvarado',
+                start: new Date(y, m, 1),
+                allDay: true,
+                className: 'fc-event_event-azure',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Employee.Job_Type_Id,
+                        label: demoDATA.Draggable.Employee.label,
+                        className: demoDATA.Draggable.Employee.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '1', label: 'Ellesha Alvarado'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Jorja Kirby',
+                start: new Date(y, m, d - 4, 6, 0),
+                allDay: false,
+                className: 'fc-event_event-azure',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Employee.Job_Type_Id,
+                        label: demoDATA.Draggable.Employee.label,
+                        className: demoDATA.Draggable.Employee.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '2', label: 'Jorja Kirby'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Thomas Barker',
+                start: new Date(y, m, d + 3, 6, 0),
+                allDay: false,
+                className: 'fc-event_event-azure',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Employee.Job_Type_Id,
+                        label: demoDATA.Draggable.Employee.label,
+                        className: demoDATA.Draggable.Employee.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '3', label: 'Thomas Barker'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Scheduler 2',
+                start: new Date(y, m, d - 1, 10, 30),
+                allDay: false,
+                className: 'fc-event_event-green',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Scheduler.Job_Type_Id,
+                        label: demoDATA.Draggable.Scheduler.label,
+                        className: demoDATA.Draggable.Scheduler.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '2',
+                            label: 'Scheduler',
+                            value: {Id: '2', label: 'Scheduler 2'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Rawcorp Pty Ltd',
+                start: new Date(y, m, d + 7, 12, 0),
+                end: new Date(y, m, d + 7, 14, 0),
+                allDay: false,
+                className: 'fc-event_event-red',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.SubContractor.Job_Type_Id,
+                        label: demoDATA.Draggable.SubContractor.label,
+                        className: demoDATA.Draggable.SubContractor.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '3',
+                            label: 'SubContractor',
+                            value: {Id: '4', label: 'Rawcorp Pty Ltd'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Rafe Hines',
+                start: new Date(y, m, d - 2, 12, 0),
+                allDay: true,
+                className: 'fc-event_event-azure',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Employee.Job_Type_Id,
+                        label: demoDATA.Draggable.Employee.label,
+                        className: demoDATA.Draggable.Employee.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '4', label: 'Rafe Hines'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Wren Haworth',
+                start: new Date(y, m, d + 1, 19, 0),
+                end: new Date(y, m, d + 1, 22, 30),
+                allDay: false,
+                className: 'fc-event_event-azure',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Employee.Job_Type_Id,
+                        label: demoDATA.Draggable.Employee.label,
+                        className: demoDATA.Draggable.Employee.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '5', label: 'Wren Haworth'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Job (Unsheduled)',
+                start: new Date(y, m, 21),
+                end: new Date(y, m, 22),
+                allDay: false,
+                className: 'fc-event_event-yellow',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Jobs.Job_Type_Id,
+                        label: demoDATA.Draggable.Jobs.label,
+                        className: demoDATA.Draggable.Jobs.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '3',
+                            label: 'SubContractor',
+                            value: {Id: '7', label: 'Eddie Blaiklock Builder'},
+                        },
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '6', label: 'Rahim Kent'},
+                        },
+                    ]
+                }
+            },
+            {
+                id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                title: 'Job (Unsheduled)',
+                start: new Date(y, m, 21),
+                end: new Date(y, m, 22),
+                allDay: false,
+                className: 'fc-event_event-yellow',
+                editable: true,
+                extendedProps: {
+                    Job_Type: {
+                        Id: demoDATA.Draggable.Jobs.Job_Type_Id,
+                        label: demoDATA.Draggable.Jobs.label,
+                        className: demoDATA.Draggable.Jobs.className,
+                    },
+                    tags: [
+                        {
+                            filter_Id: '1',
+                            label: 'Employees',
+                            value: {Id: '5', label: 'Wren Haworth'},
+                        },
+                    ]
+                }
+            }
+        ];
 
         if (global_IS_LOCALDEV) {
             // This is demo mode
@@ -599,8 +667,14 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
     }
 
 
-    object_to_JSON(item) {
-        return JSON.stringify(item);
+    object_to_JSON(item, events) {
+        const target = JSON.parse(JSON.stringify(events));
+        target.extendedProps.Job_Type = {
+            Id: item.Job_Type_Id,
+            label: item.label,
+            className: item.className,
+        };
+        return JSON.stringify(target);
     }
 
     eventCard_pop_delete(event: any) {
@@ -655,7 +729,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 title: item.title,
                 duration_num: item.duration_num,
                 Job_Type_selected: {
-                    draggable_Id: draggable.draggable_Id,
+                    Job_Type_Id: draggable.Job_Type_Id,
                     label: draggable.label,
                     className: draggable.className
                 },
@@ -758,10 +832,10 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         // tslint:disable-next-line:forin
         for (const property in this.APP['Data'].Draggable) {
             this.jobForm_data_modal.choices_Job_Type.push({
-                draggable_Id: this.APP['Data'].Draggable[property].draggable_Id,
+                Job_Type_Id: this.APP['Data'].Draggable[property].Job_Type_Id,
                 label: this.APP['Data'].Draggable[property].label,
                 className: this.APP['Data'].Draggable[property].className,
-                selected: mode === 'update' && this.APP['Data'].Draggable[property].draggable_Id === data.Job_Type_selected.draggable_Id, // pre-se;ect job-type
+                selected: mode === 'update' && this.APP['Data'].Draggable[property].Job_Type_Id === data.Job_Type_selected.Job_Type_Id, // pre-se;ect job-type
             });
         }
         // console.log('choices_Job_Type = ', this.jobForm_data_modal.choices_Job_Type);
@@ -832,7 +906,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     classNames: [this.jobForm_data_modal.Job_Type_selected.className],
                     editable: true,
                     extendedProps: {
-                        draggable_Id: this.jobForm_data_modal.Job_Type_selected.draggable_Id,
+                        Job_Type: {
+                            Id: this.jobForm_data_modal.Job_Type_selected.Job_Type_Id,
+                            label: this.jobForm_data_modal.Job_Type_selected.label,
+                            className: this.jobForm_data_modal.Job_Type_selected.className,
+                        },
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
@@ -854,7 +932,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     duration: duration + ':' + (this.jobForm_data_modal.start_time.second ? '30' : '00'),
                     duration_num: duration,
                     extendedProps: {
-                        draggable_Id: this.jobForm_data_modal.Job_Type_selected.draggable_Id,
+                        Job_Type: {
+                            Id: this.jobForm_data_modal.Job_Type_selected.Job_Type_Id,
+                            label: this.jobForm_data_modal.Job_Type_selected.label,
+                            className: this.jobForm_data_modal.Job_Type_selected.className,
+                        },
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
@@ -866,7 +948,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     job.id = data.id;
 
                     for (const property in this.APP['Data'].Draggable) {
-                        if (this.APP['Data'].Draggable[property].draggable_Id === this.jobForm_data_modal.Job_Type_selected.draggable_Id) {
+                        if (this.APP['Data'].Draggable[property].Job_Type_Id === this.jobForm_data_modal.Job_Type_selected.Job_Type_Id) {
                             for (let i = 0; i < this.APP['Data'].Draggable[property].events.length; i++) {
                                 if (this.APP['Data'].Draggable[property].events[i].id === data.id) {
                                     this.APP['Data'].Draggable[property].events[i] = JSON.parse(JSON.stringify(job)); // update existing job
@@ -882,7 +964,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     job.id = (Math.floor(1000 + Math.random() * 1000000)).toString();
 
                     for (const property in this.APP['Data'].Draggable) {
-                        if (this.APP['Data'].Draggable[property].draggable_Id === this.jobForm_data_modal.Job_Type_selected.draggable_Id) {
+                        if (this.APP['Data'].Draggable[property].Job_Type_Id === this.jobForm_data_modal.Job_Type_selected.Job_Type_Id) {
                             this.APP['Data'].Draggable[property].events.push(job); // create a new job
                             break;
                         }
@@ -1047,6 +1129,11 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 let event_data = {};
                 if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
                     event_data = JSON.parse(info.draggedEl.dataset.event);
+                    // event_data.Job_Type = {
+                    //     Id: event_data.Job_Type_Id,
+                    //     label: event_data.label,
+                    //     className: event_data.className,
+                    // };
                 }
                 console.log('Dragged data event = ', event_data);
 

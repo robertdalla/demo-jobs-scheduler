@@ -70,20 +70,22 @@
                                 </a>
                             </div>
                             <div id="collapse_3" role="tabpanel" aria-labelledby="headingThree" class="collapse">
-                                <div class="event-draggable noUi-target mb-1"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Employee.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)"
+                                <ng-container *ngIf="this.APP['Data'].Draggable.Employee as draggable">
+                                    <div class="event-draggable noUi-target mb-1"
+                                         *ngFor="let item of draggable.events"
+                                         [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                         [attr.data-event]="object_to_JSON(draggable, item)"
 
-                                     [ngbPopover]="job_pop_Content"
-                                     popoverTitle=""
-                                     [autoClose]="'outside'"
-                                     popoverClass="jobCard_pop"
-                                     placement="right-bottom"
-                                     triggers="manual"
-                                     #p="ngbPopover"
-                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Employee)">{{item.title}}
-                                </div>
+                                         [ngbPopover]="job_pop_Content"
+                                         popoverTitle=""
+                                         [autoClose]="'outside'"
+                                         popoverClass="jobCard_pop"
+                                         placement="right-bottom"
+                                         triggers="manual"
+                                         #p="ngbPopover"
+                                         (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Employee)">{{item.title}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -94,20 +96,22 @@
                                 </a>
                             </div>
                             <div id="collapse_2" role="tabpanel" aria-labelledby="headingTwo" class="collapse">
-                                <div class="event-draggable noUi-target mb-1"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Scheduler.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)"
+                                <ng-container *ngIf="this.APP['Data'].Draggable.Scheduler as draggable">
+                                    <div class="event-draggable noUi-target mb-1"
+                                         *ngFor="let item of draggable.events"
+                                         [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                         [attr.data-event]="object_to_JSON(draggable, item)"
 
-                                     [ngbPopover]="job_pop_Content"
-                                     popoverTitle=""
-                                     [autoClose]="'outside'"
-                                     popoverClass="jobCard_pop"
-                                     placement="right-bottom"
-                                     triggers="manual"
-                                     #p="ngbPopover"
-                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Scheduler)">{{item.title}}
-                                </div>
+                                         [ngbPopover]="job_pop_Content"
+                                         popoverTitle=""
+                                         [autoClose]="'outside'"
+                                         popoverClass="jobCard_pop"
+                                         placement="right-bottom"
+                                         triggers="manual"
+                                         #p="ngbPopover"
+                                         (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Scheduler)">{{item.title}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -118,20 +122,22 @@
                                 </a>
                             </div>
                             <div id="collapse_1" role="tabpanel" aria-labelledby="headingOne" class="collapse">
-                                <div class="event-draggable noUi-target mb-1"
-                                     *ngFor="let item of this.APP['Data'].Draggable.SubContractor.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)"
+                                <ng-container *ngIf="this.APP['Data'].Draggable.SubContractor as draggable">
+                                    <div class="event-draggable noUi-target mb-1"
+                                         *ngFor="let item of draggable.events"
+                                         [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                         [attr.data-event]="object_to_JSON(draggable, item)"
 
-                                     [ngbPopover]="job_pop_Content"
-                                     popoverTitle=""
-                                     [autoClose]="'outside'"
-                                     popoverClass="jobCard_pop"
-                                     placement="right-bottom"
-                                     triggers="manual"
-                                     #p="ngbPopover"
-                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.SubContractor)">{{item.title}}
-                                </div>
+                                         [ngbPopover]="job_pop_Content"
+                                         popoverTitle=""
+                                         [autoClose]="'outside'"
+                                         popoverClass="jobCard_pop"
+                                         placement="right-bottom"
+                                         triggers="manual"
+                                         #p="ngbPopover"
+                                         (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.SubContractor)">{{item.title}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -142,20 +148,22 @@
                                 </a>
                             </div>
                             <div id="collapse_4" role="tabpanel" aria-labelledby="headingFour" class="collapse">
-                                <div class="event-draggable noUi-target mb-1" lettoto="this.APP['Data'].Draggable.Jobs"
-                                     *ngFor="let item of this.APP['Data'].Draggable.Jobs.events"
-                                     [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
-                                     [attr.data-event]="object_to_JSON(item)"
+                                <ng-container *ngIf="this.APP['Data'].Draggable.Jobs as draggable">
+                                    <div class="event-draggable noUi-target mb-1"
+                                         *ngFor="let item of draggable.events"
+                                         [ngClass]="[calendar && calendar.state.viewType != 'dayGridMonth' || item.duration_num >=24 ? 'fc-draggable' : 'blurred', item.className]"
+                                         [attr.data-event]="object_to_JSON(draggable, item)"
 
-                                     [ngbPopover]="job_pop_Content"
-                                     popoverTitle=""
-                                     [autoClose]="'outside'"
-                                     popoverClass="jobCard_pop"
-                                     placement="right-bottom"
-                                     triggers="manual"
-                                     #p="ngbPopover"
-                                     (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Jobs)">{{item.title}}
-                                </div>
+                                         [ngbPopover]="job_pop_Content"
+                                         popoverTitle=""
+                                         [autoClose]="'outside'"
+                                         popoverClass="jobCard_pop"
+                                         placement="right-bottom"
+                                         triggers="manual"
+                                         #p="ngbPopover"
+                                         (click)="jobCard_pop_Toggle(p, item, this.APP['Data'].Draggable.Jobs)">{{item.title}}
+                                    </div>
+                                </ng-container>
                             </div>
                         </div>
 
@@ -188,7 +196,7 @@
                 <i class="nc-icon nc-simple-remove"></i>
             </button>
             <div ngbDropdownMenu>
-                <div ngbDropdownItem class="text-success">Cancel</div>
+                <div ngbDropdownItem class="text-info">Cancel</div>
                 <div ngbDropdownItem class="text-danger" (click)="eventCard_pop_delete(event)">Delete this Job</div>
             </div>
         </span>
@@ -197,12 +205,17 @@
         </button>
     </div>
 
-    <h6 class="card-subtitle text-muted">Title :</h6>
+    <h6 class="card-subtitle text-muted">Title</h6>
     <p>{{event.title}}</p>
 
-    <div>
-        <p>draggable_Id: {{event.extendedProps.draggable_Id}}</p>
-    </div>
+    <h6 class="card-subtitle text-muted">Start</h6>
+    <p>{{event.start | date:'medium'}}</p>
+
+    <h6 class="card-subtitle text-muted">Job Type</h6>
+    <p class="p-sm-1 fc-event" [ngClass]="[event.extendedProps.Job_Type.className]">{{event.extendedProps.Job_Type.label}}</p>
+
+    <h6 class="card-subtitle text-muted">Tags</h6>
+    <p class="mb-0" *ngFor="let tag of event.extendedProps.tags">{{tag.label}} | {{tag.value.label}}</p>
 
 </ng-template><!-- #fullCalendar event pop-over -->
 
@@ -234,13 +247,13 @@
         </button>
     </div>
 
-    <h6 class="card-subtitle text-muted">Title :</h6>
+    <h6 class="card-subtitle text-muted">Title</h6>
     <p>{{item.title}}</p>
 
-    <h6 class="card-subtitle text-muted">Duration :</h6>
+    <h6 class="card-subtitle text-muted">Duration</h6>
     <p>{{item.duration}} h</p>
 
-    <h6 class="card-subtitle text-muted">Tags :</h6>
+    <h6 class="card-subtitle text-muted">Tags</h6>
     <p class="mb-0" *ngFor="let tag of item.extendedProps.tags">{{tag.label}} | {{tag.value.label}}</p>
 
 </ng-template><!-- #draggable jobs pop-over -->
