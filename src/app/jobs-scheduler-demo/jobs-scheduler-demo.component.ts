@@ -54,7 +54,7 @@ declare var $: any; // Support for Jquery
             max-width: unset;
         }
         .jobCard_pop {
-            width: 25rem;
+            width: 18rem;
             background-color: white;
             border-radius: 15px;
             font-size: 100%;
@@ -65,7 +65,7 @@ declare var $: any; // Support for Jquery
         }
 
         .fc-event_popover {
-            width: 17rem;
+            width: 18rem;
             background-color: white;
             border-radius: 15px;
             font-size: 100%;
@@ -684,6 +684,29 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         }
     }
 
+    eventCard_pop_edit(event: any) {
+        if (event) {
+            // console.log('event:', event);
+
+            const data = {
+                id: event.id,
+                title: event.title,
+                start: event.start,
+                end: event.end,
+                fullCalendar_view_type: event._calendar.state.viewType,
+                Job_Type_selected: {
+                    Job_Type_Id: event.extendedProps.Job_Type.Id,
+                    label: event.extendedProps.Job_Type.label,
+                    className: event.extendedProps.Job_Type.className
+                },
+                tags: event.extendedProps.tags || [],
+            };
+            // console.log('data', data);
+
+            this.jobForm_modal('update', 'scheduler', data)
+        }
+    }
+
     jobCard_pop_Toggle(popover, item: any, draggable: any) {
         if (popover.isOpen()) {
             popover.close();
@@ -753,25 +776,51 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             const start_H = new Date(data.start).getHours();
             const start_MN = new Date(data.start).getMinutes();
 
-            fullCalendar_view_type = data.view.type;
+            if (mode === 'new') {
+                // This is a new schedule job
 
-            if (fullCalendar_view_type === 'dayGridMonth') {
-                fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                toDate = fromDate;
-                start_time = {hour: 8, minute: 0, second: 0};
-                end_time = {hour: 9, minute: 0, second: 0};
+                fullCalendar_view_type = data.view.type;
 
-            } else if (fullCalendar_view_type === 'timeGridWeek') {
-                fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                toDate = fromDate;
+                if (fullCalendar_view_type === 'dayGridMonth') {
+                    fromDate = {year: start_Y, month: start_M + 1, day: start_D};
+                    toDate = fromDate;
+                    start_time = {hour: 8, minute: 0, second: 0};
+                    end_time = {hour: 9, minute: 0, second: 0};
+
+                } else if (fullCalendar_view_type === 'timeGridWeek') {
+                    fromDate = {year: start_Y, month: start_M + 1, day: start_D};
+                    toDate = fromDate;
+                    start_time = {hour: start_H, minute: start_MN, second: 0};
+                    end_time = {hour: start_H + 1, minute: start_MN, second: 0};
+
+                } else if (fullCalendar_view_type === 'timeGridDay') {
+                    fromDate = {year: start_Y, month: start_M + 1, day: start_D};
+                    toDate = fromDate;
+                    start_time = {hour: start_H, minute: start_MN, second: 0};
+                    end_time = {hour: start_H + 1, minute: start_MN, second: 0};
+                }
+
+            } else if (mode === 'update') {
+                // This is a new Job card
+
+                title = data.title;
+                Job_Type_selected = data.Job_Type_selected;
+                fullCalendar_view_type = data.fullCalendar_view_type;
+
+                const end_Y = new Date(data.end).getFullYear();
+                const end_M = new Date(data.end).getMonth();
+                const end_D = new Date(data.end).getDate();
+                const end_H = new Date(data.end).getHours();
+                const end_MN = new Date(data.end).getMinutes();
+
+                fromDate = {year: end_Y, month: end_M + 1, day: end_D};
+                toDate = {year: end_Y, month: end_M + 1, day: end_D};
                 start_time = {hour: start_H, minute: start_MN, second: 0};
-                end_time = {hour: start_H + 1, minute: start_MN, second: 0};
+                end_time = {hour: end_H + 1, minute: end_MN, second: 0};
 
-            } else if (fullCalendar_view_type === 'timeGridDay') {
-                fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                toDate = fromDate;
-                start_time = {hour: start_H, minute: start_MN, second: 0};
-                end_time = {hour: start_H + 1, minute: start_MN, second: 0};
+            } else {
+                // Illegal state
+                return;
             }
 
         } else if (type === 'job') {
@@ -781,13 +830,13 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 // This is updating an existing Job card
 
                 title = data.title;
+                Job_Type_selected = data.Job_Type_selected;
                 start_time = {
                     // Mapping in template is { days, hours, minutes }
                     hour: Math.floor(data.duration_num / 24), // calculate days
                     minute: Math.floor(data.duration_num % 24 ), // calculate hours
                     second: (data.duration_num - Math.floor(data.duration_num)) * 60 // calculate minutes
                 };
-                Job_Type_selected = data.Job_Type_selected;
 
             } else if (mode === 'new') {
                 // This is a new Job card
@@ -835,7 +884,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 Job_Type_Id: this.APP['Data'].Draggable[property].Job_Type_Id,
                 label: this.APP['Data'].Draggable[property].label,
                 className: this.APP['Data'].Draggable[property].className,
-                selected: mode === 'update' && this.APP['Data'].Draggable[property].Job_Type_Id === data.Job_Type_selected.Job_Type_Id, // pre-se;ect job-type
+                selected: mode === 'update' && data && this.APP['Data'].Draggable[property].Job_Type_Id === data.Job_Type_selected.Job_Type_Id, // pre-se;ect job-type
             });
         }
         // console.log('choices_Job_Type = ', this.jobForm_data_modal.choices_Job_Type);
@@ -844,7 +893,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         // tslint:disable-next-line:forin
         for (let i = 0; i < this.APP['Data'].Dropdown_filters.length; i++) {
             let selected = false, value = [];
-            if (type === 'job' && mode === 'update') {
+            if (mode === 'update' && data) {
                 for (let j = 0; j < data.tags.length; j++) {
                     if (data.tags[j].filter_Id === this.APP['Data'].Dropdown_filters[i].filter_Id) {
                         value = [{
@@ -875,9 +924,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
         }).result.then((result) => {
             // console.log('Modal was closed by ' + result);
-            console.log('job_modal_data', this.jobForm_data_modal);
+            // console.log('job_modal_data', this.jobForm_data_modal);
 
-            if (type === 'scheduler' && data)  {
+            if (type === 'scheduler')  {
                 // Internal fullCalendar fired new event
 
                 const start = new Date(
@@ -914,7 +963,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
-                console.log('fullCalendar new job: ', calendar_event);
+                // console.log('fullCalendar new job: ', calendar_event);
 
                 this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
 
@@ -940,7 +989,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
-                console.log('External new job: ', job);
+                // console.log('External new job: ', job);
 
                 if (mode === 'update' && data) {
                     // This is updating an existing Job card
@@ -1135,7 +1184,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     //     className: event_data.className,
                     // };
                 }
-                console.log('Dragged data event = ', event_data);
+                // console.log('Dragged data event = ', event_data);
 
                 info.draggedEl.parentNode.removeChild(info.draggedEl); // Remove the element from the "Draggable Events" list
             },
@@ -1165,13 +1214,13 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             },
 
             select: function (selectionInfo) {
-                console.log('selectionInfo:', selectionInfo);
+                // console.log('selectionInfo:', selectionInfo);
 
                 that.jobForm_modal('new', 'scheduler', selectionInfo); // Create a new event
             },
 
             eventClick: function (eventClickInfo) {
-                console.log('eventClickInfo:', eventClickInfo);
+                // console.log('eventClickInfo:', eventClickInfo);
 
                 /**  Toggle event pop-over  */
                 const popover = that.popoversMap.get(eventClickInfo.el);
@@ -1179,7 +1228,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     if (popover.instance.popover.isOpen()) {
                         popover.instance.popover.close();
                     } else {
-                        popover.instance.popover.open({ event: eventClickInfo.event });
+                        popover.instance.popover.open({ event: eventClickInfo.event, popover: popover.instance.popover });
                     }
                 }
             },
