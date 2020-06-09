@@ -770,11 +770,26 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
         if (type === 'scheduler' && data) {
             // Internal fullCalendar fired new event
 
+            if (!data.start) {
+                const today = new Date();
+                data.start = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 8, 0);
+                data.end = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10, 0);
+            }
             const start_Y = new Date(data.start).getFullYear();
             const start_M = new Date(data.start).getMonth();
             const start_D = new Date(data.start).getDate();
             const start_H = new Date(data.start).getHours();
             const start_MN = new Date(data.start).getMinutes();
+
+            if (!data.end) {
+                const start = new Date(data.start);
+                data.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours() + 2, start.getMinutes());
+            }
+            const end_Y = new Date(data.end).getFullYear();
+            const end_M = new Date(data.end).getMonth();
+            const end_D = new Date(data.end).getDate();
+            const end_H = new Date(data.end).getHours();
+            const end_MN = new Date(data.end).getMinutes();
 
             if (mode === 'new') {
                 // This is a new schedule job
@@ -783,19 +798,19 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
                 if (fullCalendar_view_type === 'dayGridMonth') {
                     fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                    toDate = fromDate;
+                    toDate = {year: start_Y, month: start_M + 1, day: start_D};
                     start_time = {hour: 8, minute: 0, second: 0};
                     end_time = {hour: 9, minute: 0, second: 0};
 
                 } else if (fullCalendar_view_type === 'timeGridWeek') {
                     fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                    toDate = fromDate;
+                    toDate = {year: start_Y, month: start_M + 1, day: start_D};
                     start_time = {hour: start_H, minute: start_MN, second: 0};
                     end_time = {hour: start_H + 1, minute: start_MN, second: 0};
 
                 } else if (fullCalendar_view_type === 'timeGridDay') {
                     fromDate = {year: start_Y, month: start_M + 1, day: start_D};
-                    toDate = fromDate;
+                    toDate = {year: start_Y, month: start_M + 1, day: start_D};
                     start_time = {hour: start_H, minute: start_MN, second: 0};
                     end_time = {hour: start_H + 1, minute: start_MN, second: 0};
                 }
@@ -807,13 +822,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 Job_Type_selected = data.Job_Type_selected;
                 fullCalendar_view_type = data.fullCalendar_view_type;
 
-                const end_Y = new Date(data.end).getFullYear();
-                const end_M = new Date(data.end).getMonth();
-                const end_D = new Date(data.end).getDate();
-                const end_H = new Date(data.end).getHours();
-                const end_MN = new Date(data.end).getMinutes();
-
-                fromDate = {year: end_Y, month: end_M + 1, day: end_D};
+                fromDate = {year: start_Y, month: start_M + 1, day: start_D};
                 toDate = {year: end_Y, month: end_M + 1, day: end_D};
                 start_time = {hour: start_H, minute: start_MN, second: 0};
                 end_time = {hour: end_H + 1, minute: end_MN, second: 0};
@@ -830,9 +839,10 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 // This is updating an existing Job card
 
                 title = data.title;
+                data.duration_num = data.duration_num || 1;
                 Job_Type_selected = data.Job_Type_selected;
                 start_time = {
-                    // Mapping in template is { days, hours, minutes }
+                    // IMPORTANT: real mapping in template is { days, hours, minutes }
                     hour: Math.floor(data.duration_num / 24), // calculate days
                     minute: Math.floor(data.duration_num % 24 ), // calculate hours
                     second: (data.duration_num - Math.floor(data.duration_num)) * 60 // calculate minutes
@@ -843,7 +853,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 fromDate = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
                 toDate = fromDate;
                 start_time = {
-                    // Mapping in template is { days, hours, minutes }
+                    // IMPORTANT: real mapping in template is { days, hours, minutes }
                     hour: 0,
                     minute: 2,
                     second: 0
