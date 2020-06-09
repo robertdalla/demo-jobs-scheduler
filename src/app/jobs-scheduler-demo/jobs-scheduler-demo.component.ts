@@ -701,7 +701,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 },
                 tags: event.extendedProps.tags || [],
             };
-            // console.log('data', data);
 
             this.jobForm_modal('update', 'scheduler', data)
         }
@@ -765,7 +764,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
     jobForm_modal(mode, type, data) {
         const that = this;
-        let fullCalendar_view_type, fromDate, toDate, start_time, end_time, title = '', Job_Type_selected;
+        let fullCalendar_view_type, fromDate, toDate, start_time, end_time, id = '', title = '', Job_Type_selected;
 
         if (type === 'scheduler' && data) {
             // Internal fullCalendar fired new event
@@ -782,8 +781,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             const start_MN = new Date(data.start).getMinutes();
 
             if (!data.end) {
-                const start = new Date(data.start);
-                data.end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours() + 2, start.getMinutes());
+                data.end = new Date(start_Y, start_M, start_D, start_H + 2, start_MN);
             }
             const end_Y = new Date(data.end).getFullYear();
             const end_M = new Date(data.end).getMonth();
@@ -794,6 +792,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             if (mode === 'new') {
                 // This is a new schedule job
 
+                id = (Math.floor(1000 + Math.random() * 1000000)).toString();
                 fullCalendar_view_type = data.view.type;
 
                 if (fullCalendar_view_type === 'dayGridMonth') {
@@ -816,8 +815,9 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 }
 
             } else if (mode === 'update') {
-                // This is a new Job card
+                // This is updating an existing schedule job
 
+                id = data.id;
                 title = data.title;
                 Job_Type_selected = data.Job_Type_selected;
                 fullCalendar_view_type = data.fullCalendar_view_type;
@@ -825,7 +825,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 fromDate = {year: start_Y, month: start_M + 1, day: start_D};
                 toDate = {year: end_Y, month: end_M + 1, day: end_D};
                 start_time = {hour: start_H, minute: start_MN, second: 0};
-                end_time = {hour: end_H + 1, minute: end_MN, second: 0};
+                end_time = {hour: end_H, minute: end_MN, second: 0};
 
             } else {
                 // Illegal state
@@ -838,6 +838,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             if (mode === 'update' && data) {
                 // This is updating an existing Job card
 
+                id = data.id;
                 title = data.title;
                 data.duration_num = data.duration_num || 1;
                 Job_Type_selected = data.Job_Type_selected;
@@ -850,6 +851,8 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
             } else if (mode === 'new') {
                 // This is a new Job card
+
+                id = (Math.floor(1000 + Math.random() * 1000000)).toString();
                 fromDate = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
                 toDate = fromDate;
                 start_time = {
@@ -873,6 +876,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             modal_mode: mode,
             modal_type: type,
             fullCalendar_view_type: fullCalendar_view_type,
+            id: id,
             title: title,
             fromDate: fromDate,
             fromDate_isValid: true,
@@ -949,7 +953,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 );
 
                 const end = this.jobForm_data_modal.toDate ? new Date(
-                    (this.jobForm_data_modal.toDate.year),
+                    this.jobForm_data_modal.toDate.year,
                     this.jobForm_data_modal.toDate.month - 1,
                     this.jobForm_data_modal.toDate.day,
                     this.jobForm_data_modal.end_time.hour,
@@ -957,7 +961,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                     0) : null;
 
                 const calendar_event = {
-                    id: (Math.floor(1000 + Math.random() * 1000000)).toString(),
+                    id: this.jobForm_data_modal.id,
                     title: this.jobForm_data_modal.title,
                     start: start,
                     end: end,
@@ -973,9 +977,27 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                         tags: this.my_event_selected_Tag_chips(),
                     },
                 };
-                // console.log('fullCalendar new job: ', calendar_event);
+                // console.log('New or updated schedule job: ', calendar_event);
 
-                this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
+                if (mode === 'new') {
+                    // This is a new schedule job
+
+                    this.calendar.addEvent(calendar_event); // Inject event in the fullCalendar
+
+                } else if (mode === 'update') {
+                    // This is updating an existing schedule job
+
+                    const event = this.calendar.getEventById(calendar_event.id);
+                    event.setProp('title', calendar_event.title);
+                    event.setStart(calendar_event.start);
+                    event.setEnd(calendar_event.end);
+                    event.setExtendedProp('Job_Type', calendar_event.extendedProps.Job_Type);
+                    event.setExtendedProp('tags', calendar_event.extendedProps.tags);
+
+                } else {
+                    // Illegal state
+                    return;
+                }
 
             } else if (type === 'job') {
                 // External UI based
@@ -983,7 +1005,7 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
                 const duration = (this.jobForm_data_modal.start_time.hour * 24) + this.jobForm_data_modal.start_time.minute; // Duration in hours
 
                 let job = {
-                    id: '0',
+                    id: this.jobForm_data_modal.id,
                     title: this.jobForm_data_modal.title,
                     allDay: false,
                     className: this.jobForm_data_modal.Job_Type_selected.className || '',
@@ -1003,8 +1025,6 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
 
                 if (mode === 'update' && data) {
                     // This is updating an existing Job card
-
-                    job.id = data.id;
 
                     for (const property in this.APP['Data'].Draggable) {
                         if (this.APP['Data'].Draggable[property].Job_Type_Id === this.jobForm_data_modal.Job_Type_selected.Job_Type_Id) {
@@ -1185,16 +1205,10 @@ export class JobsSchedulerDemoComponent implements OnInit, OnDestroy, AfterViewI
             drop: function (info) {
                 // console.log(info);
 
-                let event_data = {};
-                if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
-                    event_data = JSON.parse(info.draggedEl.dataset.event);
-                    // event_data.Job_Type = {
-                    //     Id: event_data.Job_Type_Id,
-                    //     label: event_data.label,
-                    //     className: event_data.className,
-                    // };
-                }
-                // console.log('Dragged data event = ', event_data);
+                // if (typeof info.draggedEl.dataset === 'object' && info.draggedEl.dataset.event !== 'undefined') {
+                //     const event_data = JSON.parse(info.draggedEl.dataset.event);
+                //     console.log('Dragged data event = ', event_data);
+                // }
 
                 info.draggedEl.parentNode.removeChild(info.draggedEl); // Remove the element from the "Draggable Events" list
             },
