@@ -9,7 +9,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
     <div [ngbPopover]="template"
          popoverTitle=""
          [autoClose]="'outside'"
-         placement="top"
+         placement="auto"
          container="body"
          triggers="manual"
          popoverClass="fc-event_popover">

@@ -211,6 +211,11 @@
     <h6 class="card-subtitle text-muted">Start</h6>
     <p>{{event.start | date:'medium'}}</p>
 
+    <ng-container *ngIf="event.end">
+        <h6 class="card-subtitle text-muted">End</h6>
+        <p>{{event.end | date:'medium'}}</p>
+    </ng-container>
+
     <h6 class="card-subtitle text-muted">Job Type</h6>
     <p class="p-sm-1 fc-event" [ngClass]="[event.extendedProps.Job_Type.className]">{{event.extendedProps.Job_Type.label}}</p>
 
