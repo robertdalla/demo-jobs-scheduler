@@ -1,4 +1,4 @@
-## Strategik - Jobs Scheduler demo app (modified)
+## Strategik - Jobs Scheduler demo app
 
 ### Development Environment
 
