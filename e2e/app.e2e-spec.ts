@@ -7,8 +7,9 @@ describe('pd-p App', () => {
     page = new PdPPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display \'Jobs Scheduler demo\'', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    const expectedOutput = 'Jobs Scheduler demo';
+    expect(page.getApplicationTitle() as unknown).toEqual(expectedOutput);
   });
 });

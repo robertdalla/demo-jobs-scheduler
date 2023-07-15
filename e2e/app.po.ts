@@ -5,7 +5,8 @@ export class PdPPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  // function to get the title of the application
+  getApplicationTitle() {
+    return browser.getTitle();
   }
 }
