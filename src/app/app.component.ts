@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SimpleGlobal } from 'ng2-simple-global'; // A simple global variable service for Angular2/4
 
 // config
-import { global_API_URL, global_TODAY_DATE, global_IS_LOCALDEV, global_REST_timeout } from './app-config';
+import { global_IS_LOCALDEV } from './app-config';
 import { WINDOW } from './services/windows.service';
 
 
@@ -101,10 +101,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.load_critical_data();
 
     } else {
-      // This is demo mode
+      // Local dev mode
 
       this.check_dataLoad();
-      console.log('Demo mode');
+      console.log('Local dev mode');
     }
   }
 
