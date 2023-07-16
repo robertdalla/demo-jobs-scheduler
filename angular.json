@@ -1,18 +1,18 @@
 {
-  "$schema": "././node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pd-pro-angularcli": {
-      "root": "",
-      "sourceRoot": "./src",
+    "paper-dashboard-pro-angular": {
       "projectType": "application",
-      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
+      "root": "",
+      "sourceRoot": "./src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -20,8 +20,8 @@
             "outputPath": "./dist",
             "index": "./src/index.html",
             "main": "./src/main.ts",
-            "tsConfig": "./src/tsconfig.app.json",
             "polyfills": "./src/polyfills.ts",
+            "tsConfig": "./src/tsconfig.app.json",
             "assets": [
               "./src/assets",
               "./src/favicon.ico"
@@ -35,9 +35,9 @@
               "./node_modules/@fullcalendar/bootstrap/main.css",
               "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
-              "src/assets/scss/paper-dashboard.scss",
-              "src/assets/css/demo.css",
-              "src/assets/css/font-awesome-4.7.0.min.css"
+              "./src/assets/scss/paper-dashboard.scss",
+              "./src/assets/css/demo.css",
+              "./src/assets/css/font-awesome-4.7.0.min.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
@@ -66,7 +66,7 @@
               "./node_modules/datatables.net-select-bs4/js/select.bootstrap4.js",
               "./node_modules/@adactive/bootstrap-tagsinput/dist/bootstrap-tagsinput.js",
               "./node_modules/jasny-bootstrap/dist/js/jasny-bootstrap.min.js",
-              "src/assets/js/jquery.validate.min.js"
+              "./src/assets/js/jquery.validate.min.js"
             ]
           },
           "configurations": {
@@ -78,32 +78,32 @@
                 }
               ],
               "optimization": true,
+              "buildOptimizer": false,
+              "aot": false,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              "vendorChunk": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pd-pro-angularcli:build"
+            "browserTarget": "paper-dashboard-pro-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pd-pro-angularcli:build:production"
+              "browserTarget": "paper-dashboard-pro-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pd-pro-angularcli:build"
+            "browserTarget": "paper-dashboard-pro-angular:build"
           }
         },
         "test": {
@@ -151,7 +151,7 @@
               "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "./src/assets/scss/paper-dashboard.scss",
               "./src/assets/css/demo.css",
-              "src/assets/css/font-awesome-4.7.0.min.css"
+              "./src/assets/css/font-awesome-4.7.0.min.css"
             ],
             "assets": [
               "./src/assets",
@@ -171,7 +171,7 @@
         }
       }
     },
-    "pd-pro-angularcli-e2e": {
+    "paper-dashboard-pro-angular-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -180,7 +180,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "pd-pro-angularcli:serve"
+            "devServerTarget": "paper-dashboard-pro-angular:serve"
           }
         },
         "lint": {

@@ -1,21 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "",
+    "outDir": "../out-tsc/spec",
+    "removeComments": true,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "es2016"
-    ],
-    "outDir": "../out-tsc/spec",
+    "moduleResolution": "node",
     "module": "commonjs",
     "target": "es5",
-    "baseUrl": "",
-    "types": [
-      "jasmine",
-      "node"
-    ]
+    "lib": ["es2016"],
+    "types": ["jasmine", "node"]
   },
   "files": [
     "test.ts",

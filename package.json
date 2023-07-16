@@ -4,21 +4,24 @@
   "private": true,
   "author": "Creative Tim & Robert Dalla",
   "license": "See license in https://www.creative-tim.com/license",
-  "description": "Paper Dashboard Pro Angular by Creative Tim, fixed and updated to Angular 9.0.4",
+  "description": "Paper Dashboard Pro Angular by Creative Tim, fixed and updated to Angular 9.1.13",
   "homepage": "https://jobscheduler.dmxnetworks.com.au/#/",
   "repository": {
     "type": "git",
     "url": "https://github.com/creativetimofficial/ct-paper-dashboard-pro-angular.git"
   },
+  "engines": {
+    "node": "15 || 16",
+    "npm": ">=6"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod=false --aot=false --build-optimizer=false",
-    "build:prod": "ng build --prod=true --aot=true --build-optimizer=true",
+    "build": "ng build",
+    "build:prod": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@adactive/bootstrap-tagsinput": "0.8.2",
