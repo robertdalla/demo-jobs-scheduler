@@ -29,7 +29,7 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule} from './shared/navbar/navbar.module';
 
 // config
-import { global_IS_LOCALDEV, global_TODAY_DATE } from './app-config';
+import { global_TODAY_DATE } from './app-config';
 import { AppRoutes } from './app.routing';
 
 
