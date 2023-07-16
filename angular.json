@@ -36,7 +36,8 @@
               "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "./node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/assets/scss/paper-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "src/assets/css/font-awesome-4.7.0.min.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
@@ -149,7 +150,8 @@
               "./node_modules/@fullcalendar/list/main.css",
               "./node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "./src/assets/scss/paper-dashboard.scss",
-              "./src/assets/css/demo.css"
+              "./src/assets/css/demo.css",
+              "src/assets/css/font-awesome-4.7.0.min.css"
             ],
             "assets": [
               "./src/assets",
