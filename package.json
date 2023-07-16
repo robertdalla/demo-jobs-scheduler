@@ -2,13 +2,13 @@
   "name": "paper-dashboard-pro-angular",
   "version": "1.3.1",
   "private": true,
-  "author": "Creative Tim & Robert Dalla",
+  "author": "Robert Dalla & Creative Tim",
   "license": "See license in https://www.creative-tim.com/license",
-  "description": "Paper Dashboard Pro Angular by Creative Tim, fixed and updated to Angular 9.1.13",
-  "homepage": "https://jobscheduler.dmxnetworks.com.au/#/",
+  "description": "Jobs Scheduler demo, embedded within Paper Dashboard Pro Angular by Creative Tim",
+  "homepage": "https://jobscheduler.dmxnetworks.com.au",
   "repository": {
     "type": "git",
-    "url": "https://github.com/creativetimofficial/ct-paper-dashboard-pro-angular.git"
+    "url": "https://github.com/robertdalla/demo-jobs-scheduler.git"
   },
   "engines": {
     "node": "15 || 16",
