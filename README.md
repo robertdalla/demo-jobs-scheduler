@@ -6,7 +6,7 @@
 
 ![Image](./Jobs-Scheduler-Demo_2.jpg)
 
-Jobs Scheduler Demo is an app that allows you to create and schedule jobs cards and move them across a calendar. Job cards are associated with types and can be tagged and filtered with labels.
+Jobs Scheduler Demo is an app that allows you to create and schedule job cards and move them across a calendar. Job cards are associated with types and can be tagged and filtered with labels.
 
 The app is built with Angular and Bootstrap, and was a quick frontend prototype presented at Strategik Pty Ltd.
 
