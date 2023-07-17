@@ -4,7 +4,7 @@
   "private": true,
   "author": "Robert Dalla & Creative Tim",
   "license": "See license in https://www.creative-tim.com/license",
-  "description": "Jobs Scheduler demo, embedded within Paper Dashboard Pro Angular by Creative Tim",
+  "description": "Create and schedule job cards and move them across a calendar.",
   "homepage": "https://jobscheduler.dmxnetworks.com.au",
   "repository": {
     "type": "git",
