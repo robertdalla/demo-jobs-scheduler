@@ -1,16 +1,16 @@
 ## Jobs Scheduler demo
 
+Jobs Scheduler Demo is Single Page Application that allows you to create and schedule job cards and move them across a calendar. Job cards are associated with defined types and can be tagged and filtered with defined labels.
+
+The app is built with Angular and Bootstrap, and was a quick frontend prototype presented at Strategik Pty Ltd.
+
 ### [Live demo](https://jobscheduler.dmxnetworks.com.au/)
 
 ![Image](./Jobs-Scheduler-Demo_1.jpg)
 
 ![Image](./Jobs-Scheduler-Demo_2.jpg)
 
-Jobs Scheduler Demo is an app that allows you to create and schedule job cards and move them across a calendar. Job cards are associated with types and can be tagged and filtered with labels.
-
-The app is built with Angular and Bootstrap, and was a quick frontend prototype presented at Strategik Pty Ltd.
-
-### Frameworks and Libraries
+## Frameworks and Libraries
 
 | Angular @^9 | Bootstrap @^4 |
 |-------------|---------------|
@@ -21,6 +21,7 @@ The app is built with Angular and Bootstrap, and was a quick frontend prototype 
 - [Production](#production)
 - [Tests](#tests)
 - [Quick Start](#quick-start)
+- [Further help](#further-help)
 - [Documentation](#documentation)
 - [Browser Support](#browser-support)
 
@@ -46,6 +47,10 @@ The app is built with Angular and Bootstrap, and was a quick frontend prototype 
 
 1. Download and Install NodeJs LTS version from [NodeJs Official Page](https://nodejs.org/en/download/).
 2. Navigate to the root ./ directory of the product and run `yarn install` or `npm install` to install our local dependencies.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Documentation
 
