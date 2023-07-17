@@ -1,5 +1,4 @@
 ## Jobs Scheduler demo
-#### [embedded within Paper Dashboard Pro Angular by Creative Tim](./Paper-Dashboard-Pro-Angular.md)
 
 ### [Live demo](https://jobscheduler.dmxnetworks.com.au/)
 
@@ -50,7 +49,7 @@ The app is built with Angular and Bootstrap, and was a quick frontend prototype 
 
 ## Documentation
 
-The documentation for the main [Paper Dashboard Pro Angular by Creative Tim](./Paper-Dashboard-Pro-Angular.md)
+The project is embedded within  [Paper Dashboard Pro Angular by Creative Tim](./Paper-Dashboard-Pro-Angular.md)
 
 ## Browser Support
 
