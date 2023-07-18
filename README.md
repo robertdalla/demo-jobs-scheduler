@@ -1,8 +1,8 @@
 ## Jobs Scheduler demo
 
-Single Page Application that allows you to create and schedule job cards and move them across a calendar. Job cards are associated with defined types and can be tagged and filtered with defined labels.
+Single Page Application that allows you to create and schedule job cards and move them across a calendar. Job cards are associated with defined types and can be tagged and filtered-out with defined labels.
 
-The app is built with Angular and Bootstrap, and was a quick frontend prototype presented at Strategik Pty Ltd.
+The app is built with Angular and Bootstrap, and was a quick frontend prototype presented at [Strategik Pty Ltd](https://www.strategik.com.au/)
 
 ### [Live demo](https://jobscheduler.dmxnetworks.com.au/)
 
